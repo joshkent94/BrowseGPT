@@ -1,13 +1,16 @@
 {
     "name": "browse-gpt",
     "version": "0.1.0",
+    "description": "An AI assistant for your browser",
     "private": true,
     "scripts": {
         "dev": "next dev",
         "dev:extension": "npm-watch",
         "build": "next build",
         "start": "next start",
+        "format": "prettier --write --loglevel silent .",
         "lint": "next lint",
+        "correct": "npm run format && npm run lint",
         "build:extension": "next build && npm run lint:build",
         "lint:build": "mv out/_next out/assets && gsed -i 's/\\/_next/\\/assets/g' out/**.html",
         "package": "npm run build:extension && zip -r packages/$(date -u +\"%Y-%m-%dT%H:%M:%SZ\").zip out"
@@ -16,6 +19,7 @@
         "@types/node": "20.2.1",
         "@types/react": "18.2.6",
         "@types/react-dom": "18.2.4",
+        "@typescript-eslint/eslint-plugin": "^5.59.6",
         "autoprefixer": "10.4.14",
         "chrome-types": "^0.1.196",
         "eslint": "8.41.0",
@@ -24,6 +28,7 @@
         "npm-watch": "^0.11.0",
         "postcss": "8.4.23",
         "prettier": "^2.8.8",
+        "prettier-plugin-tailwindcss": "^0.3.0",
         "react": "18.2.0",
         "react-dom": "18.2.0",
         "tailwindcss": "3.3.2",
@@ -50,5 +55,8 @@
                 "ts"
             ]
         }
+    },
+    "overrides": {
+        "typescript": "^5.0.4"
     }
 }
