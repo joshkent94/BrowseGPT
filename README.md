@@ -1,2 +1,3 @@
 # browseGPT
-An assistant for the browser
+
+An AI assistant for your browser

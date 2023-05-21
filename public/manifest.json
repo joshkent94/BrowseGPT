@@ -1,0 +1,10 @@
+{
+    "name": "BrowseGPT",
+    "description": "An AI assistant for your browser",
+    "version": "0.0.1",
+    "manifest_version": 3,
+    "action": {
+        "default_title": "BrowseGPT",
+        "default_popup": "index.html"
+    }
+}
