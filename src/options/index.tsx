@@ -1,17 +1,16 @@
-import React from "react";
-import { createRoot } from "react-dom/client";
-import '../assets/tailwind.css'
-import Options from "./options";
+import React from 'react'
+import { createRoot } from 'react-dom/client'
+import '../assets/globals.css'
+import Options from './options'
 
 function init() {
     const appContainer = document.createElement('div')
     document.body.appendChild(appContainer)
     if (!appContainer) {
-        throw new Error("Can not find AppContainer");
+        throw new Error('Cannot find app container')
     }
     const root = createRoot(appContainer)
-    console.log(appContainer)
-    root.render(<Options />);
+    root.render(<Options />)
 }
 
-init();
+init()

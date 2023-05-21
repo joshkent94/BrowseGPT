@@ -1,7 +1,7 @@
-const path = require('path');
-const CopyPlugin = require('copy-webpack-plugin');
-const HtmlPlugin = require('html-webpack-plugin');
-const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const path = require('path')
+const CopyPlugin = require('copy-webpack-plugin')
+const HtmlPlugin = require('html-webpack-plugin')
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const tailwindcss = require('tailwindcss')
 const autoprefixer = require('autoprefixer')
 
@@ -11,7 +11,6 @@ module.exports = {
         options: path.resolve('src/options/index.tsx'),
         background: path.resolve('src/background/background.ts'),
         contentScript: path.resolve('src/contentScript/contentScript.ts'),
-        newTab: path.resolve('src/tabs/index.tsx'),
     },
     module: {
         rules: [
@@ -45,42 +44,43 @@ module.exports = {
                 type: 'assets/resource',
                 test: /\.(png|jpg|jpeg|gif|woff|woff2|tff|eot|svg)$/,
             },
-        ]
+        ],
     },
-    "plugins": [
+    plugins: [
         new CleanWebpackPlugin({
-            cleanStaleWebpackAssets: false
+            cleanStaleWebpackAssets: false,
         }),
         new CopyPlugin({
-            patterns: [{
-                from: path.resolve('src/static'),
-                to: path.resolve('dist')
-            }]
+            patterns: [
+                {
+                    from: path.resolve('src/static'),
+                    to: path.resolve('dist'),
+                },
+            ],
         }),
-        ...getHtmlPlugins([
-            'popup',
-            'options',
-            'newTab'
-        ])
+        ...getHtmlPlugins(['popup', 'options']),
     ],
     resolve: {
-        extensions: ['.tsx', '.js', '.ts']
+        extensions: ['.tsx', '.js', '.ts'],
     },
     output: {
         filename: '[name].js',
-        path: path.join(__dirname, 'dist')
+        path: path.join(__dirname, 'dist'),
     },
     optimization: {
         splitChunks: {
             chunks: 'all',
-        }
-    }
+        },
+    },
 }
 
 function getHtmlPlugins(chunks) {
-    return chunks.map(chunk => new HtmlPlugin({
-        title: 'BrowseGPT',
-        filename: `${chunk}.html`,
-        chunks: [chunk]
-    }))
+    return chunks.map(
+        (chunk) =>
+            new HtmlPlugin({
+                title: 'BrowseGPT',
+                filename: `${chunk}.html`,
+                chunks: [chunk],
+            })
+    )
 }

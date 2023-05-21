@@ -1,12 +1,11 @@
-import React from "react";
-import './popup.css'
+import React from 'react'
 
 const Popup = () => {
     return (
-        <div>
-            <h1 className="text-4xl text-green-500">Hello World</h1>
+        <div className='h-full w-full bg-one'>
+            <h1 className="text-6xl text-two">BrowseGPT</h1>
         </div>
     )
-};
+}
 
-export default Popup;
+export default Popup

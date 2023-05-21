@@ -1,0 +1,23 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    :root {
+        --color-one: 14 28 54;
+        --color-two: 175 203 255;
+        --color-three: 215 249 255;
+        --color-four: 249 251 242;
+        --color-five: 255 237 225;
+    }
+
+    body {
+        height: 400px;
+        width: 400px;
+    }
+
+    body > div {
+        height: 100%;
+        width: 100%;
+    }
+}

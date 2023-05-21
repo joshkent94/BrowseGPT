@@ -4,8 +4,7 @@
     "extends": [
         "eslint:recommended",
         "plugin:@typescript-eslint/eslint-recommended",
-        "plugin:@typescript-eslint/recommended",
-        "next"
+        "plugin:@typescript-eslint/recommended"
     ],
     "rules": {
         "@typescript-eslint/no-explicit-any": "off",
@@ -15,9 +14,11 @@
         "window": true,
         "document": true
     },
-    "settings": {
-        "next": {
-            "rootDir": "."
-        }
-    }
+    "ignorePatterns": [
+        "node_modules/",
+        "webpack.*.js",
+        "dist/",
+        "postcss.config.js",
+        "tailwind.config.js"
+    ]
 }
