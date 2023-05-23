@@ -1,9 +1,9 @@
 import React from 'react'
 import { createRoot } from 'react-dom/client'
 import '../assets/globals.css'
-import Options from './options'
+import Options from './components/options'
 
-function init() {
+const init = () => {
     const appContainer = document.createElement('div')
     document.body.appendChild(appContainer)
     if (!appContainer) {

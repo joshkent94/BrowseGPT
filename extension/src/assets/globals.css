@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
 @layer base {
     :root {
         --color-one: 14 28 54;
@@ -11,13 +13,11 @@
         --color-five: 255 237 225;
     }
 
-    body {
-        height: 400px;
-        width: 400px;
-    }
-
+    html,
+    body,
     body > div {
         height: 100%;
         width: 100%;
+        font-family: quicksand, sans-serif;
     }
 }

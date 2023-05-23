@@ -4,9 +4,7 @@
     "description": "An AI assistant for your browser",
     "version": "0.0.1",
     "action": {
-        "default_popup": "popup.html",
-        "default_title": "Browse GPT",
-        "default_icon": "icon.png"
+        "default_title": "Click to open panel"
     },
     "icons": {
         "16": "icon.png",
@@ -23,5 +21,17 @@
             "js": ["contentScript.js"]
         }
     ],
-    "host_permissions": ["<all_urls>"]
+    "host_permissions": ["<all_urls>"],
+    "permissions": ["sidePanel"],
+    "side_panel": {
+        "default_path": "sidepanel.html"
+    },
+    "commands": {
+        "_execute_action": {
+            "suggested_key": {
+                "default": "Ctrl+B",
+                "mac": "Command+B"
+            }
+        }
+    }
 }

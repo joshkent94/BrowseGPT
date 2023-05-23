@@ -1,0 +1,18 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "target": "es2016",
+        "moduleResolution": "node16",
+        "isolatedModules": true,
+        "esModuleInterop": true,
+        "allowJs": true,
+        "forceConsistentCasingInFileNames": true,
+        "allowSyntheticDefaultImports": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": false,
+        "moduleDetection": "force",
+        "outDir": "./dist"
+    },
+    "include": ["**/*.ts", "./index.ts"],
+    "exclude": ["node_modules"]
+}

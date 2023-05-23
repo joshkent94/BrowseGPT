@@ -1,0 +1,25 @@
+{
+    "compilerOptions": {
+        "jsx": "react",
+        "module": "ES2022",
+        "target": "es2016",
+        "moduleResolution": "node16",
+        "esModuleInterop": true,
+        "allowJs": true,
+        "forceConsistentCasingInFileNames": true,
+        "allowSyntheticDefaultImports": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": false,
+        "paths": {
+            "@components/*": ["src/sidePanel/components/*"],
+            "@utils/*": ["src/sidePanel/utils/*"],
+            "@assets/*": ["src/assets/*"],
+            "@background/*": ["src/background/*"],
+            "@contentScript/*": ["src/contentScript/*"],
+            "@options/*": ["src/options/*"]
+        },
+        "baseUrl": "./"
+    },
+    "include": ["src/**/*.ts", "src/**/*.tsx"],
+    "exclude": ["node_modules"]
+}
