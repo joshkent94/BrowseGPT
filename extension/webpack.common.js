@@ -11,7 +11,6 @@ module.exports = {
         options: path.resolve('src/options/index.tsx'),
         sidePanel: path.resolve('src/sidePanel/index.tsx'),
         background: path.resolve('src/background/background.ts'),
-        contentScript: path.resolve('src/contentScript/contentScript.ts'),
     },
     module: {
         rules: [

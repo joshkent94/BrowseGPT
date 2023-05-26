@@ -34,6 +34,10 @@
         "webpack-merge": "^5.9.0"
     },
     "dependencies": {
+        "@tanstack/react-query": "^4.29.7",
+        "@trpc/client": "^10.28.0",
+        "@trpc/react-query": "^10.28.0",
+        "@trpc/server": "^10.28.0",
         "autoprefixer": "^10.4.7",
         "postcss": "^8.4.14",
         "react-router-dom": "^6.11.2",

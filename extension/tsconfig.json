@@ -15,8 +15,8 @@
             "@utils/*": ["src/sidePanel/utils/*"],
             "@assets/*": ["src/assets/*"],
             "@background/*": ["src/background/*"],
-            "@contentScript/*": ["src/contentScript/*"],
-            "@options/*": ["src/options/*"]
+            "@options/*": ["src/options/*"],
+            "@server/types": ["../server/dist/server.d.ts"]
         },
         "baseUrl": "./"
     },

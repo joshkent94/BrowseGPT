@@ -1,22 +1,26 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import { httpLink } from '@trpc/client'
+import { trpc } from '@utils/trpc'
+import Home from './home'
+
+const queryClient = new QueryClient()
+const trpcClient = trpc.createClient({
+    links: [
+        httpLink({
+            url: 'http://localhost:3000/api',
+        }),
+    ],
+    transformer: undefined,
+})
 
 const SidePanel = () => {
-    const [response, setResponse] = useState('Some string')
-
-    useEffect(() => {
-        const getReply = async () => {
-            const reply = await fetch('http://localhost:3000/api/conversation')
-            const json = await reply.json()
-            setResponse(json.choices[0].text)
-        }
-
-        getReply()
-    }, [])
-
     return (
-        <div className="h-full w-full bg-one">
-            <div className="text-xl text-two">{response}</div>
-        </div>
+        <trpc.Provider client={trpcClient} queryClient={queryClient}>
+            <QueryClientProvider client={queryClient}>
+                <Home />
+            </QueryClientProvider>
+        </trpc.Provider>
     )
 }
 

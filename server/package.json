@@ -4,7 +4,7 @@
     "description": "Backend for the BrowseGPT extension",
     "main": "index.ts",
     "scripts": {
-        "start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/index.js",
+        "start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/server.js",
         "build": "tsc",
         "dev": "nodemon",
         "format": "prettier --write --loglevel silent .",
@@ -24,6 +24,8 @@
         "typescript": "^5.0.4"
     },
     "dependencies": {
+        "@trpc/client": "^10.28.0",
+        "@trpc/server": "^10.28.0",
         "dotenv": "^16.0.3",
         "express": "^4.18.2",
         "openai": "^3.2.1"
@@ -37,7 +39,7 @@
             "src/utils",
             "src/index.ts"
         ],
-        "exec": "node -r tsconfig-paths/register -r ts-node/register ./src/index.ts",
+        "exec": "node -r tsconfig-paths/register -r ts-node/register ./src/server.ts",
         "ext": "ts, js"
     }
 }
