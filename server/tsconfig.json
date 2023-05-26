@@ -11,8 +11,15 @@
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": false,
         "moduleDetection": "force",
-        "outDir": "./dist"
+        "outDir": "./dist",
+        "strict": true,
+        "rootDir": "./src",
+        "baseUrl": "./",
+        "paths": {
+            "@routes/*": ["src/routes/*"],
+            "@utils/*": ["src/utils/*"]
+        }
     },
-    "include": ["**/*.ts", "./index.ts"],
-    "exclude": ["node_modules"]
+    "include": ["./src/**/*.ts", "./src/index.ts"],
+    "exclude": ["node_modules", "dist"]
 }

@@ -1,9 +1,8 @@
 import express from 'express'
+import { aiConversation } from 'src/routes/aiConversation'
 
 const app = express()
 const port = 3000
-
-const { aiConversation } = require('./routes/aiConversation')
 
 app.get('/api/conversation', aiConversation)
 

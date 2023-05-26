@@ -15,7 +15,7 @@ const SidePanel = () => {
 
     return (
         <div className="h-full w-full bg-one">
-            <div className="text-two text-xl">{response}</div>
+            <div className="text-xl text-two">{response}</div>
         </div>
     )
 }
