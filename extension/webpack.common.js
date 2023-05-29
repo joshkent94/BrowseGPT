@@ -41,8 +41,16 @@ module.exports = {
                 ],
             },
             {
+                test: /\.(png|jpe?g|gif)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                    },
+                ],
+            },
+            {
                 type: 'assets/resource',
-                test: /\.(png|jpg|jpeg|gif|woff|woff2|tff|eot|svg)$/,
+                test: /\.(woff|woff2|tff|eot|svg)$/,
             },
         ],
     },

@@ -1,6 +1,6 @@
 import express from 'express'
 import { greeting } from '@routes/greeting'
-import { router, createContext } from './trpc'
+import { router, createContext } from './utils/trpc'
 import * as trpcExpress from '@trpc/server/adapters/express'
 require('dotenv').config()
 

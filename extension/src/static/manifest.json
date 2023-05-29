@@ -16,7 +16,7 @@
         "service_worker": "background.js"
     },
     "host_permissions": ["<all_urls>"],
-    "permissions": ["sidePanel"],
+    "permissions": ["sidePanel", "storage"],
     "side_panel": {
         "default_path": "sidepanel.html"
     },

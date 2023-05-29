@@ -19,6 +19,7 @@
         "clean-webpack-plugin": "^4.0.0",
         "copy-webpack-plugin": "^11.0.0",
         "css-loader": "^6.7.4",
+        "file-loader": "^6.2.0",
         "html-webpack-plugin": "^5.5.1",
         "postcss-loader": "^7.3.0",
         "prettier": "^2.8.8",
@@ -34,6 +35,9 @@
         "webpack-merge": "^5.9.0"
     },
     "dependencies": {
+        "@emotion/react": "^11.11.0",
+        "@emotion/styled": "^11.11.0",
+        "@mui/material": "^5.13.2",
         "@tanstack/react-query": "^4.29.7",
         "@trpc/client": "^10.28.0",
         "@trpc/react-query": "^10.28.0",

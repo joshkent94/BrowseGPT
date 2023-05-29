@@ -1,14 +1,24 @@
-import { openAI } from '@utils/gptHelpers'
-import { procedure } from 'src/trpc'
+import { procedure } from '@utils/trpc'
+import z from 'zod'
+import { Configuration, OpenAIApi } from 'openai'
 
-const greeting = procedure.query(async () => {
-    const response = await openAI.createCompletion({
-        model: 'text-davinci-003',
-        prompt: 'Say hi to Alex',
-        temperature: 0,
-        max_tokens: 20,
+const greeting = procedure
+    .input(z.object({ firstName: z.string(), apiKey: z.string() }))
+    .query(async (opts) => {
+        const name = opts.input.firstName
+        const apiKey = opts.input.apiKey
+        // const configuration = new Configuration({
+        //     apiKey,
+        // })
+        // const openAI = new OpenAIApi(configuration)
+        // const response = await openAI.createCompletion({
+        //     model: 'text-davinci-003',
+        //     prompt: `Say hi to ${name}`,
+        //     temperature: 0,
+        //     max_tokens: 20,
+        // })
+        // return response.data
+        return { choices: [{ text: "Hi Josh!" }]}
     })
-    return response.data
-})
 
 export { greeting }

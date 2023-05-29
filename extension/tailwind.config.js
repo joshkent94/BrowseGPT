@@ -10,5 +10,6 @@ module.exports = {
             five: 'rgb(var(--color-five) / <alpha-value>)',
         },
     },
+    important: true,
     plugins: [],
 }
