@@ -35,8 +35,11 @@
         "webpack-merge": "^5.9.0"
     },
     "dependencies": {
+        "@chatscope/chat-ui-kit-react": "^1.10.1",
+        "@chatscope/chat-ui-kit-styles": "^1.4.0",
         "@emotion/react": "^11.11.0",
         "@emotion/styled": "^11.11.0",
+        "@mui/icons-material": "^5.11.16",
         "@mui/material": "^5.13.2",
         "@tanstack/react-query": "^4.29.7",
         "@trpc/client": "^10.28.0",

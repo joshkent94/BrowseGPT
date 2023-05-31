@@ -18,7 +18,21 @@
     body > div {
         height: 100vh;
         width: 100vw;
-        font-family: quicksand, sans-serif;
         background-color: rgb(14, 28, 54);
     }
+
+    body * {
+        font-family: quicksand, sans-serif !important;
+    }
+}
+
+.cs-message__content {
+    border-radius: 0.7em !important;
+    color: #0e1c36 !important;
+    font-weight: 500 !important;
+}
+
+.cs-message-input__content-editor {
+    color: #0e1c36 !important;
+    font-weight: 500 !important;
 }

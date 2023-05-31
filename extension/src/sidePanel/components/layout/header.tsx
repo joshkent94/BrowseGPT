@@ -11,60 +11,63 @@ import logo from '@static/logo.png'
 
 const Header = () => {
     const navigate = useNavigate()
-    const [userInitials, setUserInitials] = useState('JS')
+    const [userInitials, setUserInitials] = useState(null)
 
     useEffect(() => {
-        getDetailsFromStorage().then(({ firstName, lastName, userAPIKey }) => {
-            if (!firstName || !lastName || !userAPIKey) {
-                navigate('/details')
-            } else {
+        getDetailsFromStorage().then(({ firstName, lastName }) => {
+            if (firstName && lastName) {
                 const initials = [firstName, lastName].map((name: string) => {
                     return name.charAt(0).toUpperCase()
                 })
                 setUserInitials(initials.join(''))
             }
         })
-    }, [])
+    })
 
-    return (
-        <AppBar position="static">
-            <Container maxWidth="xl">
-                <Toolbar
-                    disableGutters
-                    sx={{ justifyContent: 'space-between' }}
-                >
-                    <Link to={'/'} className='hover:opacity-80'>
-                        <img
-                            src={logo}
-                            alt="BrowseGPT logo"
-                            width={140}
-                            height={40}
-                        />
-                    </Link>
-                    <Box sx={{ flexGrow: 0 }}>
-                        <IconButton
-                            onClick={() => navigate('/details')}
-                            sx={{
-                                p: 0,
-                                '&:hover': {
-                                    opacity: 0.8
-                                }
-                            }}
-                        >
-                            <Avatar
+    if (userInitials) {
+        return (
+            <AppBar position="static" className="z-10 border-b border-b-two">
+                <Container maxWidth="xl">
+                    <Toolbar
+                        disableGutters
+                        sx={{
+                            justifyContent: 'space-between',
+                        }}
+                    >
+                        <Link to={'/'} className="hover:opacity-80">
+                            <img src={logo} alt="BrowseGPT logo" width={120} />
+                        </Link>
+                        <Box sx={{ flexGrow: 0 }}>
+                            <IconButton
+                                onClick={() => navigate('/details')}
                                 sx={{
-                                    backgroundColor: '#f9fbf2',
-                                    color: '#0e1c36'
+                                    p: 0,
+                                    '&:hover': {
+                                        opacity: 0.8,
+                                    },
                                 }}
                             >
-                                {userInitials}
-                            </Avatar>
-                        </IconButton>
-                    </Box>
-                </Toolbar>
-            </Container>
-        </AppBar>
-    )
+                                <Avatar
+                                    sx={{
+                                        backgroundColor: '#d7f9ff',
+                                        color: '#0e1c36',
+                                        width: 32,
+                                        height: 32,
+                                        fontSize: '16px',
+                                        fontWeight: 500,
+                                    }}
+                                >
+                                    {userInitials}
+                                </Avatar>
+                            </IconButton>
+                        </Box>
+                    </Toolbar>
+                </Container>
+            </AppBar>
+        )
+    } else {
+        return null
+    }
 }
 
 export default Header

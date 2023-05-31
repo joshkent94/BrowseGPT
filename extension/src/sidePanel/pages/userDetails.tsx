@@ -46,13 +46,28 @@ const UserDetails = () => {
         }
     }, [firstName, lastName, userAPIKey])
 
+    useEffect(() => {
+        if (
+            firstName.length &&
+            firstNameValid &&
+            lastName.length &&
+            lastNameValid &&
+            userAPIKey.length &&
+            APIKeyValid
+        ) {
+            setFormValid(true)
+        } else {
+            setFormValid(false)
+        }
+    }, [firstNameValid, lastNameValid, APIKeyValid])
+
     const handleSubmit = async (event: React.SyntheticEvent) => {
         event.preventDefault()
         await chrome.storage.sync.set({ firstName, lastName, userAPIKey })
         navigate('/')
     }
 
-    const sendToAPIKey = (event) => {
+    const sendToAPIKey = (event: React.SyntheticEvent) => {
         event.preventDefault()
         chrome.runtime.sendMessage({
             message: {
