@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { httpLink } from '@trpc/client'
 import { trpc } from '@utils/trpc'
-import Home from 'src/sidePanel/pages/home'
+import Conversation from 'src/sidePanel/pages/conversation'
 import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import UserDetails from 'src/sidePanel/pages/userDetails'
@@ -49,7 +49,7 @@ const SidePanel = () => {
                     <BrowserRouter>
                         <Routes>
                             <Route path="/" element={<Layout />}>
-                                <Route index element={<Home />} />
+                                <Route index element={<Conversation />} />
                                 <Route
                                     path="details"
                                     element={<UserDetails />}

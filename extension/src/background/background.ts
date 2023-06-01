@@ -4,7 +4,7 @@ chrome.sidePanel
     .catch((error) => console.error(error))
 
 chrome.runtime.onMessage.addListener(({ message }) => {
-    if (message.text === 'api-key-redirect') {
+    if (message.text === 'browse-gpt-redirect') {
         chrome.tabs.create({ url: message.url })
     }
 })

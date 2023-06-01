@@ -2,6 +2,7 @@ import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/system/Box'
 import { getDetailsFromStorage } from '@utils/getDetailsFromStorage'
+import { sendToUrl } from '@utils/sendToUrl'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -67,19 +68,15 @@ const UserDetails = () => {
         navigate('/')
     }
 
-    const sendToAPIKey = (event: React.SyntheticEvent) => {
-        event.preventDefault()
-        chrome.runtime.sendMessage({
-            message: {
-                text: 'api-key-redirect',
-                url: 'https://platform.openai.com/account/api-keys',
-            },
-        })
-    }
-
     const helperContent = [
         <span key={1}>Click </span>,
-        <button key={2} onClick={sendToAPIKey} className="font-bold underline">
+        <button
+            key={2}
+            onClick={(event) =>
+                sendToUrl(event, 'https://platform.openai.com/account/api-keys')
+            }
+            className="font-bold underline"
+        >
             here
         </button>,
         <span key={3}> to get your API key</span>,

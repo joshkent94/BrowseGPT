@@ -12,8 +12,9 @@ import {
     TypingIndicator,
 } from '@chatscope/chat-ui-kit-react'
 import gptIcon from '@static/icon2.png'
+import { sendToUrl } from '@utils/sendToUrl'
 
-const Home = () => {
+const Conversation = () => {
     const navigate = useNavigate()
     const [firstName, setFirstName] = useState(null)
     const [apiKey, setApiKey] = useState(null)
@@ -49,6 +50,13 @@ const Home = () => {
                 setUserInitials(initials.join(''))
             }
         })
+        const links = [...document.getElementsByTagName('a')]
+        links.forEach((link) => {
+            link.addEventListener('click', (e: any) => {
+                const url = e.target.innerText
+                sendToUrl(e, url)
+            })
+        })
     })
 
     const handleMessageSubmit = (message: string) => {
@@ -59,9 +67,13 @@ const Home = () => {
     return (
         <div className="flex w-full grow flex-col items-center justify-center overflow-scroll bg-one">
             {isError ? (
-                <div className='w-3/4 text-two text-base text-center'>
+                <div className="w-3/4 text-center text-base text-two">
                     There was an error connecting to BrowseGPT, please check
-                    your <Link to="/details" className='underline font-semibold'>API key</Link> and retry.
+                    your{' '}
+                    <Link to="/details" className="font-semibold underline">
+                        API key
+                    </Link>{' '}
+                    and retry.
                 </div>
             ) : (
                 <MainContainer className="my-1 flex w-full border-0">
@@ -78,6 +90,15 @@ const Home = () => {
                             }
                         >
                             {chat.map((section, index: number) => {
+                                const links =
+                                    section.content.match(/\bhttps?:\/\/\S+/gi)
+                                links?.forEach((link: string) => {
+                                    section.content =
+                                        section.content.replaceAll(
+                                            link,
+                                            `<a class="underline cursor-pointer">${link}</a>`
+                                        )
+                                })
                                 if (section.role === 'assistant') {
                                     return (
                                         <Message
@@ -136,4 +157,4 @@ const Home = () => {
     )
 }
 
-export default Home
+export default Conversation
