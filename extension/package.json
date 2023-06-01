@@ -1,6 +1,5 @@
 {
-    "name": "browse-gpt",
-    "author": "Josh Kent",
+    "name": "browsegpt-extension",
     "version": "0.0.1",
     "main": "index.ts",
     "license": "MIT",
