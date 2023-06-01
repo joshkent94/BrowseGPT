@@ -8,7 +8,6 @@
 -   [Screenshot](#screenshot)
 -   [Technologies](#technologies)
 -   [Development](#development)
--   [Contributing](#contributing)
 -   [Contact](#contact)
 
 ## General info
@@ -56,10 +55,6 @@ To lint the project, run the below command from the server folder to lint the se
 ```
 npm run correct
 ```
-
-## Contributing
-
-I am open to any and all contributions that you feel would improve the project, however there is a list of things to do in the issues section on GitHub. These are ordered from most to least important. Feel free to create a pull request for me to review, or alternatively get in touch using the details below.
 
 ## Contact
 

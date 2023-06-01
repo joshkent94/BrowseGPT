@@ -1,0 +1,1 @@
+I am open to any and all contributions that you feel would improve the project, however there is a list of things to do in the issues section on GitHub. These are ordered from most to least important. Feel free to create a pull request for me to review, or alternatively get in touch using the details below.
