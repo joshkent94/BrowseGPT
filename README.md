@@ -6,6 +6,8 @@
 
 -   [General info](#general-info)
 -   [Screenshot](#screenshot)
+-   [Technologies](#technologies)
+-   [Development](#development)
 -   [Contributing](#contributing)
 -   [Contact](#contact)
 
@@ -61,4 +63,4 @@ I am open to any and all contributions that you feel would improve the project, 
 
 ## Contact
 
-Created by [@joshuakent](josh.kent94@yahoo.co.uk) - if you'd like to chat about feature requests, contributing or anything else please get in touch!
+Created by [@joshuakent](mailto:josh.kent94@yahoo.co.uk) - if you'd like to chat about feature requests, contributing or anything else please get in touch!
