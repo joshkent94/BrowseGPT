@@ -17,7 +17,6 @@
             "@assets/*": ["src/assets/*"],
             "@static/*": ["src/static/*"],
             "@background/*": ["src/background/*"],
-            "@options/*": ["src/options/*"],
             "@server/types": ["../server/dist/server.d.ts"]
         },
         "baseUrl": "./"
