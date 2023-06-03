@@ -8,7 +8,6 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 
 module.exports = {
     entry: {
-        options: path.resolve('src/options/index.tsx'),
         sidePanel: path.resolve('src/sidePanel/index.tsx'),
         background: path.resolve('src/background/background.ts'),
     },
@@ -66,7 +65,7 @@ module.exports = {
                 },
             ],
         }),
-        ...getHtmlPlugins(['sidePanel', 'options']),
+        ...getHtmlPlugins(['sidePanel']),
     ],
     resolve: {
         extensions: ['.tsx', '.js', '.ts'],

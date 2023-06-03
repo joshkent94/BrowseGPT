@@ -66,7 +66,20 @@ const Header = () => {
             </AppBar>
         )
     } else {
-        return null
+        return (
+            <AppBar position="static" className="z-10 border-b border-b-two">
+                <Container maxWidth="xl">
+                    <Toolbar
+                        disableGutters
+                        sx={{
+                            justifyContent: 'space-between',
+                        }}
+                    >
+                        <img src={logo} alt="BrowseGPT logo" width={120} />
+                    </Toolbar>
+                </Container>
+            </AppBar>
+        )
     }
 }
 
