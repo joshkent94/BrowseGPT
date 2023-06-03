@@ -3,7 +3,6 @@ import { createRoot } from 'react-dom/client'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import { httpLink } from '@trpc/client'
 import { trpc } from '@utils/trpc'
-import Conversation from 'src/sidePanel/pages/conversation'
 import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import UserDetails from 'src/sidePanel/pages/userDetails'
@@ -11,6 +10,7 @@ import NotFound from 'src/sidePanel/pages/notFound'
 import Layout from '@components/layout/layout'
 import '@assets/globals.css'
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css'
+import Conversation from '@pages/conversation'
 
 const queryClient = new QueryClient()
 const trpcClient = trpc.createClient({

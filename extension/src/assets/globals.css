@@ -26,13 +26,26 @@
     }
 }
 
+.cs-message {
+    align-items: center !important;
+}
+
 .cs-message__content {
     border-radius: 0.7em !important;
     color: #0e1c36 !important;
     font-weight: 500 !important;
+    padding: 8px 10px !important;
 }
 
 .cs-message-input__content-editor {
     color: #0e1c36 !important;
     font-weight: 500 !important;
+}
+
+.MuiModal-backdrop {
+    opacity: 0.9 !important;
+}
+
+.MuiModal-root {
+    background-color: transparent !important;
 }

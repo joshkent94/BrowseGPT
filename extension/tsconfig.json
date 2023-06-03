@@ -13,6 +13,7 @@
         "paths": {
             "@components/*": ["src/sidePanel/components/*"],
             "@utils/*": ["src/sidePanel/utils/*"],
+            "@pages/*": ["src/sidePanel/pages/*"],
             "@assets/*": ["src/assets/*"],
             "@static/*": ["src/static/*"],
             "@background/*": ["src/background/*"],
