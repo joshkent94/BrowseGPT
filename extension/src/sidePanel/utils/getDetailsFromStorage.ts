@@ -1,8 +1,10 @@
 export const getDetailsFromStorage = async () => {
-    const { firstName, lastName, userAPIKey } = await chrome.storage.sync.get()
+    const { firstName, lastName, encryptedAPIKey, salt } =
+        await chrome.storage.sync.get()
     return {
         firstName,
         lastName,
-        userAPIKey,
+        encryptedAPIKey,
+        salt,
     }
 }

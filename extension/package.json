@@ -12,6 +12,7 @@
     },
     "devDependencies": {
         "@types/chrome": "^0.0.236",
+        "@types/crypto-js": "^4.1.1",
         "@types/react": "^18.2.6",
         "@types/react-dom": "^18.2.4",
         "@typescript-eslint/eslint-plugin": "^5.59.6",
@@ -45,6 +46,7 @@
         "@trpc/react-query": "^10.28.0",
         "@trpc/server": "^10.28.0",
         "autoprefixer": "^10.4.7",
+        "crypto-js": "^4.1.1",
         "postcss": "^8.4.14",
         "react-router-dom": "^6.11.2",
         "tailwindcss": "^3.3.2"
