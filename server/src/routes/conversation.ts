@@ -1,14 +1,36 @@
 import { procedure } from '@utils/trpc'
 import z from 'zod'
-import { Configuration, OpenAIApi, ChatCompletionRequestMessageRoleEnum } from 'openai'
+import {
+    Configuration,
+    OpenAIApi,
+    ChatCompletionRequestMessageRoleEnum,
+} from 'openai'
+import { decryptString } from '@utils/decryptString'
 
 const conversation = procedure
-    .input(z.object({ firstName: z.string(), apiKey: z.string(), conversation: z.array(z.object({ role: z.enum([ChatCompletionRequestMessageRoleEnum.Assistant, ChatCompletionRequestMessageRoleEnum.User]), content: z.string() })) }))
+    .input(
+        z.object({
+            firstName: z.string(),
+            apiKey: z.string(),
+            salt: z.string(),
+            conversation: z.array(
+                z.object({
+                    role: z.enum([
+                        ChatCompletionRequestMessageRoleEnum.Assistant,
+                        ChatCompletionRequestMessageRoleEnum.User,
+                    ]),
+                    content: z.string(),
+                })
+            ),
+        })
+    )
     .query(async (opts) => {
         // const name = opts.input.firstName
         // const apiKey = opts.input.apiKey
+        // const salt = opts.input.salt
+        // const decryptedKey = decryptString(apiKey, salt)
         // const configuration = new Configuration({
-        //     apiKey,
+        //     apiKey: decryptedKey,
         // })
         // const openAI = new OpenAIApi(configuration)
         // const response = await openAI.createChatCompletion({
@@ -22,13 +44,16 @@ const conversation = procedure
         //     ],
         // })
         // return response.data
-        return { // ! Comment this out and uncomment the above to use OpenAI
-            choices: [{
-                message: {
-                    role: 'assistant',
-                    content: 'Hi Josh!'
-                }
-            }]
+        return {
+            // ! Comment this out and uncomment the above to use OpenAI
+            choices: [
+                {
+                    message: {
+                        role: 'assistant',
+                        content: 'Hi Josh!',
+                    },
+                },
+            ],
         }
     })
 

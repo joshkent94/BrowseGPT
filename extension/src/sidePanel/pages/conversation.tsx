@@ -24,6 +24,7 @@ const Conversation = () => {
     const [open, setOpen] = useState(false)
     const [firstName, setFirstName] = useState(null)
     const [apiKey, setApiKey] = useState(null)
+    const [salt, setSalt] = useState(null)
     const [userInitials, setUserInitials] = useState(null)
     const [continueChat, setContinueChat] = useState(false)
 
@@ -35,18 +36,23 @@ const Conversation = () => {
     }, [])
 
     useEffect(() => {
-        getDetailsFromStorage().then(({ firstName, lastName, userAPIKey }) => {
-            if (!firstName || !lastName || !userAPIKey) {
-                navigate('/details')
-            } else {
-                setFirstName(firstName)
-                setApiKey(userAPIKey)
-                const initials = [firstName, lastName].map((name: string) => {
-                    return name.charAt(0).toUpperCase()
-                })
-                setUserInitials(initials.join(''))
+        getDetailsFromStorage().then(
+            ({ firstName, lastName, encryptedAPIKey, salt }) => {
+                if (!firstName || !lastName || !encryptedAPIKey || !salt) {
+                    navigate('/details')
+                } else {
+                    setFirstName(firstName)
+                    setApiKey(encryptedAPIKey)
+                    setSalt(salt)
+                    const initials = [firstName, lastName].map(
+                        (name: string) => {
+                            return name.charAt(0).toUpperCase()
+                        }
+                    )
+                    setUserInitials(initials.join(''))
+                }
             }
-        })
+        )
     })
 
     let content
@@ -96,6 +102,7 @@ const Conversation = () => {
                     existingChat={existingChat}
                     firstName={firstName}
                     apiKey={apiKey}
+                    salt={salt}
                     userInitials={userInitials}
                 />
             </>
@@ -106,6 +113,7 @@ const Conversation = () => {
                 existingChat={existingChat}
                 firstName={firstName}
                 apiKey={apiKey}
+                salt={salt}
                 userInitials={userInitials}
             />
         )
@@ -115,6 +123,7 @@ const Conversation = () => {
                 existingChat={[]}
                 firstName={firstName}
                 apiKey={apiKey}
+                salt={salt}
                 userInitials={userInitials}
             />
         )

@@ -1,6 +1,8 @@
 import Button from '@mui/material/Button'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/system/Box'
+import { decryptString } from '@utils/decryptString'
+import { encryptString } from '@utils/encryptString'
 import { getDetailsFromStorage } from '@utils/getDetailsFromStorage'
 import { sendToUrl } from '@utils/sendToUrl'
 import React, { useEffect, useState } from 'react'
@@ -17,11 +19,15 @@ const UserDetails = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        getDetailsFromStorage().then(({ firstName, lastName, userAPIKey }) => {
-            if (firstName) setFirstName(firstName)
-            if (lastName) setLastName(lastName)
-            if (userAPIKey) setUserAPIKey(userAPIKey)
-        })
+        getDetailsFromStorage().then(
+            ({ firstName, lastName, encryptedAPIKey, salt }) => {
+                if (firstName) setFirstName(firstName)
+                if (lastName) setLastName(lastName)
+                if (encryptedAPIKey && salt) {
+                    setUserAPIKey(decryptString(encryptedAPIKey, salt))
+                }
+            }
+        )
     }, [])
 
     useEffect(() => {
@@ -64,7 +70,13 @@ const UserDetails = () => {
 
     const handleSubmit = async (event: React.SyntheticEvent) => {
         event.preventDefault()
-        await chrome.storage.sync.set({ firstName, lastName, userAPIKey })
+        const [encryptedAPIKey, salt] = encryptString(userAPIKey)
+        await chrome.storage.sync.set({
+            firstName,
+            lastName,
+            encryptedAPIKey,
+            salt,
+        })
         navigate('/')
     }
 
@@ -156,6 +168,7 @@ const UserDetails = () => {
                     autoComplete="off"
                     placeholder="OpenAI API Key"
                     variant="outlined"
+                    type="password"
                     sx={{
                         width: 300,
                         '& .MuiOutlinedInput-notchedOutline': {

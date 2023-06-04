@@ -5,7 +5,7 @@ import Toolbar from '@mui/material/Toolbar'
 import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import Avatar from '@mui/material/Avatar'
-import { Link, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { getDetailsFromStorage } from '@utils/getDetailsFromStorage'
 import logo from '@static/logo.png'
 
@@ -34,9 +34,13 @@ const Header = () => {
                             justifyContent: 'space-between',
                         }}
                     >
-                        <Link to={'/'} className="hover:opacity-80">
-                            <img src={logo} alt="BrowseGPT logo" width={120} />
-                        </Link>
+                        <img
+                            src={logo}
+                            alt="BrowseGPT logo"
+                            width={120}
+                            onClick={() => navigate('/')}
+                            className="hover:cursor-pointer hover:opacity-80"
+                        />
                         <Box sx={{ flexGrow: 0 }}>
                             <IconButton
                                 onClick={() => navigate('/details')}

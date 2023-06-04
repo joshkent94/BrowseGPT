@@ -14,16 +14,16 @@ import gptIcon from '@static/icon2.png'
 import { sendToUrl } from '@utils/sendToUrl'
 import { stripHTMLTags } from '@utils/sanitiseString'
 
-const Chat = ({ existingChat, firstName, apiKey, userInitials }) => {
+const Chat = ({ existingChat, firstName, apiKey, salt, userInitials }) => {
     const [chat, setChat] = useState([...existingChat])
     const [message, setMessage] = useState('')
 
     const shouldFetch =
-        !!(firstName && apiKey) &&
+        !!(firstName && apiKey && salt) &&
         (chat[chat.length - 1]?.role === 'user' || chat.length === 0)
 
     const { isSuccess, isFetching, isError, data } = trpc.conversation.useQuery(
-        { firstName, apiKey, conversation: chat },
+        { firstName, apiKey, salt, conversation: chat },
         { enabled: shouldFetch }
     )
 
