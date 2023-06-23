@@ -1,10 +1,12 @@
-<p align="center">
+<div align="center" style="margin-bottom:-5px">
     <img alt="GitHub" src="https://img.shields.io/github/license/joshkent94/browsegpt" align="center">
     <img alt="GitHub manifest version (path)" src="https://img.shields.io/github/manifest-json/v/joshkent94/browsegpt?filename=extension/public/manifest.json" align="center">
     <img alt="GitHub issues" src="https://img.shields.io/github/issues/joshkent94/browsegpt" align="center">
-</p>
+</div>
 <h1 align="center">
-    BrowseGPT
+    <font size="7">
+        BrowseGPT
+    </font>
 </h1>
 
 > An AI assistant for your browser
