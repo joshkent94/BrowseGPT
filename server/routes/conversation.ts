@@ -40,20 +40,14 @@ const conversation = procedure
         //             role: 'system',
         //             content: `You are an AI assistant that aids users as they browse the web, called BrowseGPT. You are helpful, creative, clever, and friendly. You are helping ${name}. Introduce yourself in one sentence`,
         //         },
-        //         ...opts.input.conversation
+        //         ...opts.input.conversation,
         //     ],
         // })
-        // return response.data
+        // return response.data.choices[0].message
+        // ! Comment this out and uncomment the above to use OpenAI
         return {
-            // ! Comment this out and uncomment the above to use OpenAI
-            choices: [
-                {
-                    message: {
-                        role: 'assistant',
-                        content: 'Hi Josh!',
-                    },
-                },
-            ],
+            role: 'assistant',
+            content: 'Hi Josh!',
         }
     })
 

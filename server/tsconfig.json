@@ -13,14 +13,14 @@
         "moduleDetection": "force",
         "outDir": "./dist",
         "strict": true,
-        "rootDir": "./src",
+        "rootDir": "./",
         "baseUrl": "./",
         "paths": {
-            "@routes/*": ["src/routes/*"],
-            "@utils/*": ["src/utils/*"]
+            "@routes/*": ["routes/*"],
+            "@utils/*": ["utils/*"]
         },
         "declaration": true
     },
-    "include": ["./src/**/*.ts", "src/server.ts", "src/utils/trpc.ts"],
+    "include": ["./**/*.ts", "./server.ts"],
     "exclude": ["node_modules", "dist"]
 }

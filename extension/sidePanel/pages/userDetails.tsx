@@ -5,7 +5,7 @@ import { decryptString } from '@utils/decryptString'
 import { encryptString } from '@utils/encryptString'
 import { getDetailsFromStorage } from '@utils/getDetailsFromStorage'
 import { sendToUrl } from '@utils/sendToUrl'
-import React, { useEffect, useState } from 'react'
+import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 const UserDetails = () => {
@@ -19,15 +19,16 @@ const UserDetails = () => {
     const navigate = useNavigate()
 
     useEffect(() => {
-        getDetailsFromStorage().then(
-            ({ firstName, lastName, encryptedAPIKey, salt }) => {
-                if (firstName) setFirstName(firstName)
-                if (lastName) setLastName(lastName)
-                if (encryptedAPIKey && salt) {
-                    setUserAPIKey(decryptString(encryptedAPIKey, salt))
-                }
+        const getUserDetails = async () => {
+            const { firstName, lastName, encryptedAPIKey, salt } =
+                await getDetailsFromStorage()
+            if (firstName) setFirstName(firstName)
+            if (lastName) setLastName(lastName)
+            if (encryptedAPIKey && salt) {
+                setUserAPIKey(decryptString(encryptedAPIKey, salt))
             }
-        )
+        }
+        getUserDetails()
     }, [])
 
     useEffect(() => {
@@ -53,22 +54,7 @@ const UserDetails = () => {
         }
     }, [firstName, lastName, userAPIKey])
 
-    useEffect(() => {
-        if (
-            firstName.length &&
-            firstNameValid &&
-            lastName.length &&
-            lastNameValid &&
-            userAPIKey.length &&
-            APIKeyValid
-        ) {
-            setFormValid(true)
-        } else {
-            setFormValid(false)
-        }
-    }, [firstNameValid, lastNameValid, APIKeyValid])
-
-    const handleSubmit = async (event: React.SyntheticEvent) => {
+    const handleSubmit = async (event: SyntheticEvent) => {
         event.preventDefault()
         const [encryptedAPIKey, salt] = encryptString(userAPIKey)
         await chrome.storage.sync.set({
@@ -84,7 +70,7 @@ const UserDetails = () => {
         <span key={1}>Click </span>,
         <button
             key={2}
-            onClick={(event) =>
+            onClick={(event: any) =>
                 sendToUrl(event, 'https://platform.openai.com/account/api-keys')
             }
             className="font-bold underline"
@@ -106,7 +92,7 @@ const UserDetails = () => {
                     label="First Name"
                     value={firstName}
                     error={!firstNameValid}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    onChange={(event: ChangeEvent<HTMLInputElement>) => {
                         setFirstName(event.target.value)
                     }}
                     color="secondary"
@@ -133,7 +119,7 @@ const UserDetails = () => {
                     className="mt-9"
                     value={lastName}
                     error={!lastNameValid}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    onChange={(event: ChangeEvent<HTMLInputElement>) => {
                         setLastName(event.target.value)
                     }}
                     color="secondary"
@@ -160,7 +146,7 @@ const UserDetails = () => {
                     label="API Key"
                     value={userAPIKey}
                     error={!APIKeyValid}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                    onChange={(event: ChangeEvent<HTMLInputElement>) => {
                         setUserAPIKey(event.target.value)
                     }}
                     color="secondary"

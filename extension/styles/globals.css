@@ -23,29 +23,26 @@
 
     body * {
         font-family: quicksand, sans-serif !important;
+        line-height: 1.4;
     }
 }
 
-.cs-message {
-    align-items: center !important;
-}
-
 .cs-message__content {
-    border-radius: 0.7em !important;
+    border-radius: 1rem !important;
     color: #0e1c36 !important;
-    font-weight: 500 !important;
-    padding: 8px 10px !important;
+    font-weight: 400 !important;
+    padding: 8px 12px !important;
 }
 
 .cs-message-input__content-editor {
     color: #0e1c36 !important;
-    font-weight: 500 !important;
+    font-weight: 400 !important;
 }
 
-.MuiModal-backdrop {
-    opacity: 0.9 !important;
+.hide-logo {
+    opacity: 0 !important;
 }
 
-.MuiModal-root {
-    background-color: transparent !important;
+.show-menu-icon {
+    opacity: 1 !important;
 }

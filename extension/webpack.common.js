@@ -8,8 +8,8 @@ const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
 
 module.exports = {
     entry: {
-        sidePanel: path.resolve('src/sidePanel/index.tsx'),
-        background: path.resolve('src/background/background.ts'),
+        sidePanel: path.resolve('sidePanel/index.tsx'),
+        background: path.resolve('background/background.ts'),
     },
     module: {
         rules: [
@@ -60,7 +60,7 @@ module.exports = {
         new CopyPlugin({
             patterns: [
                 {
-                    from: path.resolve('src/static'),
+                    from: path.resolve('public'),
                     to: path.resolve('dist'),
                 },
             ],
@@ -68,7 +68,7 @@ module.exports = {
         ...getHtmlPlugins(['sidePanel']),
     ],
     resolve: {
-        extensions: ['.tsx', '.js', '.ts'],
+        extensions: ['.js', '.ts', '.tsx'],
         plugins: [new TsconfigPathsPlugin()],
     },
     output: {
@@ -80,6 +80,7 @@ module.exports = {
             chunks: 'all',
         },
     },
+    stats: 'summary',
 }
 
 function getHtmlPlugins(chunks) {
