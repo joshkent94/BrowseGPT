@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "BrowseGPT",
     "description": "An AI assistant for your browser",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "action": {
         "default_title": "Click to open panel"
     },

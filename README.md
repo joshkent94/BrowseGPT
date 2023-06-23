@@ -1,8 +1,11 @@
 <p align="center">
-    <img alt="GitHub" src="https://img.shields.io/github/license/joshkent94/browsegpt">
+    <img alt="GitHub" src="https://img.shields.io/github/license/joshkent94/browsegpt" align="center">
+    <img alt="GitHub manifest version (path)" src="https://img.shields.io/github/manifest-json/v/joshkent94/browsegpt?filename=extension/public/manifest.json" align="center">
+    <img alt="GitHub issues" src="https://img.shields.io/github/issues/joshkent94/browsegpt" align="center">
 </p>
-
-# BrowseGPT
+<h1 align="center">
+    BrowseGPT
+</h1>
 
 > An AI assistant for your browser
 
