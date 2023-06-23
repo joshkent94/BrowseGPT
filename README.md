@@ -3,10 +3,8 @@
     <img alt="GitHub manifest version (path)" src="https://img.shields.io/github/manifest-json/v/joshkent94/browsegpt?filename=extension/public/manifest.json" align="center">
     <img alt="GitHub issues" src="https://img.shields.io/github/issues/joshkent94/browsegpt" align="center">
 </div>
-<h1 align="center">
-    <font size="7">
-        BrowseGPT
-    </font>
+<h1 align="center" style="font-size:48px">
+    BrowseGPT
 </h1>
 
 > An AI assistant for your browser
