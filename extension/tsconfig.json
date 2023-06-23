@@ -1,8 +1,8 @@
 {
     "compilerOptions": {
-        "jsx": "react",
+        "jsx": "react-jsx",
         "module": "ES2022",
-        "target": "es2016",
+        "target": "ES2022",
         "moduleResolution": "node16",
         "esModuleInterop": true,
         "allowJs": true,
@@ -11,16 +11,16 @@
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": false,
         "paths": {
-            "@components/*": ["src/sidePanel/components/*"],
-            "@utils/*": ["src/sidePanel/utils/*"],
-            "@pages/*": ["src/sidePanel/pages/*"],
-            "@assets/*": ["src/assets/*"],
-            "@static/*": ["src/static/*"],
-            "@background/*": ["src/background/*"],
+            "@background/*": ["background/*"],
+            "@public/*": ["public/*"],
+            "@styles/*": ["styles/*"],
+            "@components/*": ["sidePanel/components/*"],
+            "@pages/*": ["sidePanel/pages/*"],
+            "@utils/*": ["sidePanel/utils/*"],
             "@server/types": ["../server/dist/server.d.ts"]
         },
         "baseUrl": "./"
     },
-    "include": ["src/**/*.ts", "src/**/*.tsx"],
+    "include": ["./**/*.ts", "./**/*.tsx"],
     "exclude": ["node_modules"]
 }

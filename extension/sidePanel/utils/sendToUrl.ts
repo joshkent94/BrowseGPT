@@ -1,4 +1,4 @@
-export const sendToUrl = (event: any, url: string) => {
+export const sendToUrl = (event: MouseEvent, url: string) => {
     event.preventDefault()
     chrome.runtime.sendMessage({
         message: {
