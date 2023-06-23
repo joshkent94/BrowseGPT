@@ -9,8 +9,12 @@
         "correct": {
 			"cache": false
 		},
-		"build": {
-			"outputs": ["dist/**"]
+		"extension#build": {
+			"dependsOn": ["server#build"],
+			"cache": false
+		},
+		"server#build": {
+			"cache": false
 		}
     }
 }

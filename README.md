@@ -1,4 +1,11 @@
-# BrowseGPT
+<p align="center">
+    <img alt="GitHub" src="https://img.shields.io/github/license/joshkent94/browsegpt" align="center">
+    <img alt="GitHub manifest version (path)" src="https://img.shields.io/github/manifest-json/v/joshkent94/browsegpt?filename=extension/public/manifest.json" align="center">
+    <img alt="GitHub issues" src="https://img.shields.io/github/issues/joshkent94/browsegpt" align="center">
+</p>
+<h1 align="center">
+    BrowseGPT
+</h1>
 
 > An AI assistant for your browser
 
@@ -16,7 +23,7 @@ A Chrome extension using the sidepanel API that allows users to persistently int
 
 ## Screenshot
 
-![Screenshot of extension working](./public/app-in-action.jpg)
+![Screenshot of extension working](./public/app-in-action.png)
 
 ## Technologies
 
@@ -25,36 +32,45 @@ A Chrome extension using the sidepanel API that allows users to persistently int
 -   tRPC
 -   Tailwind
 -   Typescript
+-   Turborepo
 
 ## Development
 
-You need to be running Node v18 for this project (as specified in the .nvmrc file). Go into both the server and extension folders and install dependencies in each.
+You need to be running Node v18 for this project (as specified in the .nvmrc file). We suggest using [NVM](https://github.com/nvm-sh/nvm) to manage your Node versions.
+
+The project also uses Turborepo to manage the front and back end workspaces simultaneously. Run the below to install Turborepo globally (substitute in yarn if necessary).
+
+```
+npm install turbo@latest --global
+```
+
+From the project root, run the below to install dependencies.
 
 ```
 npm install
 ```
 
-To start the backend server in development mode, from the server folder run the below. This will transpile the backend code into a dist folder, start the server and watch for changes.
+Then create initial development builds for both front and back end.
 
 ```
-npm run dev
+turbo run build
 ```
 
-To perform frontend development, from the extension folder run the below. This will transpile the frontend code into a dist folder and watch for changes. Download the beta version of Google Chrome, then go to Chrome extensions, turn on development mode and load the dist folder. Click on the extension icon to open the sidepanel, or use the shortcut CMD + SHIFT + SPACE. Follow the instructions in the extension to get your API key from OpenAI (this is needed for development but is not actually used by default, see ./server/src/routes/conversation.ts).
+To perform development, run the below. This will compile both front and back end, start a server at port 3000, and watch for changes across the entire codebase.
 
 ```
-npm run watch
+turbo run dev
 ```
 
-To see any frontend changes in the browser you'll need to manually reload the extension by clicking the refresh button from the extensions page. Alternatively download the 'Extensions Reloader' Chrome extension to make this easier.
-
-If performing backend and frontend development, when making changes to the backend routes, you may need to manually stop/start the backend server and/or restart your Typescript server in order for tRPC to pick up the new router types on the frontend.
-
-To lint the project, run the below command from the server folder to lint the server, or from the extension folder to lint the extension.
+To lint the project, run the below command from the project root.
 
 ```
-npm run correct
+turbo run correct
 ```
+
+Download the beta version of [Google Chrome](https://www.google.com/intl/en_uk/chrome/beta/), then go to Chrome extensions, turn on development mode, click 'Load unpacked' and select the dist folder within the extension directory. Click on the extension icon to open the sidepanel, or use the shortcut CMD + SHIFT + SPACE. Follow the instructions in the extension to get your API key from OpenAI (this is needed for development but is not actually used by default, see [./server/routes/conversation.ts](https://github.com/joshkent94/BrowseGPT/blob/19aa2977499b37f800b0308fb44edcb8621973fa/server/routes/conversation.ts)).
+
+To see any front end changes in the browser, you'll need to manually reload the extension by clicking the refresh button from the extensions page. Alternatively, download the [Extensions Reloader](https://chrome.google.com/webstore/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) to make this easier.
 
 ## Contact
 
