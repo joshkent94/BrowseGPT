@@ -1,11 +1,12 @@
 {
-    "name": "browsegpt-extension",
+    "name": "extension",
     "version": "1.0.0",
     "main": "index.ts",
     "license": "MIT",
     "scripts": {
         "dev": "webpack --watch --config webpack.dev.js",
-        "build": "webpack --watch --config webpack.prod.js",
+        "build": "webpack --config webpack.dev.js",
+        "build:prod": "webpack --config webpack.prod.js",
         "format": "prettier --write --loglevel silent .",
         "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
         "correct": "npm run format && npm run lint"

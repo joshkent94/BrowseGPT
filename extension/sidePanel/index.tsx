@@ -20,7 +20,7 @@ const trpcClient = trpc.createClient({
             url:
                 process.env.NODE_ENV === 'development'
                     ? 'http://localhost:3000/api'
-                    : null, // to implement once backend is deployed
+                    : null, // to implement once backend is deployed to Vercel
         }),
     ],
     transformer: undefined,
