@@ -74,7 +74,7 @@ const ChatList = ({ open, setOpen, setOpenChat, setChats }) => {
         )
         setChats(newChatsArray)
         if (openChat.id === chat.id) {
-            if (newChatsArray.length > 0) {
+            if (newChatsArray?.length > 0) {
                 setOpenChat(newChatsArray[0])
             } else {
                 handleNewChat()

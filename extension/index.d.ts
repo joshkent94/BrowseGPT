@@ -12,4 +12,5 @@ declare interface Chat {
 declare interface Message {
     content: string
     role: 'user' | 'assistant'
+    url?: string
 }
