@@ -1,12 +1,13 @@
-const path = require('path')
-const CopyPlugin = require('copy-webpack-plugin')
-const HtmlPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const tailwindcss = require('tailwindcss')
-const autoprefixer = require('autoprefixer')
-const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin')
+import * as path from 'path'
+import { Configuration } from 'webpack'
+import CopyPlugin from 'copy-webpack-plugin'
+import HtmlPlugin from 'html-webpack-plugin'
+import tailwindcss from 'tailwindcss'
+import autoprefixer from 'autoprefixer'
+import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
+import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 
-module.exports = {
+const config: Configuration = {
     entry: {
         sidePanel: path.resolve('sidePanel/index.tsx'),
         background: path.resolve('background/background.ts'),
@@ -93,3 +94,5 @@ function getHtmlPlugins(chunks) {
             })
     )
 }
+
+export default config

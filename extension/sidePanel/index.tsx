@@ -29,14 +29,14 @@ const theme = responsiveFontSizes(
     createTheme({
         palette: {
             primary: {
-                main: '#0e1c36',
+                main: 'rgb(14, 28, 54)',
             },
             secondary: {
-                main: '#afcbff',
+                main: 'rgb(230, 239, 255)',
             },
             text: {
-                primary: '#afcbff',
-                secondary: '#f9fbf2',
+                primary: 'rgb(14, 28, 54)',
+                secondary: 'rgb(255, 255, 255)',
             },
         },
         typography: {

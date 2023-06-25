@@ -6,11 +6,11 @@
 
 @layer base {
     :root {
-        --color-one: 14 28 54;
-        --color-two: 175 203 255;
-        --color-three: 215 249 255;
-        --color-four: 249 251 242;
-        --color-five: 255 237 225;
+        --color-dark-blue: 14 28 54;
+        --color-light-blue: 230 239 255;
+        --color-midnight-blue: 61 71 101;
+        --color-white: 255 255 255;
+        --color-success: 75 181 110;
     }
 
     html,
@@ -18,7 +18,6 @@
     body > div {
         height: 100vh;
         width: 100vw;
-        background-color: rgb(14, 28, 54);
     }
 
     body * {
@@ -27,22 +26,125 @@
     }
 }
 
-.cs-message__content {
-    border-radius: 1rem !important;
-    color: #0e1c36 !important;
-    font-weight: 400 !important;
-    padding: 8px 12px !important;
-}
-
-.cs-message-input__content-editor {
-    color: #0e1c36 !important;
-    font-weight: 400 !important;
-}
-
+/* Global Styles */
 .hide-logo {
     opacity: 0 !important;
 }
 
 .show-menu-icon {
     opacity: 1 !important;
+}
+
+input[type='search']::-webkit-search-cancel-button {
+    margin-left: 10px;
+    -webkit-appearance: none;
+    height: 1em;
+    width: 1em;
+    border-radius: 50%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:%230e1c36}</style><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>')
+        no-repeat 50% 50%;
+    background-size: contain;
+}
+
+input[type='search']::-webkit-search-cancel-button:hover {
+    cursor: pointer;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(230, 239, 255, 0.6) rgb(255, 255, 255);
+}
+
+*::-webkit-scrollbar-track {
+    background-color: rgb(255, 255, 255);
+    border-top-right-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: rgba(230, 239, 255, 0.6);
+    border-radius: 6px;
+    border: 2px solid rgb(255, 255, 255);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(230, 239, 255, 0.9);
+}
+
+/* Chat Styles */
+.cs-message__content {
+    color: rgb(14, 28, 54) !important;
+    font-weight: 400 !important;
+    padding: 14px 12px !important;
+    font-size: 14px !important;
+}
+
+.cs-message--incoming .cs-message__content {
+    background-color: rgb(230, 239, 255) !important;
+}
+
+.cs-message--outgoing .cs-message__content {
+    border-radius: 0.7em 0 0.7em 0.7em !important;
+    background-color: rgb(14, 28, 54) !important;
+    color: rgb(255, 255, 255) !important;
+}
+
+.cs-message-input__content-editor {
+    color: rgb(14, 28, 54) !important;
+    font-weight: 400 !important;
+    background-color: rgb(230, 239, 255) !important;
+}
+
+.cs-message-input__content-editor-wrapper {
+    margin: 0 !important;
+    border-radius: 1.5rem !important;
+    font-size: 14px !important;
+    padding: 16px !important;
+    background-color: rgb(230, 239, 255) !important;
+}
+
+.cs-button--send {
+    background-color: rgb(75, 181, 110) !important;
+    color: rgb(255, 255, 255) !important;
+    border-radius: 50% !important;
+    height: 52px !important;
+    width: 52px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.1rem !important;
+    margin-left: 8px !important;
+    position: relative !important;
+}
+
+.cs-button--send .svg-inline--fa {
+    position: absolute;
+    top: 17px;
+    left: 17px;
+}
+
+.ps__rail-y {
+    background-color: rgb(255, 255, 255) !important;
+    margin-top: 6px !important;
+    opacity: 0.6 !important;
+    transition: none !important;
+}
+
+.ps__rail-y:hover {
+    opacity: 0.9 !important;
+}
+
+.ps__thumb-y {
+    background-color: rgb(230, 239, 255) !important;
+    width: 6px !important;
+}
+
+.cs-typing-indicator__dot {
+    height: 3px !important;
+    width: 3px !important;
+    background-color: rgb(14, 28, 54) !important;
+}
+
+.cs-typing-indicator__text {
+    color: rgb(14, 28, 54) !important;
 }

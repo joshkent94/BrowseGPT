@@ -81,10 +81,10 @@ const UserDetails = () => {
     ]
 
     return (
-        <div className="flex h-full w-full items-center justify-center bg-one">
+        <div className="flex h-full w-full items-center justify-center bg-light-blue">
             <Box
                 component="form"
-                className="flex w-4/5 flex-col items-center"
+                className="flex h-[95%] w-5/6 flex-col items-center justify-center rounded-xl bg-white"
                 onSubmit={handleSubmit}
             >
                 <TextField
@@ -95,21 +95,21 @@ const UserDetails = () => {
                     onChange={(event: ChangeEvent<HTMLInputElement>) => {
                         setFirstName(event.target.value)
                     }}
-                    color="secondary"
+                    color="primary"
                     required
                     autoComplete="off"
                     placeholder="John"
                     variant="outlined"
                     sx={{
-                        width: 300,
+                        width: 240,
                         '& .MuiOutlinedInput-notchedOutline': {
-                            borderColor: 'secondary.main',
+                            borderColor: 'primary.main',
                         },
                         '& .MuiInputLabel-outlined': {
                             color: 'text.primary',
                         },
                         '& .MuiOutlinedInput-root': {
-                            color: 'text.secondary',
+                            color: 'text.primary',
                         },
                     }}
                 />
@@ -122,21 +122,21 @@ const UserDetails = () => {
                     onChange={(event: ChangeEvent<HTMLInputElement>) => {
                         setLastName(event.target.value)
                     }}
-                    color="secondary"
+                    color="primary"
                     required
                     autoComplete="off"
                     placeholder="Smith"
                     variant="outlined"
                     sx={{
-                        width: 300,
+                        width: 240,
                         '& .MuiOutlinedInput-notchedOutline': {
-                            borderColor: 'secondary.main',
+                            borderColor: 'primary.main',
                         },
                         '& .MuiInputLabel-outlined': {
                             color: 'text.primary',
                         },
                         '& .MuiOutlinedInput-root': {
-                            color: 'text.secondary',
+                            color: 'text.primary',
                         },
                     }}
                 />
@@ -149,22 +149,22 @@ const UserDetails = () => {
                     onChange={(event: ChangeEvent<HTMLInputElement>) => {
                         setUserAPIKey(event.target.value)
                     }}
-                    color="secondary"
+                    color="primary"
                     required
                     autoComplete="off"
                     placeholder="OpenAI API Key"
                     variant="outlined"
                     type="password"
                     sx={{
-                        width: 300,
+                        width: 240,
                         '& .MuiOutlinedInput-notchedOutline': {
-                            borderColor: 'secondary.main',
+                            borderColor: 'primary.main',
                         },
                         '& .MuiInputLabel-outlined': {
                             color: 'text.primary',
                         },
                         '& .MuiOutlinedInput-root': {
-                            color: 'text.secondary',
+                            color: 'text.primary',
                         },
                         '& .MuiFormHelperText-contained': {
                             opacity: 0.7,
@@ -174,19 +174,19 @@ const UserDetails = () => {
                 />
                 <Button
                     variant="outlined"
-                    color="secondary"
-                    className="mt-14"
+                    color="primary"
+                    className="mt-12"
                     type="submit"
                     sx={{
                         width: 120,
                         '&.MuiButtonBase-root': {
-                            borderColor: 'rgba(175, 203, 255, 1)',
+                            borderColor: 'primary.main',
                         },
                         '&.MuiButtonBase-root:disabled': {
                             cursor: 'not-allowed',
                             pointerEvents: 'auto',
-                            color: 'text.primary',
-                            borderColor: 'rgba(175, 203, 255, 0.5)',
+                            color: 'rgba(14, 28, 54, 0.3)',
+                            borderColor: 'rgba(14, 28, 54, 0.3)',
                         },
                         '&.MuiButtonBase-root:disabled:hover': {
                             background: 'unset',

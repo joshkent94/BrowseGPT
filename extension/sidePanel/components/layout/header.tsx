@@ -1,15 +1,15 @@
 import { useEffect, useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom'
 import AppBar from '@mui/material/AppBar'
 import Container from '@mui/material/Container'
 import Toolbar from '@mui/material/Toolbar'
 import Box from '@mui/material/Box'
 import IconButton from '@mui/material/IconButton'
 import Avatar from '@mui/material/Avatar'
-import { useLocation, useNavigate } from 'react-router-dom'
 import { getDetailsFromStorage } from '@utils/getDetailsFromStorage'
-import logo from '@public/icon.png'
 import MenuIcon from '@mui/icons-material/Menu'
 import Icon from '@mui/material/Icon'
+import logo from '@public/icon-dark.png'
 
 const Header = ({ open, setOpen }) => {
     const navigate = useNavigate()
@@ -57,11 +57,14 @@ const Header = ({ open, setOpen }) => {
 
     if (userInitials) {
         return (
-            <AppBar position="static" className="z-20 border-b border-b-two">
+            <AppBar
+                position="static"
+                className="z-20 bg-light-blue shadow-none"
+            >
                 <Container
-                    maxWidth="xl"
                     sx={{
-                        padding: '0 16px !important',
+                        padding: '10px 16px 0 16px !important',
+                        maxWidth: 'calc(100% * 5/6) !important',
                     }}
                 >
                     <Toolbar
@@ -88,7 +91,7 @@ const Header = ({ open, setOpen }) => {
                                 component={MenuIcon}
                                 id="chat-list-toggle"
                                 fontSize="large"
-                                className="absolute top-0 h-9 w-auto text-three opacity-0 transition-opacity duration-300 ease-in-out"
+                                className="absolute top-0 h-9 w-auto text-dark-blue opacity-0 transition-opacity duration-300 ease-in-out"
                             />
                         </div>
                         <Box sx={{ flexGrow: 0 }}>
@@ -103,8 +106,8 @@ const Header = ({ open, setOpen }) => {
                             >
                                 <Avatar
                                     sx={{
-                                        backgroundColor: '#d7f9ff',
-                                        color: '#0e1c36',
+                                        backgroundColor: 'primary.main',
+                                        color: 'text.secondary',
                                         width: 36,
                                         height: 36,
                                         fontSize: '16px',
@@ -121,12 +124,21 @@ const Header = ({ open, setOpen }) => {
         )
     } else {
         return (
-            <AppBar position="static" className="z-10 border-b border-b-two">
-                <Container maxWidth="xl">
+            <AppBar
+                position="static"
+                className="z-10 bg-light-blue shadow-none"
+            >
+                <Container
+                    sx={{
+                        padding: '10px 16px 0 16px !important',
+                        maxWidth: 'calc(100% * 5/6) !important',
+                    }}
+                >
                     <Toolbar
                         disableGutters
                         sx={{
                             justifyContent: 'space-between',
+                            minHeight: '56px !important',
                         }}
                     >
                         <img
