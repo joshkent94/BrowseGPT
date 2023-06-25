@@ -63,7 +63,7 @@ const Header = ({ open, setOpen }) => {
             >
                 <Container
                     sx={{
-                        padding: '10px 16px 0 16px !important',
+                        padding: '12px 12px 0 12px !important',
                         maxWidth: 'calc(100% * 5/6) !important',
                     }}
                 >
@@ -96,7 +96,10 @@ const Header = ({ open, setOpen }) => {
                         </div>
                         <Box sx={{ flexGrow: 0 }}>
                             <IconButton
-                                onClick={() => !open && navigate('/details')}
+                                onClick={() => {
+                                    setOpen(false)
+                                    navigate('/details')
+                                }}
                                 sx={{
                                     p: 0,
                                     '&:hover': {
@@ -130,7 +133,7 @@ const Header = ({ open, setOpen }) => {
             >
                 <Container
                     sx={{
-                        padding: '10px 16px 0 16px !important',
+                        padding: '12px 12px 0 12px !important',
                         maxWidth: 'calc(100% * 5/6) !important',
                     }}
                 >

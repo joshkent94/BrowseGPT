@@ -41,11 +41,11 @@ const UserDetails = () => {
             : setLastNameValid(false)
         pattern.test(userAPIKey) ? setAPIKeyValid(true) : setAPIKeyValid(false)
         if (
-            firstName.length &&
+            firstName?.length &&
             firstNameValid &&
-            lastName.length &&
+            lastName?.length &&
             lastNameValid &&
-            userAPIKey.length &&
+            userAPIKey?.length &&
             APIKeyValid
         ) {
             setFormValid(true)
