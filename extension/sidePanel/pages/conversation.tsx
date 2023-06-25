@@ -20,7 +20,7 @@ import { sendChatsToStorage } from '@utils/sendChatsToStorage'
 import { getInitials } from '@utils/getInitials'
 import { addEventListenersToLinks } from '@utils/addEventListenersToLinks'
 import { formatLinks } from '@utils/formatLinks'
-import gptIcon from '@public/icon2.png'
+import gptIcon from '@public/icon-light.png'
 
 const Conversation = ({ setChats, setOpenChat }) => {
     const navigate = useNavigate()
@@ -35,7 +35,7 @@ const Conversation = ({ setChats, setOpenChat }) => {
     const shouldFetch =
         !!(firstName && apiKey && salt) &&
         !loading &&
-        (openChat.messages[openChat.messages.length - 1]?.role === 'user' ||
+        (openChat.messages[openChat.messages?.length - 1]?.role === 'user' ||
             openChat.messages?.length === 0)
     const { isSuccess, isFetching, isError, data } = trpc.conversation.useQuery(
         { firstName, apiKey, salt, conversation: openChat.messages },
@@ -100,19 +100,19 @@ const Conversation = ({ setChats, setOpenChat }) => {
 
     return (
         !loading && (
-            <div className="flex w-full grow flex-col items-center justify-center overflow-scroll bg-one">
+            <div className="flex w-full grow flex-col items-center justify-center overflow-scroll bg-light-blue">
                 {isError ? (
                     <ChatError />
                 ) : (
-                    <MainContainer className="my-1 flex w-full border-0">
-                        <ChatContainer className="z-0 bg-one text-base text-two">
+                    <MainContainer className="my-1 flex h-[95%] w-5/6 rounded-xl border-0">
+                        <ChatContainer className="z-0 bg-white text-base text-dark-blue">
                             <MessageList
-                                className="flex flex-col bg-one text-base text-two"
+                                className="flex flex-col bg-white text-base text-dark-blue"
                                 typingIndicator={
                                     isFetching && (
                                         <TypingIndicator
                                             content="BrowseGPT is thinking..."
-                                            className="static flex h-6 w-full items-center bg-one pb-0 pl-4 text-base text-two"
+                                            className="static flex h-6 items-center bg-white pb-0 pl-4"
                                         />
                                     )
                                 }
@@ -130,10 +130,10 @@ const Conversation = ({ setChats, setOpenChat }) => {
                                                         direction: 'incoming',
                                                         position: 'single',
                                                     }}
-                                                    className="my-4 items-center"
-                                                    avatarPosition="center-left"
+                                                    className="my-4"
+                                                    avatarPosition="tl"
                                                 >
-                                                    <Avatar className="flex h-10 min-h-fit w-10 min-w-fit items-center justify-center bg-three">
+                                                    <Avatar className="flex h-10 min-h-fit w-10 min-w-fit items-center justify-center bg-dark-blue">
                                                         <img
                                                             src={gptIcon}
                                                             className="h-6 w-6 rounded-none"
@@ -151,10 +151,10 @@ const Conversation = ({ setChats, setOpenChat }) => {
                                                         direction: 'outgoing',
                                                         position: 'single',
                                                     }}
-                                                    className="my-4 items-center"
-                                                    avatarPosition="center-right"
+                                                    className="my-4"
+                                                    avatarPosition="tr"
                                                 >
-                                                    <Avatar className="text-md flex h-10 min-h-fit w-10 min-w-fit items-center justify-center bg-three font-medium">
+                                                    <Avatar className="text-md flex h-10 min-h-fit w-10 min-w-fit items-center justify-center bg-dark-blue font-medium text-white">
                                                         {userInitials}
                                                     </Avatar>
                                                 </Message>
@@ -164,15 +164,14 @@ const Conversation = ({ setChats, setOpenChat }) => {
                                 )}
                             </MessageList>
                             <MessageInput
-                                placeholder="Type your message here..."
+                                placeholder="Type a message..."
                                 attachButton={false}
-                                sendButton={false}
                                 onChange={(value) => setMessage(value)}
                                 onSend={(message) =>
                                     handleMessageSubmit(message)
                                 }
                                 value={message}
-                                className="border-0 bg-one py-4"
+                                className="mx-4 items-center justify-center rounded border-0 bg-white py-4"
                             />
                         </ChatContainer>
                     </MainContainer>

@@ -1,7 +1,7 @@
 // @ts-expect-error - using chrome beta api
 chrome.sidePanel
     .setPanelBehavior({ openPanelOnActionClick: true })
-    .catch((error) => console.error(error))
+    .catch((error: Error) => console.error(error))
 
 chrome.runtime.onMessage.addListener(({ message }) => {
     if (message.text === 'browse-gpt-redirect') {
