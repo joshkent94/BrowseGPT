@@ -103,6 +103,17 @@ input[type='search']::-webkit-search-cancel-button:hover {
     background-color: rgb(230, 239, 255) !important;
 }
 
+.cs-message-input__content-editor-wrapper .ps__rail-y {
+    background-color: transparent !important;
+    opacity: 1 !important;
+    transition: none !important;
+}
+
+.cs-message-input__content-editor-wrapper .ps__thumb-y {
+    background-color: rgb(255, 255, 255) !important;
+    width: 6px !important;
+}
+
 .cs-button--send {
     background-color: rgb(75, 181, 110) !important;
     color: rgb(255, 255, 255) !important;
