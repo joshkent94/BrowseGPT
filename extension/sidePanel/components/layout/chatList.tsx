@@ -42,7 +42,11 @@ const ChatList = ({ open, setOpen, setOpenChat, setChats }) => {
     }, [searchTerm, existingChats])
 
     const handleNewChat = () => {
-        setOpenChat({ id: uuid(), isOpen: true, messages: [] })
+        setOpenChat({
+            id: uuid(),
+            messages: [],
+            isOpen: true,
+        })
         setOpen(false)
     }
 

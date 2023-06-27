@@ -1,9 +1,10 @@
-import Button from '@mui/material/Button'
+import LoadingButton from '@mui/lab/LoadingButton'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/system/Box'
 import { decryptString } from '@utils/decryptString'
 import { encryptString } from '@utils/encryptString'
 import { getDetailsFromStorage } from '@utils/getDetailsFromStorage'
+import { getUserLocation } from '@utils/getUserLocation'
 import { sendToUrl } from '@utils/sendToUrl'
 import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -16,6 +17,7 @@ const UserDetails = () => {
     const [userAPIKey, setUserAPIKey] = useState('')
     const [APIKeyValid, setAPIKeyValid] = useState(true)
     const [formValid, setFormValid] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
@@ -56,13 +58,18 @@ const UserDetails = () => {
 
     const handleSubmit = async (event: SyntheticEvent) => {
         event.preventDefault()
+        setIsLoading(true)
         const [encryptedAPIKey, salt] = encryptString(userAPIKey)
+        const { latitude, longitude } = await getUserLocation()
         await chrome.storage.sync.set({
             firstName,
             lastName,
             encryptedAPIKey,
             salt,
+            latitude,
+            longitude,
         })
+        setIsLoading(false)
         navigate('/')
     }
 
@@ -168,11 +175,12 @@ const UserDetails = () => {
                         },
                         '& .MuiFormHelperText-contained': {
                             opacity: 0.7,
+                            color: 'text.primary',
                         },
                     }}
                     helperText={helperContent}
                 />
-                <Button
+                <LoadingButton
                     variant="outlined"
                     color="primary"
                     className="mt-12"
@@ -185,7 +193,6 @@ const UserDetails = () => {
                         '&.MuiButtonBase-root:disabled': {
                             cursor: 'not-allowed',
                             pointerEvents: 'auto',
-                            color: 'rgba(14, 28, 54, 0.3)',
                             borderColor: 'rgba(14, 28, 54, 0.3)',
                         },
                         '&.MuiButtonBase-root:disabled:hover': {
@@ -193,9 +200,10 @@ const UserDetails = () => {
                         },
                     }}
                     disabled={!formValid}
+                    loading={isLoading}
                 >
                     Save
-                </Button>
+                </LoadingButton>
             </Box>
         </div>
     )
