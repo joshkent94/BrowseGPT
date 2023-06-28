@@ -30,6 +30,7 @@ const Conversation = ({ setChats, setOpenChat }) => {
     const [firstName, setFirstName] = useState('')
     const [apiKey, setApiKey] = useState('')
     const [salt, setSalt] = useState('')
+    const [userLocation, setUserLocation] = useState([])
     const [userInitials, setUserInitials] = useState('')
     const [message, setMessage] = useState('')
     const loading = !openChat || !firstName || !apiKey || !salt || !userInitials
@@ -39,13 +40,18 @@ const Conversation = ({ setChats, setOpenChat }) => {
         (openChat.messages[openChat.messages?.length - 1]?.role === 'user' ||
             openChat.messages?.length === 0)
     const { isSuccess, isFetching, isError, data } = trpc.conversation.useQuery(
-        { firstName, apiKey, salt, conversation: openChat },
+        {
+            firstName,
+            apiKey,
+            salt,
+            conversation: { ...openChat, userLocation },
+        },
         { enabled: shouldFetch }
     )
 
     useEffect(() => {
         const getUserDetails = async () => {
-            const { firstName, lastName, encryptedAPIKey, salt } =
+            const { firstName, lastName, encryptedAPIKey, salt, userLocation } =
                 await getDetailsFromStorage()
             if (!firstName || !lastName || !encryptedAPIKey || !salt) {
                 navigate('/details')
@@ -53,6 +59,7 @@ const Conversation = ({ setChats, setOpenChat }) => {
                 setFirstName(firstName)
                 setApiKey(encryptedAPIKey)
                 setSalt(salt)
+                setUserLocation(userLocation)
                 setUserInitials(getInitials([firstName, lastName]))
             }
         }
@@ -60,13 +67,18 @@ const Conversation = ({ setChats, setOpenChat }) => {
         const getOpenChat = async () => {
             const existingChats = await getChatsFromStorage()
             setChats(existingChats)
-            setOpenChat(
-                existingChats.find((chat) => chat.isOpen === true) || {
+            const previouslyOpenChat = existingChats.find(
+                (chat) => chat.isOpen === true
+            )
+            if (previouslyOpenChat) {
+                setOpenChat(previouslyOpenChat)
+            } else {
+                setOpenChat({
                     id: uuid(),
                     messages: [],
                     isOpen: true,
-                }
-            )
+                })
+            }
         }
         getOpenChat()
     }, [])
@@ -94,7 +106,11 @@ const Conversation = ({ setChats, setOpenChat }) => {
             ...openChat,
             messages: [
                 ...openChat.messages,
-                { content: strippedMessage, role: 'user', url: currentUrl },
+                {
+                    content: strippedMessage,
+                    role: 'user',
+                    url: currentUrl,
+                },
             ],
         })
         setMessage('')
