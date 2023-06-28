@@ -28,22 +28,18 @@ const Conversation = ({ setChats, setOpenChat }) => {
     const chats = useContext(ChatsArrayContext)
     const openChat = useContext(OpenChatContext)
     const [firstName, setFirstName] = useState('')
-    const [apiKey, setApiKey] = useState('')
-    const [salt, setSalt] = useState('')
     const [userLocation, setUserLocation] = useState([])
     const [userInitials, setUserInitials] = useState('')
     const [message, setMessage] = useState('')
-    const loading = !openChat || !firstName || !apiKey || !salt || !userInitials
+    const loading = !openChat || !firstName || !userInitials
     const shouldFetch =
-        !!(firstName && apiKey && salt) &&
+        !!firstName &&
         !loading &&
         (openChat.messages[openChat.messages?.length - 1]?.role === 'user' ||
             openChat.messages?.length === 0)
     const { isSuccess, isFetching, isError, data } = trpc.conversation.useQuery(
         {
             firstName,
-            apiKey,
-            salt,
             conversation: { ...openChat, userLocation },
         },
         { enabled: shouldFetch }
@@ -51,14 +47,12 @@ const Conversation = ({ setChats, setOpenChat }) => {
 
     useEffect(() => {
         const getUserDetails = async () => {
-            const { firstName, lastName, encryptedAPIKey, salt, userLocation } =
+            const { firstName, lastName, userLocation } =
                 await getDetailsFromStorage()
-            if (!firstName || !lastName || !encryptedAPIKey || !salt) {
+            if (!firstName || !lastName) {
                 navigate('/details')
             } else {
                 setFirstName(firstName)
-                setApiKey(encryptedAPIKey)
-                setSalt(salt)
                 setUserLocation(userLocation)
                 setUserInitials(getInitials([firstName, lastName]))
             }

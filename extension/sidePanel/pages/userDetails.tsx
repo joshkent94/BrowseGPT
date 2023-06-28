@@ -1,11 +1,8 @@
 import LoadingButton from '@mui/lab/LoadingButton'
 import TextField from '@mui/material/TextField'
 import Box from '@mui/system/Box'
-import { decryptString } from '@utils/decryptString'
-import { encryptString } from '@utils/encryptString'
 import { getDetailsFromStorage } from '@utils/getDetailsFromStorage'
 import { getUserLocation } from '@utils/getUserLocation'
-import { sendToUrl } from '@utils/sendToUrl'
 import { ChangeEvent, SyntheticEvent, useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
@@ -14,21 +11,16 @@ const UserDetails = () => {
     const [firstNameValid, setFirstNameValid] = useState(true)
     const [lastName, setLastName] = useState('')
     const [lastNameValid, setLastNameValid] = useState(true)
-    const [userAPIKey, setUserAPIKey] = useState('')
-    const [APIKeyValid, setAPIKeyValid] = useState(true)
     const [formValid, setFormValid] = useState(false)
     const [isLoading, setIsLoading] = useState(false)
     const navigate = useNavigate()
 
     useEffect(() => {
         const getUserDetails = async () => {
-            const { firstName, lastName, encryptedAPIKey, salt } =
+            const { firstName, lastName } =
                 await getDetailsFromStorage()
             if (firstName) setFirstName(firstName)
             if (lastName) setLastName(lastName)
-            if (encryptedAPIKey && salt) {
-                setUserAPIKey(decryptString(encryptedAPIKey, salt))
-            }
         }
         getUserDetails()
     }, [])
@@ -41,51 +33,31 @@ const UserDetails = () => {
         pattern.test(lastName)
             ? setLastNameValid(true)
             : setLastNameValid(false)
-        pattern.test(userAPIKey) ? setAPIKeyValid(true) : setAPIKeyValid(false)
         if (
             firstName?.length &&
             firstNameValid &&
             lastName?.length &&
-            lastNameValid &&
-            userAPIKey?.length &&
-            APIKeyValid
+            lastNameValid
         ) {
             setFormValid(true)
         } else {
             setFormValid(false)
         }
-    }, [firstName, lastName, userAPIKey])
+    }, [firstName, lastName])
 
     const handleSubmit = async (event: SyntheticEvent) => {
         event.preventDefault()
         setIsLoading(true)
-        const [encryptedAPIKey, salt] = encryptString(userAPIKey)
         const { latitude, longitude } = await getUserLocation()
         await chrome.storage.sync.set({
             firstName,
             lastName,
-            encryptedAPIKey,
-            salt,
             latitude,
             longitude,
         })
         setIsLoading(false)
         navigate('/')
     }
-
-    const helperContent = [
-        <span key={1}>Click </span>,
-        <button
-            key={2}
-            onClick={(event: any) =>
-                sendToUrl(event, 'https://platform.openai.com/account/api-keys')
-            }
-            className="font-bold underline"
-        >
-            here
-        </button>,
-        <span key={3}> to get your API key</span>,
-    ]
 
     return (
         <div className="flex h-full w-full items-center justify-center bg-light-blue">
@@ -147,43 +119,10 @@ const UserDetails = () => {
                         },
                     }}
                 />
-                <TextField
-                    id="api-key-input"
-                    className="mt-9"
-                    label="API Key"
-                    value={userAPIKey}
-                    error={!APIKeyValid}
-                    onChange={(event: ChangeEvent<HTMLInputElement>) => {
-                        setUserAPIKey(event.target.value)
-                    }}
-                    color="primary"
-                    required
-                    autoComplete="off"
-                    placeholder="OpenAI API Key"
-                    variant="outlined"
-                    type="password"
-                    sx={{
-                        width: 240,
-                        '& .MuiOutlinedInput-notchedOutline': {
-                            borderColor: 'primary.main',
-                        },
-                        '& .MuiInputLabel-outlined': {
-                            color: 'text.primary',
-                        },
-                        '& .MuiOutlinedInput-root': {
-                            color: 'text.primary',
-                        },
-                        '& .MuiFormHelperText-contained': {
-                            opacity: 0.7,
-                            color: 'text.primary',
-                        },
-                    }}
-                    helperText={helperContent}
-                />
                 <LoadingButton
                     variant="outlined"
                     color="primary"
-                    className="mt-12"
+                    className="mt-16"
                     type="submit"
                     sx={{
                         width: 120,

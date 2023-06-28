@@ -53,22 +53,22 @@ npm install
 Then create initial development builds for both front and back end.
 
 ```
-turbo run build
+turbo build
 ```
 
 To perform development, run the below. This will compile both front and back end, start a server at port 3000, and watch for changes across the entire codebase.
 
 ```
-turbo run dev
+turbo dev
 ```
 
 To lint the project, run the below command from the project root.
 
 ```
-turbo run correct
+turbo correct
 ```
 
-Download the beta version of [Google Chrome](https://www.google.com/intl/en_uk/chrome/beta/), then go to Chrome extensions, turn on development mode, click 'Load unpacked' and select the dist folder within the extension directory. Click on the extension icon to open the sidepanel, or use the shortcut CMD + SHIFT + SPACE. Follow the instructions in the extension to get your API key from OpenAI (this is needed for development but is not actually used by default, see [./server/routes/conversation.ts](https://github.com/joshkent94/BrowseGPT/blob/19aa2977499b37f800b0308fb44edcb8621973fa/server/routes/conversation.ts)).
+Download the beta version of [Google Chrome](https://www.google.com/intl/en_uk/chrome/beta/), then go to Chrome extensions, turn on development mode, click 'Load unpacked' and select the dist folder within the extension directory. Click on the extension icon to open the sidepanel, or use the shortcut CMD + SHIFT + SPACE.
 
 To see any front end changes in the browser, you'll need to manually reload the extension by clicking the refresh button from the extensions page. Alternatively, download the [Extensions Reloader](https://chrome.google.com/webstore/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) to make this easier.
 
