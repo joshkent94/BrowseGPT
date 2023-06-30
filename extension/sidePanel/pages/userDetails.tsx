@@ -17,8 +17,7 @@ const UserDetails = () => {
 
     useEffect(() => {
         const getUserDetails = async () => {
-            const { firstName, lastName } =
-                await getDetailsFromStorage()
+            const { firstName, lastName } = await getDetailsFromStorage()
             if (firstName) setFirstName(firstName)
             if (lastName) setLastName(lastName)
         }

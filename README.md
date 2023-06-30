@@ -12,6 +12,7 @@
 ## Table of contents
 
 -   [General info](#general-info)
+-   [Features](#features)
 -   [Screenshot](#screenshot)
 -   [Technologies](#technologies)
 -   [Development](#development)
@@ -21,6 +22,12 @@
 
 A Chrome extension using the sidepanel API that allows users to persistently interact with an AI assistant whilst browsing the web. Under the hood the extension is integrated to OpenAI's GPT3.5.
 
+## Features
+
+-   Hold persistent chats with an AI across the whole browser experience.
+-   The AI knows the date, and the user's name and location (if permission is granted).
+-   Start multiple chats, search through chat content and delete old chats.
+
 ## Screenshot
 
 ![Screenshot of extension working](./public/app-in-action.png)
@@ -28,6 +35,8 @@ A Chrome extension using the sidepanel API that allows users to persistently int
 ## Technologies
 
 -   Express
+-   Postgresql
+-   Prisma
 -   React
 -   tRPC
 -   Tailwind
@@ -48,6 +57,12 @@ From the project root, run the below to install dependencies.
 
 ```
 npm install
+```
+
+The project uses Postgres and Prisma for database management. Download [Postgres](https://www.postgresql.org/download/), create a database and add your database connection URL to your .env file. Then to populate your database, run the below.
+
+```
+turbo prisma
 ```
 
 Then create initial development builds for both front and back end.
