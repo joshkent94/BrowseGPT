@@ -58,7 +58,7 @@ const conversation = procedure
             day: 'numeric',
         })
         const configuration = new Configuration({
-            apiKey
+            apiKey,
         })
         const openAI = new OpenAIApi(configuration)
         const response = await openAI.createChatCompletion({
@@ -72,11 +72,6 @@ const conversation = procedure
             ],
         })
         return response.data.choices[0].message
-        // // ! Comment this out and uncomment the above to use OpenAI
-        // return {
-        //     role: 'assistant',
-        //     content: 'Hi Josh!',
-        // }
     })
 
 export { conversation }

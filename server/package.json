@@ -9,9 +9,11 @@
         "dev": "tsc && nodemon -q",
         "format": "prettier --write --loglevel silent .",
         "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-        "correct": "npm run format && npm run lint"
+        "correct": "npm run format && npm run lint",
+        "prisma": "npx prisma migrate dev"
     },
     "dependencies": {
+        "@prisma/client": "^4.16.2",
         "@trpc/client": "^10.28.0",
         "@trpc/server": "^10.28.0",
         "@types/express": "^4.17.17",
@@ -23,6 +25,7 @@
         "nodemon": "^2.0.22",
         "openai": "^3.2.1",
         "prettier": "^2.8.8",
+        "prisma": "^4.16.1",
         "ts-node": "^10.9.1",
         "tsconfig-paths": "^4.2.0",
         "typescript": "^5.1.3",
