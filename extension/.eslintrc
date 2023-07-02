@@ -19,6 +19,8 @@
         "node_modules/",
         "webpack.*.js",
         "dist/",
+        "build/",
+        "packages/",
         "postcss.config.js",
         "tailwind.config.js"
     ]

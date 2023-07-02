@@ -1,12 +1,12 @@
 {
 	"$schema": "https://turbo.build/schema.json",
     "pipeline": {
-        "dev": {
+		"dev": {
 			"persistent": true,
-            "cache": false,
+			"cache": false,
 			"outputMode": "none"
 		},
-        "correct": {
+		"correct": {
 			"cache": false
 		},
 		"extension#build": {
@@ -16,8 +16,14 @@
 		"server#build": {
 			"cache": false
 		},
-		"prisma": {
+		"package": {
+			"cache": false
+		},
+		"prisma:migrate:dev": {
+			"cache": false
+		},
+		"prisma:migrate:deploy": {
 			"cache": false
 		}
-    }
+	}
 }

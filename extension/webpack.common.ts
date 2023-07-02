@@ -1,11 +1,12 @@
 import * as path from 'path'
-import { Configuration } from 'webpack'
+import { Configuration, DefinePlugin } from 'webpack'
 import CopyPlugin from 'copy-webpack-plugin'
 import HtmlPlugin from 'html-webpack-plugin'
 import tailwindcss from 'tailwindcss'
 import autoprefixer from 'autoprefixer'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
+import 'dotenv/config'
 
 const config: Configuration = {
     entry: {
@@ -67,6 +68,14 @@ const config: Configuration = {
             ],
         }),
         ...getHtmlPlugins(['sidePanel']),
+        new DefinePlugin({
+            'process.env.REACT_APP_GOOGLE_CLIENT_ID': JSON.stringify(
+                process.env.REACT_APP_GOOGLE_CLIENT_ID
+            ),
+            'process.env.REACT_APP_GOOGLE_API_KEY': JSON.stringify(
+                process.env.REACT_APP_GOOGLE_API_KEY
+            ),
+        }),
     ],
     resolve: {
         extensions: ['.js', '.ts', '.tsx'],
@@ -74,7 +83,6 @@ const config: Configuration = {
     },
     output: {
         filename: '[name].js',
-        path: path.join(__dirname, 'dist'),
     },
     optimization: {
         splitChunks: {

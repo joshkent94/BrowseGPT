@@ -13,7 +13,7 @@
 
 -   [General info](#general-info)
 -   [Features](#features)
--   [Screenshot](#screenshot)
+-   [Screenshots](#screenshots)
 -   [Technologies](#technologies)
 -   [Development](#development)
 -   [Contact](#contact)
@@ -27,10 +27,17 @@ A Chrome extension using the sidepanel API that allows users to persistently int
 -   Hold persistent chats with an AI across the whole browser experience.
 -   The AI knows the date, and the user's name and location (if permission is granted).
 -   Start multiple chats, search through chat content and delete old chats.
+-   Use OAuth authentication to sign up and log in.
 
-## Screenshot
+## Screenshots
 
-![Screenshot of extension working](./public/app-in-action.png)
+Users can sign up securely using OAuth.
+
+![Screenshot of log in page](./public/log-in-page.png)
+
+Once logged in, users can chat with an assistant across their whole browser experience.
+
+![Screenshot of app in action](./public/chat-page.png)
 
 ## Technologies
 
@@ -59,10 +66,16 @@ From the project root, run the below to install dependencies.
 npm install
 ```
 
-The project uses Postgres and Prisma for database management. Download [Postgres](https://www.postgresql.org/download/), create a database and add your database connection URL to your .env file. Then to populate your database, run the below.
+The project uses Postgres and Prisma for database management. Download [Postgres](https://www.postgresql.org/download/), create a database and add your database connection URL to the appropriate .env file (your .env files should match the format and location of the .env.example files). Then to create the tables in your database, run the below.
 
 ```
-turbo prisma
+turbo prisma:migrate:dev
+```
+
+Every time you change the database schema in schema.prisma, you should also run the above command with a name argument to generate a new migration script for your schema changes and apply the changes to your database.
+
+```
+turbo prisma:migrate:dev -- --name={name-for-your-migration}
 ```
 
 Then create initial development builds for both front and back end.

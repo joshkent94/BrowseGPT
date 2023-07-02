@@ -11,6 +11,10 @@
         --color-midnight-blue: 61 71 101;
         --color-white: 255 255 255;
         --color-success: 75 181 110;
+        --color-error: 255 51 51;
+        --toastify-text-color-light: rgb(14, 28, 54);
+        --toastify-color-success: rgb(75, 181, 110);
+        --toastify-color-error: rgb(255, 51, 51);
     }
 
     html,
@@ -72,6 +76,15 @@ input[type='search']::-webkit-search-cancel-button:hover {
 }
 
 /* Chat Styles */
+.cs-avatar:hover > img {
+    filter: none !important;
+}
+
+.cs-message__avatar {
+    width: 40px !important;
+    height: 40px !important;
+}
+
 .cs-message__content {
     color: rgb(14, 28, 54) !important;
     font-weight: 400 !important;
@@ -112,6 +125,12 @@ input[type='search']::-webkit-search-cancel-button:hover {
 .cs-message-input__content-editor-wrapper .ps__thumb-y {
     background-color: rgb(255, 255, 255) !important;
     width: 6px !important;
+}
+
+.cs-message-input--disabled,
+.cs-message-input--disabled .cs-message-input__content-editor::before,
+.cs-button--send:disabled {
+    cursor: not-allowed !important;
 }
 
 .cs-button--send {
@@ -158,4 +177,17 @@ input[type='search']::-webkit-search-cancel-button:hover {
 
 .cs-typing-indicator__text {
     color: rgb(14, 28, 54) !important;
+}
+
+/* Toast Styles */
+@media only screen and (max-width: 600px) {
+    .Toastify__toast-container {
+        padding: 4px !important;
+        top: 1em !important;
+        left: unset !important;
+    }
+}
+
+.Toastify__toast-icon {
+    margin-right: 16px !important;
 }

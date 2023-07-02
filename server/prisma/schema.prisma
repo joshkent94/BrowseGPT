@@ -7,30 +7,45 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Chat {
-  id        Int        @id @default(autoincrement())
-  createdAt DateTime   @default(now()) @db.Timestamp(6)
-  isOpen    Boolean    @default(false)
-  userId    Int
-  User      User       @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
-  Messages  Messages[]
+enum Role {
+  user
+  assistant
+  system
 }
 
-model Messages {
-  id        Int      @id @default(autoincrement())
+model chat {
+  id        String    @id @default(uuid())
+  createdAt DateTime  @default(now()) @db.Timestamp(6)
+  isOpen    Boolean   @default(false)
+  userId    String
+  user      user      @relation(fields: [userId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  messages  message[]
+}
+
+model message {
+  id        String   @id @default(uuid())
   createdAt DateTime @default(now()) @db.Timestamp(6)
   content   String
-  role      String   @db.VarChar(255)
-  url       String   @db.VarChar(255)
-  chatId    Int
-  Chat      Chat     @relation(fields: [chatId], references: [id], onDelete: Cascade, onUpdate: NoAction)
+  role      Role
+  url       String?  @db.VarChar(255)
+  chatId    String
+  chat      chat     @relation(fields: [chatId], references: [id], onDelete: Cascade, onUpdate: NoAction)
 }
 
-model User {
-  id        Int    @id @default(autoincrement())
+model user {
+  id        String @id @db.VarChar(255)
   firstName  String @db.VarChar(255)
   lastName  String @db.VarChar(255)
-  latitude  Int?
-  longitude Int?
-  Chat      Chat[]
+  email     String @db.VarChar(255)
+  latitude  Float?
+  longitude Float?
+  chats     chat[]
+}
+
+model session {
+  sid    String   @id @db.VarChar
+  sess   Json     @db.Json
+  expire DateTime @db.Timestamp(6)
+
+  @@index([expire], map: "IDX_session_expire")
 }

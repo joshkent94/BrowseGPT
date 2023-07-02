@@ -17,11 +17,12 @@
             "@components/*": ["sidePanel/components/*"],
             "@pages/*": ["sidePanel/pages/*"],
             "@utils/*": ["sidePanel/utils/*"],
+            "@backgroundUtils/*": ["background/utils/*"],
             "@server/types": ["../server/dist/server.d.ts"]
         },
         "baseUrl": "./"
     },
-    "include": ["./**/*.ts", "./**/*.tsx"],
+    "include": ["./**/*.ts", "./**/*.tsx", "../index.d.ts"],
     "exclude": ["node_modules"],
     "ts-node": {
         "compilerOptions": {
