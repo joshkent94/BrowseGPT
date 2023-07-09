@@ -11,6 +11,7 @@ module.exports = {
             'midnight-blue': 'rgb(var(--color-midnight-blue) / <alpha-value>)',
             white: 'rgb(var(--color-white) / <alpha-value>)',
             success: 'rgb(var(--color-success) / <alpha-value>)',
+            error: 'rgb(var(--color-error) / <alpha-value>)',
         },
     },
     important: true,

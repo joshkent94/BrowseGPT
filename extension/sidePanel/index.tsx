@@ -1,26 +1,30 @@
 import { createRoot } from 'react-dom/client'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
-import { httpLink } from '@trpc/client'
+import { httpBatchLink } from '@trpc/client'
 import { trpc } from '@utils/trpc'
 import { ThemeProvider, createTheme, responsiveFontSizes } from '@mui/material'
-import Conversation from '@pages/conversation'
-import UserDetails from '@pages/userDetails'
-import NotFound from '@pages/notFound'
-import Layout from '@components/layout'
+import { FC } from 'react'
+import { RouterProvider } from 'react-router-dom'
+import { router } from '@utils/router'
 import '@styles/globals.css'
 import '@chatscope/chat-ui-kit-styles/dist/default/styles.min.css'
-import { useState } from 'react'
-import { ChatsArrayContext, OpenChatContext } from '@utils/context'
+import 'react-toastify/dist/ReactToastify.css'
+import Toast from '@components/layout/toast'
 
 const queryClient = new QueryClient()
 const trpcClient = trpc.createClient({
     links: [
-        httpLink({
+        httpBatchLink({
             url:
                 process.env.NODE_ENV === 'development'
                     ? 'http://localhost:3000/api'
                     : null, // to implement once backend is deployed to Vercel
+            fetch(url, options) {
+                return fetch(url, {
+                    ...options,
+                    credentials: 'include',
+                })
+            },
         }),
     ],
     transformer: undefined,
@@ -45,49 +49,13 @@ const theme = responsiveFontSizes(
     })
 )
 
-const SidePanel = () => {
-    const [chats, setChats] = useState([] as Chats)
-    const [openChat, setOpenChat] = useState({} as Chat)
-
+const SidePanel: FC = () => {
     return (
         <trpc.Provider client={trpcClient} queryClient={queryClient}>
             <QueryClientProvider client={queryClient}>
                 <ThemeProvider theme={theme}>
-                    <ChatsArrayContext.Provider value={chats}>
-                        <OpenChatContext.Provider value={openChat}>
-                            <BrowserRouter>
-                                <Routes>
-                                    <Route
-                                        path="/"
-                                        element={
-                                            <Layout
-                                                setChats={setChats}
-                                                setOpenChat={setOpenChat}
-                                            />
-                                        }
-                                    >
-                                        <Route
-                                            index
-                                            element={
-                                                <Conversation
-                                                    setChats={setChats}
-                                                    setOpenChat={setOpenChat}
-                                                />
-                                            }
-                                        />
-                                        <Route
-                                            path="details"
-                                            element={<UserDetails />}
-                                        />
-                                        <Route
-                                            path="*"
-                                            element={<NotFound />}
-                                        />
-                                    </Route>
-                                </Routes>
-                            </BrowserRouter>
-                        </OpenChatContext.Provider>
-                    </ChatsArrayContext.Provider>
+                    <RouterProvider router={router} />
+                    <Toast />
                 </ThemeProvider>
             </QueryClientProvider>
         </trpc.Provider>

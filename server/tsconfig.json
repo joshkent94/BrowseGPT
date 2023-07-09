@@ -1,4 +1,8 @@
 {
+    "ts-node": {
+        "files": true
+    },
+    "files": ["./server.ts", "../index.d.ts"],
     "compilerOptions": {
         "module": "commonjs",
         "target": "es2016",
@@ -21,6 +25,6 @@
         },
         "declaration": true
     },
-    "include": ["./**/*.ts", "./server.ts"],
+    "include": ["./**/*.ts", "./server.ts", "../index.d.ts"],
     "exclude": ["node_modules", "dist"]
 }
