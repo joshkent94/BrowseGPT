@@ -39,7 +39,9 @@ const setOpenChat = hasValidSessionProcedure
 
         return {
             ...updatedChat,
-            messages,
+            messages: messages.sort((a, b) => {
+                return new Date(a.createdAt) > new Date(b.createdAt) ? 1 : -1
+            }),
         }
     })
 

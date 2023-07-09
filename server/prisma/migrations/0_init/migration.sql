@@ -1,40 +1,55 @@
+-- CreateEnum
+CREATE TYPE "Role" AS ENUM ('user', 'assistant', 'system');
+
 -- CreateTable
-CREATE TABLE "chats" (
-    "id" SERIAL NOT NULL,
+CREATE TABLE "chat" (
+    "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "isOpen" BOOLEAN NOT NULL DEFAULT false,
     "userId" TEXT NOT NULL,
 
-    CONSTRAINT "chats_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "chat_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "messages" (
-    "id" SERIAL NOT NULL,
+CREATE TABLE "message" (
+    "id" TEXT NOT NULL,
     "createdAt" TIMESTAMP(6) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "content" TEXT NOT NULL,
-    "role" VARCHAR(255) NOT NULL,
-    "url" VARCHAR(255) NOT NULL,
-    "chatId" INTEGER NOT NULL,
+    "role" "Role" NOT NULL,
+    "url" VARCHAR(255),
+    "chatId" TEXT NOT NULL,
 
-    CONSTRAINT "messages_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "message_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
-CREATE TABLE "users" (
+CREATE TABLE "user" (
     "id" VARCHAR(255) NOT NULL,
     "firstName" VARCHAR(255) NOT NULL,
     "lastName" VARCHAR(255) NOT NULL,
     "email" VARCHAR(255) NOT NULL,
-    "latitude" INTEGER,
-    "longitude" INTEGER,
+    "latitude" DOUBLE PRECISION,
+    "longitude" DOUBLE PRECISION,
 
-    CONSTRAINT "users_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "user_pkey" PRIMARY KEY ("id")
 );
 
--- AddForeignKey
-ALTER TABLE "chats" ADD CONSTRAINT "chats_userId_fkey" FOREIGN KEY ("userId") REFERENCES "users"("id") ON DELETE CASCADE ON UPDATE NO ACTION;
+-- CreateTable
+CREATE TABLE "session" (
+    "sid" VARCHAR NOT NULL,
+    "sess" JSON NOT NULL,
+    "expire" TIMESTAMP(6) NOT NULL,
+
+    CONSTRAINT "session_pkey" PRIMARY KEY ("sid")
+);
+
+-- CreateIndex
+CREATE INDEX "IDX_session_expire" ON "session"("expire");
 
 -- AddForeignKey
-ALTER TABLE "messages" ADD CONSTRAINT "messages_chatId_fkey" FOREIGN KEY ("chatId") REFERENCES "chats"("id") ON DELETE CASCADE ON UPDATE NO ACTION;
+ALTER TABLE "chat" ADD CONSTRAINT "chat_userId_fkey" FOREIGN KEY ("userId") REFERENCES "user"("id") ON DELETE CASCADE ON UPDATE NO ACTION;
+
+-- AddForeignKey
+ALTER TABLE "message" ADD CONSTRAINT "message_chatId_fkey" FOREIGN KEY ("chatId") REFERENCES "chat"("id") ON DELETE CASCADE ON UPDATE NO ACTION;
 

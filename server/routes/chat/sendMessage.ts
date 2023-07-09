@@ -99,16 +99,20 @@ const sendMessage = hasValidSessionProcedure
             },
         })
 
-        const messagesToSend = storedMessages.map((message) => {
-            const messageContent = message.url
-                ? `${message.url}: ${message.content}`
-                : message.content
+        const messagesToSend = storedMessages
+            .sort((a, b) => {
+                return new Date(a.createdAt) > new Date(b.createdAt) ? 1 : -1
+            })
+            .map((message) => {
+                const messageContent = message.url
+                    ? `${message.url}: ${message.content}`
+                    : message.content
 
-            return {
-                role: message.role,
-                content: messageContent,
-            }
-        })
+                return {
+                    role: message.role,
+                    content: messageContent,
+                }
+            })
 
         const gptResponse = await openAI.createChatCompletion({
             model: 'gpt-3.5-turbo',

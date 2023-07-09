@@ -12,7 +12,6 @@ import ChatError from '@components/chat/chatError'
 import { trpc } from '@utils/trpc'
 import { stripHTMLTags } from '@utils/chat/sanitiseString'
 import { addEventListenersToLinks } from '@utils/chat/addEventListenersToLinks'
-import { formatLinks } from '@utils/chat/formatLinks'
 import { getCurrentTab } from '@utils/chat/getCurrentTab'
 import { useGptStore } from '@utils/store'
 import { getInitials } from '@utils/user/getInitials'
@@ -21,6 +20,8 @@ import { getUserLocation } from '@utils/user/getUserLocation'
 import CircularProgress from '@mui/material/CircularProgress'
 import { useNavigate } from 'react-router-dom'
 import { unauthorizedLogout } from '@utils/auth/unauthorizedLogout'
+import DOMPurify from 'dompurify'
+import { marked } from 'marked'
 
 const Chat: FC = () => {
     const navigate = useNavigate()
@@ -188,13 +189,11 @@ const Chat: FC = () => {
                                 {openChat?.messages?.length > 0 &&
                                     openChat.messages.map(
                                         (section: Message, index: number) => {
-                                            section = formatLinks(section)
                                             if (section.role === 'assistant') {
                                                 return (
                                                     <Message
                                                         key={index}
                                                         model={{
-                                                            message: `${section.content}`,
                                                             sender: 'BrowseGPT',
                                                             direction:
                                                                 'incoming',
@@ -209,6 +208,18 @@ const Chat: FC = () => {
                                                                 className="h-6 w-6 rounded-none"
                                                             />
                                                         </Avatar>
+                                                        <Message.HtmlContent
+                                                            html={DOMPurify.sanitize(
+                                                                marked.parse(
+                                                                    section.content,
+                                                                    {
+                                                                        mangle: false,
+                                                                        headerIds:
+                                                                            false,
+                                                                    }
+                                                                )
+                                                            )}
+                                                        />
                                                     </Message>
                                                 )
                                             } else {
@@ -216,7 +227,6 @@ const Chat: FC = () => {
                                                     <Message
                                                         key={index}
                                                         model={{
-                                                            message: `${section.content}`,
                                                             sender: `${firstName}`,
                                                             direction:
                                                                 'outgoing',
@@ -228,6 +238,18 @@ const Chat: FC = () => {
                                                         <Avatar className="text-md flex h-10 min-h-fit w-10 min-w-fit cursor-default items-center justify-center bg-dark-blue font-medium text-light-blue">
                                                             {userInitials}
                                                         </Avatar>
+                                                        <Message.HtmlContent
+                                                            html={DOMPurify.sanitize(
+                                                                marked.parse(
+                                                                    section.content,
+                                                                    {
+                                                                        mangle: false,
+                                                                        headerIds:
+                                                                            false,
+                                                                    }
+                                                                )
+                                                            )}
+                                                        />
                                                     </Message>
                                                 )
                                             }

@@ -90,6 +90,7 @@ input[type='search']::-webkit-search-cancel-button:hover {
     font-weight: 400 !important;
     padding: 14px 12px !important;
     font-size: 14px !important;
+    white-space: unset !important;
 }
 
 .cs-message--incoming .cs-message__content {
