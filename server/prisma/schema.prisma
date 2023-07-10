@@ -4,7 +4,7 @@ generator client {
 
 datasource db {
   provider = "postgresql"
-  url      = env("DATABASE_URL")
+  url = env("DATABASE_URL")
 }
 
 enum Role {
@@ -34,7 +34,7 @@ model message {
 
 model user {
   id        String @id @db.VarChar(255)
-  firstName  String @db.VarChar(255)
+  firstName String @db.VarChar(255)
   lastName  String @db.VarChar(255)
   email     String @db.VarChar(255)
   latitude  Float?
