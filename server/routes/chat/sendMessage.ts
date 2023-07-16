@@ -42,7 +42,7 @@ const sendMessage = hasValidSessionProcedure
         // if no message, the chat has just started so send the system prompt
         if (!message) {
             const initialPrompt = await generateInitialPrompt(
-                firstName,
+                firstName || 'someone',
                 latitude,
                 longitude
             )

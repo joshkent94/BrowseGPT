@@ -128,6 +128,7 @@ const ChatList: FC<ChatListProps> = ({ open, setOpen }) => {
                 }}
             >
                 <TextField
+                    id="chat-search"
                     label="Search"
                     type="search"
                     value={searchTerm}
@@ -141,18 +142,20 @@ const ChatList: FC<ChatListProps> = ({ open, setOpen }) => {
                     }}
                     sx={{
                         m: '16px auto',
-                        width: '240px',
+                        width: 240,
                         '& .MuiOutlinedInput-notchedOutline': {
                             borderColor: 'primary.main',
                         },
                         '& .MuiInputLabel-outlined': {
                             color: 'text.primary',
+                            fontSize: '14px',
                         },
                         '& .MuiOutlinedInput-root': {
                             color: 'text.primary',
                         },
-                        '& .MuiInputAdornment-positionStart': {
-                            color: 'text.primary',
+                        '& .MuiInputBase-input': {
+                            padding: '12px 12px 12px 0',
+                            fontSize: '14px',
                         },
                     }}
                     color="primary"

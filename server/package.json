@@ -10,11 +10,12 @@
         "format": "prettier --write --loglevel silent .",
         "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
         "correct": "npm run format && npm run lint",
-        "prisma:migrate:dev": "npx prisma migrate dev && npx prisma format",
-        "prisma:migrate:deploy": "npx prisma migrate deploy"
+        "prisma:migrate:dev": "npx prisma migrate dev",
+        "prisma:migrate:deploy": "npx prisma migrate deploy",
+        "prisma:format": "npx prisma format"
     },
     "dependencies": {
-        "@prisma/client": "^4.16.2",
+        "@prisma/client": "^5.0.0",
         "@trpc/client": "^10.28.0",
         "@trpc/server": "^10.28.0",
         "@types/connect-pg-simple": "^7.0.0",
@@ -34,7 +35,7 @@
         "nodemon": "^2.0.22",
         "openai": "^3.2.1",
         "prettier": "^2.8.8",
-        "prisma": "^4.16.2",
+        "prisma": "^5.0.0",
         "ts-node": "^10.9.1",
         "tsconfig-paths": "^4.2.0",
         "typescript": "^5.1.3",

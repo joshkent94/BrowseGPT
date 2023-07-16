@@ -17,6 +17,7 @@
 			"cache": false
 		},
 		"package": {
+			"dependsOn": ["server#build"],
 			"cache": false
 		},
 		"prisma:migrate:dev": {

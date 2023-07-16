@@ -1,6 +1,5 @@
 import * as path from 'path'
 import { Configuration, DefinePlugin } from 'webpack'
-import CopyPlugin from 'copy-webpack-plugin'
 import HtmlPlugin from 'html-webpack-plugin'
 import tailwindcss from 'tailwindcss'
 import autoprefixer from 'autoprefixer'
@@ -59,14 +58,6 @@ const config: Configuration = {
         new CleanWebpackPlugin({
             cleanStaleWebpackAssets: false,
         }),
-        new CopyPlugin({
-            patterns: [
-                {
-                    from: path.resolve('public'),
-                    to: path.resolve('dist'),
-                },
-            ],
-        }),
         ...getHtmlPlugins(['sidePanel']),
         new DefinePlugin({
             'process.env.REACT_APP_GOOGLE_CLIENT_ID': JSON.stringify(
@@ -74,6 +65,21 @@ const config: Configuration = {
             ),
             'process.env.REACT_APP_GOOGLE_API_KEY': JSON.stringify(
                 process.env.REACT_APP_GOOGLE_API_KEY
+            ),
+            'process.env.REACT_APP_GITHUB_CLIENT_ID': JSON.stringify(
+                process.env.REACT_APP_GITHUB_CLIENT_ID
+            ),
+            'process.env.REACT_APP_GITHUB_CLIENT_SECRET': JSON.stringify(
+                process.env.REACT_APP_GITHUB_CLIENT_SECRET
+            ),
+            'process.env.REACT_APP_FACEBOOK_CLIENT_ID': JSON.stringify(
+                process.env.REACT_APP_FACEBOOK_CLIENT_ID
+            ),
+            'process.env.REACT_APP_FACEBOOK_CLIENT_SECRET': JSON.stringify(
+                process.env.REACT_APP_FACEBOOK_CLIENT_SECRET
+            ),
+            'process.env.REACT_APP_STATE_SECRET': JSON.stringify(
+                process.env.REACT_APP_STATE_SECRET
             ),
         }),
     ],

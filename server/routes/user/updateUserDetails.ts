@@ -5,6 +5,7 @@ import z from 'zod'
 const updateUserDetails = hasValidSessionProcedure
     .input(
         z.object({
+            email: z.string(),
             firstName: z.string(),
             lastName: z.string(),
             latitude: z.number().nullable(),
@@ -13,7 +14,7 @@ const updateUserDetails = hasValidSessionProcedure
     )
     .mutation(async ({ input, ctx }): Promise<User> => {
         const { prisma, user } = ctx
-        const { firstName, lastName, latitude, longitude } = input
+        const { email, firstName, lastName, latitude, longitude } = input
 
         const updatedUser = await prisma.user.update({
             where: {
@@ -21,6 +22,7 @@ const updateUserDetails = hasValidSessionProcedure
             },
             data: {
                 ...user,
+                email,
                 firstName,
                 lastName,
                 latitude,
@@ -35,7 +37,14 @@ const updateUserDetails = hasValidSessionProcedure
             })
         }
 
-        return updatedUser
+        return {
+            id: updatedUser.id,
+            email: updatedUser.email || '',
+            firstName: updatedUser.firstName || '',
+            lastName: updatedUser.lastName || '',
+            latitude: updatedUser.latitude || null,
+            longitude: updatedUser.longitude || null,
+        }
     })
 
 export { updateUserDetails }

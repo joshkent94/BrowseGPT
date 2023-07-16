@@ -6,9 +6,9 @@ const signUp = procedure
     .input(
         z.object({
             id: z.string(),
-            firstName: z.string(),
-            lastName: z.string(),
-            email: z.string(),
+            firstName: z.string().nullable(),
+            lastName: z.string().nullable(),
+            email: z.string().nullable(),
             latitude: z.number().nullable(),
             longitude: z.number().nullable(),
         })
@@ -49,7 +49,14 @@ const signUp = procedure
         }
 
         session.userId = newUser.id
-        return newUser
+        return {
+            id: newUser.id,
+            email: newUser.email || '',
+            firstName: newUser.firstName || '',
+            lastName: newUser.lastName || '',
+            latitude: newUser.latitude || null,
+            longitude: newUser.longitude || null,
+        }
     })
 
 export { signUp }

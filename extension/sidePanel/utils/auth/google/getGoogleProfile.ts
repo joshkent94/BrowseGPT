@@ -1,4 +1,4 @@
-export const getGoogleProfile = async (token: string) => {
+export const getGoogleProfile = async (token: string): Promise<User> => {
     const userInfo: chrome.identity.UserInfo = await new Promise(
         (resolve, reject) => {
             chrome.identity.getProfileUserInfo((userInfo) => {

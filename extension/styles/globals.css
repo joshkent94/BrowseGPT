@@ -192,3 +192,23 @@ input[type='search']::-webkit-search-cancel-button:hover {
 .Toastify__toast-icon {
     margin-right: 16px !important;
 }
+
+/* User Details Styles */
+.MuiOutlinedInput-notchedOutline legend {
+    height: 9px !important;
+}
+
+.MuiOutlinedInput-notchedOutline span {
+    padding: 0 !important;
+    padding-left: 1px !important;
+}
+
+#email-input + .MuiOutlinedInput-notchedOutline span {
+    padding: 0 !important;
+    padding-left: 4px !important;
+}
+
+#chat-search + .MuiOutlinedInput-notchedOutline span {
+    padding: 0 !important;
+    padding-left: 4px !important;
+}

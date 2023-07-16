@@ -23,7 +23,7 @@ export const router = createBrowserRouter(
                 </Route>
 
                 <Route element={<ChatLayout />}>
-                    <Route path="/chat" element={<Chat />} />
+                    <Route path="/" element={<Chat />} />
                 </Route>
 
                 <Route element={<DetailsLayout />}>

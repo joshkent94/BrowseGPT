@@ -10,7 +10,7 @@
         "format": "prettier --write --loglevel silent .",
         "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
         "correct": "npm run format && npm run lint",
-        "package": "npm run build:prod && zip -r packages/$(date -u +\"%Y-%m-%dT%H:%M:%SZ\").zip dist"
+        "package": "npm run build:prod && zip -r packages/$(date -u +\"%Y-%m-%dT%H:%M:%SZ\").zip build"
     },
     "dependencies": {
         "@chatscope/chat-ui-kit-react": "^1.10.1",
