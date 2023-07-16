@@ -11,7 +11,7 @@ const Auth: FC = () => {
     useLayoutEffect(() => {
         const isLoggedIn = !!user.cookieValue
         if (location.pathname === '/login' || location.pathname === '/signup') {
-            isLoggedIn && navigate('/chat', { replace: true })
+            isLoggedIn && navigate('/', { replace: true })
         } else {
             !isLoggedIn &&
                 navigate('/login', {

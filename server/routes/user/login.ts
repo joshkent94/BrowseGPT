@@ -6,14 +6,13 @@ const login = procedure
     .input(
         z.object({
             id: z.string(),
-            email: z.string(),
             latitude: z.number().nullable(),
             longitude: z.number().nullable(),
         })
     )
     .mutation(async ({ input, ctx }): Promise<User> => {
         const { prisma, session } = ctx
-        const { id, email, latitude, longitude } = input
+        const { id, latitude, longitude } = input
 
         const existingUser = await prisma.user.findUnique({
             where: {
@@ -33,7 +32,6 @@ const login = procedure
                 id,
             },
             data: {
-                email,
                 latitude,
                 longitude,
             },
@@ -47,7 +45,14 @@ const login = procedure
         }
 
         session.userId = updatedUser.id
-        return updatedUser
+        return {
+            id: updatedUser.id,
+            email: updatedUser.email || '',
+            firstName: updatedUser.firstName || '',
+            lastName: updatedUser.lastName || '',
+            latitude: updatedUser.latitude || null,
+            longitude: updatedUser.longitude || null,
+        }
     })
 
 export { login }
