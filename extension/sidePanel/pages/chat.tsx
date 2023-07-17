@@ -1,4 +1,4 @@
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import {
     MainContainer,
     ChatContainer,
@@ -18,12 +18,13 @@ import { getInitials } from '@utils/user/getInitials'
 import gptIcon from '@public/icon-light.png'
 import { getUserLocation } from '@utils/user/getUserLocation'
 import CircularProgress from '@mui/material/CircularProgress'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useOutletContext } from 'react-router-dom'
 import { unauthorizedLogout } from '@utils/auth/unauthorizedLogout'
 import DOMPurify from 'dompurify'
 import { marked } from 'marked'
 
 const Chat: FC = () => {
+    const open = useOutletContext()
     const navigate = useNavigate()
     const {
         user,
@@ -39,6 +40,13 @@ const Chat: FC = () => {
     const [userInitials, setUserInitials] = useState<string>('')
     const [message, setMessage] = useState<string>('')
     const [isError, setIsError] = useState<boolean>(false)
+    const messageInput = useRef<HTMLInputElement>(null)
+
+    const focusMessageInput = () => {
+        setTimeout(() => {
+            messageInput.current?.focus()
+        }, 100)
+    }
 
     const getAllChatsForUserQuery = trpc.getAllChatsForUser.useQuery(null, {
         enabled: Object.keys(openChat)?.length === 0 && id !== '',
@@ -79,6 +87,7 @@ const Chat: FC = () => {
                 ])
             }
             setIsStartingChat(false)
+            focusMessageInput()
         },
         onError: (error) => {
             if (error.data?.httpStatus === 401) {
@@ -92,6 +101,12 @@ const Chat: FC = () => {
             }
         },
     })
+
+    useEffect(() => {
+        if (!open) {
+            focusMessageInput()
+        }
+    }, [open])
 
     useEffect(() => {
         setUserInitials(getInitials([firstName, lastName]))
@@ -257,6 +272,7 @@ const Chat: FC = () => {
                                     )}
                             </MessageList>
                             <MessageInput
+                                ref={messageInput}
                                 placeholder="Type a message..."
                                 attachButton={false}
                                 onChange={(value) => setMessage(value)}

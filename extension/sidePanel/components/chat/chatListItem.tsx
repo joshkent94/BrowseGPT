@@ -6,7 +6,6 @@ import {
     ListItemText,
 } from '@mui/material'
 import DeleteIcon from '@mui/icons-material/Delete'
-import CircleIcon from '@mui/icons-material/Circle'
 import { trpc } from '@utils/trpc'
 import { toast } from 'react-toastify'
 import { useGptStore } from '@utils/store'
@@ -156,34 +155,22 @@ const ChatListItem = ({ chat, setOpen }: ChatListItemProps) => {
     return (
         <ListItem
             sx={{
-                '&:after': {
-                    content: '""',
-                    position: 'absolute',
-                    bottom: '0',
-                    left: '20%',
-                    width: '60%',
-                    height: '1px',
-                    backgroundColor: 'rgb(230, 239, 255)',
-                },
-                '&:last-of-type:after': {
-                    height: '0',
-                },
-                padding: '16px 32px',
+                padding: '6px 32px',
                 '@media (max-width: 480px)': {
-                    padding: '16px 24px',
+                    padding: '8px 24px',
                 },
             }}
         >
             <ListItemButton
                 selected={chat.id === openChat.id}
                 sx={{
-                    borderRadius: '1.5rem',
-                    padding: '10px 20px !important',
+                    borderRadius: '4px',
+                    padding: '6px 14px !important',
                     '&:hover': {
-                        backgroundColor: 'rgb(230, 239, 255, 0.7) !important',
+                        backgroundColor: 'rgb(230, 239, 255) !important',
                     },
                     '&.Mui-selected': {
-                        backgroundColor: 'unset',
+                        backgroundColor: 'rgb(230, 239, 255, 0.8)',
                     },
                     '&.Mui-selected .MuiListItemIcon-root:first-of-type': {
                         display: 'flex',
@@ -193,20 +180,6 @@ const ChatListItem = ({ chat, setOpen }: ChatListItemProps) => {
                 onMouseEnter={handleShowDeleteIcon}
                 onMouseLeave={handleHideDeleteIcon}
             >
-                <ListItemIcon
-                    sx={{
-                        width: '20px',
-                        display: 'none',
-                        justifyContent: 'center',
-                        alignItems: 'center',
-                    }}
-                >
-                    <CircleIcon
-                        sx={{
-                            fontSize: '10px',
-                        }}
-                    />
-                </ListItemIcon>
                 <ListItemText
                     primary={
                         chat.messages.find((message) => message.role === 'user')
@@ -217,6 +190,7 @@ const ChatListItem = ({ chat, setOpen }: ChatListItemProps) => {
                             overflow: 'hidden',
                             textOverflow: 'ellipsis',
                             whiteSpace: 'nowrap',
+                            fontSize: '14px',
                         },
                     }}
                 />
@@ -227,17 +201,20 @@ const ChatListItem = ({ chat, setOpen }: ChatListItemProps) => {
                             padding: '5px',
                         }}
                     >
-                        <CircularProgress size={20} />
+                        <CircularProgress size={14} />
                     </ListItemIcon>
                 ) : (
                     <ListItemIcon
                         sx={{
                             display: 'none',
-                            padding: '5px',
                         }}
                         onClick={(event) => handleDeleteChat(event, chat)}
                     >
-                        <DeleteIcon fontSize="small" />
+                        <DeleteIcon
+                            sx={{
+                                fontSize: '16px',
+                            }}
+                        />
                     </ListItemIcon>
                 )}
             </ListItemButton>

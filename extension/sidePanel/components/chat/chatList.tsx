@@ -5,6 +5,7 @@ import {
     Drawer,
     TextField,
     InputAdornment,
+    Typography,
 } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import SearchIcon from '@mui/icons-material/Search'
@@ -135,7 +136,12 @@ const ChatList: FC<ChatListProps> = ({ open, setOpen }) => {
                     placeholder="Search..."
                     InputProps={{
                         startAdornment: (
-                            <InputAdornment position="start">
+                            <InputAdornment
+                                position="start"
+                                sx={{
+                                    color: 'text.primary',
+                                }}
+                            >
                                 <SearchIcon />
                             </InputAdornment>
                         ),
@@ -183,6 +189,9 @@ const ChatList: FC<ChatListProps> = ({ open, setOpen }) => {
                     }}
                     className="m-4 flex grow flex-col overflow-auto rounded-xl border border-midnight-blue border-opacity-30 bg-white"
                 >
+                    <Typography variant="h6" className="mx-auto my-4">
+                        Chats
+                    </Typography>
                     {filteredChats.map((chat) => {
                         return (
                             <ChatListItem
