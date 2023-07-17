@@ -89,10 +89,10 @@ const UserDetails: FC = () => {
                 className="flex h-[95%] w-5/6 flex-col items-center rounded-xl border border-midnight-blue border-opacity-30 bg-white"
                 onSubmit={handleSubmit}
             >
-                <Typography variant="h6" className="mt-16">
+                <Typography variant="h6" className="my-16">
                     Profile
                 </Typography>
-                <div className="flex grow flex-col items-center justify-center">
+                <div className="flex grow flex-col items-center">
                     <TextField
                         id="first-name-input"
                         label="First Name"

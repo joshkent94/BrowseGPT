@@ -11,7 +11,7 @@ const ChatLayout: FC = () => {
         <div className="flex h-screen max-h-screen w-full flex-col overflow-hidden">
             <ChatHeader open={open} setOpen={setOpen} />
             <ChatList open={open} setOpen={setOpen} />
-            <Outlet />
+            <Outlet context={open} />
             <Footer />
         </div>
     )
