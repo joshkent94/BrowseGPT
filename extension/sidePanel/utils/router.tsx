@@ -1,6 +1,7 @@
 import Auth from '@components/auth/auth'
 import ChatLayout from '@components/layout/chat/chatLayout'
 import DetailsLayout from '@components/layout/details/detailsLayout'
+import Pendo from '@components/layout/pendo'
 import PreLoginLayout from '@components/layout/preLogin/preLoginLayout'
 import Chat from '@pages/chat'
 import Login from '@pages/login'
@@ -22,15 +23,17 @@ export const router = createBrowserRouter(
                     <Route path="/login" element={<Login />} />
                 </Route>
 
-                <Route element={<ChatLayout />}>
-                    <Route path="/" element={<Chat />} />
-                </Route>
+                <Route element={<Pendo />}>
+                    <Route element={<ChatLayout />}>
+                        <Route path="/" element={<Chat />} />
+                    </Route>
 
-                <Route element={<DetailsLayout />}>
-                    <Route path="/details" element={<UserDetails />} />
-                </Route>
+                    <Route element={<DetailsLayout />}>
+                        <Route path="/details" element={<UserDetails />} />
+                    </Route>
 
-                <Route path="*" element={<NotFound />} />
+                    <Route path="*" element={<NotFound />} />
+                </Route>
             </Route>
         </>
     )

@@ -1,5 +1,5 @@
 import { Avatar, IconButton, ListItemIcon, Menu, MenuItem } from '@mui/material'
-import { MouseEvent, useEffect, useState } from 'react'
+import { FC, MouseEvent, useEffect, useState } from 'react'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import LogoutIcon from '@mui/icons-material/Logout'
 import { getInitials } from '@utils/user/getInitials'
@@ -7,7 +7,7 @@ import { useGptStore, resetStore } from '@utils/store'
 import { useNavigate } from 'react-router-dom'
 import { trpc } from '@utils/trpc'
 
-const ProfileDropdown = () => {
+const ProfileDropdown: FC = () => {
     const [userInitials, setUserInitials] = useState<string>('')
     const [anchor, setAnchor] = useState<null | HTMLElement>(null)
     const { user, setIsLoggingOut } = useGptStore()
