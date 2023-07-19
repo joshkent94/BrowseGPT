@@ -17,24 +17,38 @@ const Pendo: FC = () => {
     const { id, firstName, lastName, email } = user
 
     useEffect(() => {
-        loadPendoScript().then(() => {
-            window.pendo?.initialize({
-                visitor: {
-                    id,
-                    email,
-                    full_name: `${firstName} ${lastName}`,
-                },
-                account: {
-                    id,
-                    name: email,
-                },
+        if (!window.pendo) {
+            loadPendoScript().then(() => {
+                window.pendo?.initialize({
+                    visitor: {
+                        id,
+                        email,
+                        full_name: `${firstName} ${lastName}`,
+                    },
+                    account: {
+                        id,
+                        name: email,
+                    },
+                })
             })
-        })
 
-        return () => {
-            cleanUpPendoScript()
+            return () => {
+                cleanUpPendoScript()
+            }
         }
-    }, [id, firstName, lastName, email])
+
+        window.pendo?.updateOptions({
+            visitor: {
+                id,
+                email,
+                full_name: `${firstName} ${lastName}`,
+            },
+            account: {
+                id,
+                name: email,
+            },
+        })
+    }, [])
 
     return <Outlet />
 }

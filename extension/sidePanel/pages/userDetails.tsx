@@ -27,6 +27,17 @@ const UserDetails: FC = () => {
         onSuccess: (updatedUser: User) => {
             setUser({ ...user, ...updatedUser })
             setIsLoading(false)
+            window.pendo?.updateOptions({
+                visitor: {
+                    id: updatedUser.id,
+                    email: updatedUser.email,
+                    full_name: `${updatedUser.firstName} ${updatedUser.lastName}`,
+                },
+                account: {
+                    id: updatedUser.id,
+                    name: updatedUser.email,
+                },
+            })
             navigate('/')
             toast.success('Successfully updated user details')
         },

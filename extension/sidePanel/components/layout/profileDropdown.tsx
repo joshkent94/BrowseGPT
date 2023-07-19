@@ -7,6 +7,12 @@ import { useGptStore, resetStore } from '@utils/store'
 import { useNavigate } from 'react-router-dom'
 import { trpc } from '@utils/trpc'
 
+declare global {
+    interface Window {
+        pendo: any
+    }
+}
+
 const ProfileDropdown: FC = () => {
     const [userInitials, setUserInitials] = useState<string>('')
     const [anchor, setAnchor] = useState<null | HTMLElement>(null)
@@ -18,6 +24,7 @@ const ProfileDropdown: FC = () => {
         resetStore()
         useGptStore.persist.clearStorage()
         setIsLoggingOut(false)
+        window.pendo?.clearSession()
         navigate('/login')
     }
 
