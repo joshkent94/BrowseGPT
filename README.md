@@ -73,6 +73,12 @@ The project uses Postgres and Prisma for database management. Download [Postgres
 turbo prisma:migrate:dev
 ```
 
+You may get an error saying you need to use an interactive command line for this, if so, run the below instead.
+
+```
+cd server && npm run prisma:migrate:dev
+```
+
 Every time you change the database schema in schema.prisma, you should also run the above command with a name argument to generate a new migration script for your schema changes and apply the changes to your database.
 
 ```
