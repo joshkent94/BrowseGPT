@@ -28,6 +28,7 @@ A Chrome extension using the sidepanel API that allows users to persistently int
 -   The AI knows the date, and the user's name and location (if permission is granted).
 -   Start multiple chats, search through chat content and delete old chats.
 -   Use OAuth authentication to sign up and log in.
+-   Markdown is supported in chats.
 
 ## Screenshots
 
