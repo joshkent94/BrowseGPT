@@ -42,6 +42,7 @@ const appRouter = router({
 })
 export type AppRouter = typeof appRouter
 
+app.set('trust proxy', true)
 app.use(
     cors({
         credentials: true,
