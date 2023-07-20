@@ -3,7 +3,7 @@
 	"version": "1.0.0",
 	"author": "Joshua Kent",
 	"license": "MIT",
-	"packageManager": "npm@9.5.1",
+	"packageManager": "npm@9.8.1",
 	"workspaces": [
 		"extension",
 		"server"
