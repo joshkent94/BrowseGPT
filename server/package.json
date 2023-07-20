@@ -4,7 +4,8 @@
     "main": "server.js",
     "license": "MIT",
     "scripts": {
-        "start": "tsc && node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/server.js",
+        "start": "node dist/server.js",
+        "start:dev": "tsc && node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/server.js",
         "build": "tsc",
         "dev": "nodemon -q",
         "format": "prettier --write --loglevel silent .",
@@ -51,7 +52,7 @@
             "server.ts",
             "../index.d.ts"
         ],
-        "exec": "npm start",
+        "exec": "npm run start:dev",
         "ext": "ts, js"
     }
 }
