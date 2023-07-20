@@ -7,5 +7,9 @@
 	"workspaces": [
 		"extension",
 		"server"
-	]
+	],
+	"scripts": {
+		"heroku-prebuild": "cd server && npm install && npm run build && npm run prisma:migrate:deploy",
+		"start": "cd server && npm start"
+	}
 }
