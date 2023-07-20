@@ -1,4 +1,4 @@
-import { getCityAndCountry } from './getCityAndCountry'
+import { getCityAndCountry } from '@utils/misc/getCityAndCountry'
 
 export const generateInitialPrompt = async (
     firstName: string,
