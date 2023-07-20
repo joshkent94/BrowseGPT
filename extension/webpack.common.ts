@@ -6,7 +6,6 @@ import autoprefixer from 'autoprefixer'
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import 'dotenv/config'
-import CopyPlugin from 'copy-webpack-plugin'
 
 const config: Configuration = {
     entry: {
@@ -82,14 +81,6 @@ const config: Configuration = {
             'process.env.REACT_APP_STATE_SECRET': JSON.stringify(
                 process.env.REACT_APP_STATE_SECRET
             ),
-        }),
-        new CopyPlugin({
-            patterns: [
-                {
-                    from: path.resolve('pendo'),
-                    to: path.resolve('dist'),
-                },
-            ],
         }),
     ],
     resolve: {

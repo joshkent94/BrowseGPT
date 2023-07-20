@@ -17,6 +17,10 @@ const config: Configuration = merge(common, {
                     from: path.resolve('public'),
                     to: path.resolve('dist'),
                 },
+                {
+                    from: path.resolve('pendo'),
+                    to: path.resolve('dist'),
+                },
             ],
         }),
     ],
