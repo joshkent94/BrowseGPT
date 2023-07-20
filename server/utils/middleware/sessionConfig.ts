@@ -2,7 +2,7 @@ import session, { CookieOptions } from 'express-session'
 import connect from 'connect-pg-simple'
 
 const cookie: CookieOptions = {
-    secure: process.env.NODE_ENV === 'production',
+    ...(process.env.NODE_ENV === 'production' && { secure: true, sameSite: 'none' }),
     httpOnly: false,
     maxAge: 86400000,
 }
