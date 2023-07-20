@@ -9,7 +9,12 @@
 		"server"
 	],
 	"scripts": {
-		"heroku-prebuild": "cd server && npm install && npm run build && npm run prisma:migrate:deploy && npm run prisma:generate",
-		"start": "cd server && npm start"
+		"start": "cd server && npm start",
+		"build": "cd server && npm run build",
+		"heroku-postbuild": "cd server && npm run prisma:migrate:deploy && npm run prisma:generate"
+	},
+	"engines": {
+		"node": "18.16.0",
+		"npm": "9.8.1"
 	}
 }

@@ -5,7 +5,7 @@ import Toolbar from '@mui/material/Toolbar'
 import MenuIcon from '@mui/icons-material/Menu'
 import Icon from '@mui/material/Icon'
 import logo from '@public/icon-dark.png'
-import ProfileDropdown from '../profileDropdown'
+import ProfileDropdown from '@components/layout/profileDropdown'
 
 type ChatHeaderProps = {
     open: boolean
