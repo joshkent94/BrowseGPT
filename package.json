@@ -10,8 +10,7 @@
 	],
 	"scripts": {
 		"start": "cd server && npm start",
-		"build": "cd server && npm run build",
-		"heroku-postbuild": "cd server && npm run prisma:migrate:deploy && npm run prisma:generate"
+		"build": "cd server && npm run build && npm run prisma:migrate:deploy && npm run prisma:generate",
 	},
 	"engines": {
 		"node": "18.16.0",
