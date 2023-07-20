@@ -16,14 +16,15 @@
 		"server#build": {
 			"cache": false
 		},
+		"build:prod": {
+			"dependsOn": ["server#build"],
+			"cache": false
+		},
 		"package": {
 			"dependsOn": ["server#build"],
 			"cache": false
 		},
 		"prisma:migrate:dev": {
-			"cache": false
-		},
-		"prisma:migrate:deploy": {
 			"cache": false
 		}
 	}

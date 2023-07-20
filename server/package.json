@@ -13,6 +13,7 @@
         "correct": "npm run format && npm run lint",
         "prisma:migrate:dev": "npx prisma migrate dev",
         "prisma:migrate:deploy": "npx prisma migrate deploy",
+        "prisma:generate": "npx prisma generate",
         "prisma:format": "npx prisma format"
     },
     "dependencies": {

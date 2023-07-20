@@ -9,7 +9,7 @@
 		"server"
 	],
 	"scripts": {
-		"heroku-prebuild": "cd server && npm install && npm run build && npm run prisma:migrate:deploy",
+		"heroku-prebuild": "cd server && npm install && npm run build && npm run prisma:migrate:deploy && npm run prisma:generate",
 		"start": "cd server && npm start"
 	}
 }
