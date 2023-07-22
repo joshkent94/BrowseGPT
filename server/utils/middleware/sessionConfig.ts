@@ -19,7 +19,7 @@ const cookie: CookieOptions = {
 
 const pgSession = connect(session)
 const pool = new Pool({
-    connectionString,
+    connectionString: process.env.DATABASE_URL,
     ssl: isProduction ? { rejectUnauthorized: false } : false,
 })
 
