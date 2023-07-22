@@ -10,7 +10,6 @@ export const createContext = async ({
     const url =
         process.env.NODE_ENV ===
         'production' ? `${process.env.DATABASE_URL}?schema=public&sslmode=require` : process.env.DATABASE_URL
-    console.log(url)
     const prisma = new PrismaClient({
         datasources: {
             db: {
