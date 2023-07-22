@@ -1,20 +1,13 @@
 import { PrismaClient } from '@prisma/client'
 import { initTRPC, inferAsyncReturnType } from '@trpc/server'
 import { CreateExpressContextOptions } from '@trpc/server/adapters/express'
-import { connectionString } from '@utils/middleware/sessionConfig'
 
 export const createContext = async ({
     req,
     res,
 }: CreateExpressContextOptions) => {
     const session = req.session
-    const prisma = new PrismaClient({
-        datasources: {
-            db: {
-                url: connectionString,
-            },
-        },
-    })
+    const prisma = new PrismaClient()
 
     return { prisma, session, req, res }
 }

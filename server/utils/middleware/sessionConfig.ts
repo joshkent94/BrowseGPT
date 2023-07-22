@@ -4,9 +4,6 @@ import { Pool } from 'pg'
 import 'dotenv/config'
 
 export const isProduction = process.env.NODE_ENV === 'production'
-export const connectionString = isProduction
-    ? `${process.env.DATABASE_URL}?schema=public&sslmode=require`
-    : process.env.DATABASE_URL
 
 const cookie: CookieOptions = {
     ...(process.env.NODE_ENV === 'production' && {
