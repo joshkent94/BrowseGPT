@@ -23,6 +23,7 @@ const trpcClient = trpc.createClient({
                 return fetch(url, {
                     ...options,
                     credentials: 'include',
+                    mode: 'cors',
                 })
             },
         }),
