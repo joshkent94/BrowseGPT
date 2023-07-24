@@ -15,6 +15,20 @@ declare global {
 const Pendo: FC = () => {
     const { user } = useGptStore()
     const { id, firstName, lastName, email } = user
+    const devTransforms = [
+        {
+            attr: 'hostname',
+            action: 'Replace',
+            data: 'browsegpt-dev.com',
+        },
+    ]
+    const prodTransforms = [
+        {
+            attr: 'hostname',
+            action: 'Replace',
+            data: 'browsegpt-prod.com',
+        },
+    ]
 
     useEffect(() => {
         if (!window.pendo) {
@@ -28,6 +42,12 @@ const Pendo: FC = () => {
                     account: {
                         id,
                         name: email,
+                    },
+                    location: {
+                        transforms:
+                            process.env.NODE_ENV === 'production'
+                                ? prodTransforms
+                                : devTransforms,
                     },
                 })
             })

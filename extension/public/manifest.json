@@ -17,7 +17,6 @@
     "host_permissions": ["<all_urls>"],
     "permissions": [
         "sidePanel",
-        "storage",
         "tabs",
         "geolocation",
         "identity",
