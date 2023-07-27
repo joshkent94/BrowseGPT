@@ -2,6 +2,7 @@ import { Avatar, IconButton, ListItemIcon, Menu, MenuItem } from '@mui/material'
 import { FC, MouseEvent, useEffect, useState } from 'react'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import LogoutIcon from '@mui/icons-material/Logout'
+import HelpIcon from '@mui/icons-material/Help'
 import { getInitials } from '@utils/user/getInitials'
 import { useGptStore, resetStore } from '@utils/store'
 import { useNavigate } from 'react-router-dom'
@@ -90,7 +91,7 @@ const ProfileDropdown: FC = () => {
                             },
                             '& .MuiMenuItem-root': {
                                 py: 1.5,
-                                px: 3,
+                                px: 2.5,
                                 fontSize: '14px',
                                 color: 'text.primary',
                             },
@@ -102,8 +103,9 @@ const ProfileDropdown: FC = () => {
                                 minWidth: '28px !important',
                             },
                             '& .MuiSvgIcon-root': {
-                                fontSize: '18px',
+                                fontSize: '21px',
                                 color: 'text.primary',
+                                marginRight: '12px',
                             },
                         },
                         elevation: 0,
@@ -119,9 +121,23 @@ const ProfileDropdown: FC = () => {
                     }}
                 >
                     <ListItemIcon>
-                        <AccountCircleIcon fontSize="small" />
+                        <AccountCircleIcon />
                     </ListItemIcon>
                     Profile
+                </MenuItem>
+                <MenuItem
+                    id="launch-resource-center"
+                    onClick={() => {
+                        hideMenu()
+                        window.pendo?.showGuideById(
+                            'VuRQStkruo86VokMj404FsKJxbA'
+                        )
+                    }}
+                >
+                    <ListItemIcon>
+                        <HelpIcon />
+                    </ListItemIcon>
+                    Resources
                 </MenuItem>
                 <MenuItem
                     onClick={() => {
@@ -131,7 +147,7 @@ const ProfileDropdown: FC = () => {
                     }}
                 >
                     <ListItemIcon>
-                        <LogoutIcon fontSize="small" />
+                        <LogoutIcon />
                     </ListItemIcon>
                     Logout
                 </MenuItem>

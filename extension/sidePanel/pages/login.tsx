@@ -1,4 +1,3 @@
-import LoadingButton from '@mui/lab/LoadingButton/LoadingButton'
 import { getUserLocation } from '@utils/user/getUserLocation'
 import { useGptStore } from '@utils/store'
 import { trpc } from '@utils/trpc'
@@ -17,23 +16,17 @@ import { getGithubAccessToken } from '@utils/auth/github/getGithubAccessToken'
 import { getFacebookAuthParams } from '@utils/auth/facebook/getFacebookAuthParams'
 import { getFacebookAccessToken } from '@utils/auth/facebook/getFacebookAccessToken'
 import { getFacebookProfile } from '@utils/auth/facebook/getFacebookProfile'
+import Button from '@mui/material/Button'
+import CircularProgress from '@mui/material/CircularProgress'
 
 const Login: FC = () => {
-    const [isGoogleLoading, setIsGoogleLoading] = useState<boolean>(false)
-    const [isGithubLoading, setIsGithubLoading] = useState<boolean>(false)
-    const [isFacebookLoading, setIsFacebookLoading] = useState<boolean>(false)
+    const [loading, setLoading] = useState<boolean>(false)
     const navigate = useNavigate()
     const { setUser } = useGptStore()
 
-    const stopLoading = (): void => {
-        setIsGoogleLoading(false)
-        setIsGithubLoading(false)
-        setIsFacebookLoading(false)
-    }
-
     const showErrorToast = (message: string): void => {
         toast.error(message)
-        stopLoading()
+        setLoading(false)
     }
 
     const loginMutation = trpc.login.useMutation({
@@ -43,7 +36,7 @@ const Login: FC = () => {
                 ...loggedInUser,
                 cookieValue: cookies[0]?.value,
             })
-            stopLoading()
+            setLoading(false)
             navigate('/')
         },
         onError: (error) => {
@@ -55,7 +48,7 @@ const Login: FC = () => {
 
     const oauthLoginGoogle = async (event: MouseEvent) => {
         event.preventDefault()
-        setIsGoogleLoading(true)
+        setLoading(true)
 
         const token = googleAuthToken
         if (!token) {
@@ -79,7 +72,7 @@ const Login: FC = () => {
 
     const oauthLoginGithub = async (event: MouseEvent) => {
         event.preventDefault()
-        setIsGithubLoading(true)
+        setLoading(true)
 
         const { code, state } = await getGithubAuthParams()
         if (!code || !state || state !== process.env.REACT_APP_STATE_SECRET) {
@@ -109,7 +102,7 @@ const Login: FC = () => {
 
     const oauthLoginFacebook = async (event: MouseEvent) => {
         event.preventDefault()
-        setIsFacebookLoading(true)
+        setLoading(true)
 
         const { code, state } = await getFacebookAuthParams()
         if (!code || !state || state !== process.env.REACT_APP_STATE_SECRET) {
@@ -139,48 +132,53 @@ const Login: FC = () => {
 
     return (
         <div className="flex h-full w-full flex-col items-center justify-center bg-light-blue">
-            <LoadingButton
-                onClick={(event: MouseEvent) => oauthLoginGoogle(event)}
-                loading={isGoogleLoading}
-                variant="outlined"
-                color="primary"
-                className="my-2 w-56 bg-white"
-                sx={{ textTransform: 'none' }}
-            >
-                <GoogleIcon className="mr-2" />
-                <span className="grow">Log in with Google</span>
-            </LoadingButton>
-            <LoadingButton
-                onClick={(event: MouseEvent) => oauthLoginGithub(event)}
-                loading={isGithubLoading}
-                variant="outlined"
-                color="primary"
-                className="my-2 w-56 bg-white"
-                sx={{ textTransform: 'none' }}
-            >
-                <GitHubIcon className="mr-2" />
-                <span className="grow">Log in with GitHub</span>
-            </LoadingButton>
-            <LoadingButton
-                onClick={(event: MouseEvent) => oauthLoginFacebook(event)}
-                loading={isFacebookLoading}
-                variant="outlined"
-                color="primary"
-                className="my-2 w-56 bg-white"
-                sx={{ textTransform: 'none' }}
-            >
-                <FacebookIcon className="mr-2" />
-                <span className="grow">Log in with Facebook</span>
-            </LoadingButton>
-            <div className="mt-6 flex">
-                <span>Don't have an account?</span>
-                <Link
-                    to="/signup"
-                    className="ml-1 font-bold underline-offset-1 hover:underline"
-                >
-                    Sign Up
-                </Link>
-            </div>
+            {loading ? (
+                <CircularProgress />
+            ) : (
+                <>
+                    <Button
+                        onClick={(event: MouseEvent) => oauthLoginGoogle(event)}
+                        variant="outlined"
+                        color="primary"
+                        className="my-2 w-56 bg-white"
+                        sx={{ textTransform: 'none' }}
+                    >
+                        <GoogleIcon className="mr-2" />
+                        <span className="grow">Log in with Google</span>
+                    </Button>
+                    <Button
+                        onClick={(event: MouseEvent) => oauthLoginGithub(event)}
+                        variant="outlined"
+                        color="primary"
+                        className="my-2 w-56 bg-white"
+                        sx={{ textTransform: 'none' }}
+                    >
+                        <GitHubIcon className="mr-2" />
+                        <span className="grow">Log in with GitHub</span>
+                    </Button>
+                    <Button
+                        onClick={(event: MouseEvent) =>
+                            oauthLoginFacebook(event)
+                        }
+                        variant="outlined"
+                        color="primary"
+                        className="my-2 w-56 bg-white"
+                        sx={{ textTransform: 'none' }}
+                    >
+                        <FacebookIcon className="mr-2" />
+                        <span className="grow">Log in with Facebook</span>
+                    </Button>
+                    <div className="mt-6 flex">
+                        <span>Don't have an account?</span>
+                        <Link
+                            to="/signup"
+                            className="ml-1 font-bold underline-offset-1 hover:underline"
+                        >
+                            Sign Up
+                        </Link>
+                    </div>
+                </>
+            )}
         </div>
     )
 }
