@@ -7,7 +7,7 @@
     BrowseGPT
 </h1>
 
-> An AI assistant for your browser
+> An AI assistant for your browser. Now available to [download](https://chrome.google.com/webstore/detail/browsegpt/ijdehllahgkhhcoffcohgmbebcchdknb) from the Chrome Store!
 
 ## Table of contents
 
