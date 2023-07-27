@@ -221,3 +221,27 @@ input[type='search']::-webkit-search-cancel-button:hover {
     padding: 0 !important;
     padding-left: 4px !important;
 }
+
+/* Pendo Styles */
+#pendo-resource-center-container {
+    position: fixed !important;
+    top: unset !important;
+    left: unset !important;
+    bottom: 20px !important;
+    right: 20px !important;
+}
+
+#pendo-resource-center-container h2 {
+    padding: 18px 24px !important;
+    font-size: 18px !important;
+}
+
+._pendo-resource-center-left-caret {
+    top: 21px !important;
+}
+
+._pendo-close-guide {
+    top: 0px !important;
+    right: 10px !important;
+    font-size: 28px !important;
+}

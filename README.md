@@ -103,7 +103,7 @@ To lint the project, run the below command from the project root.
 turbo correct
 ```
 
-Download the beta version of [Google Chrome](https://www.google.com/intl/en_uk/chrome/beta/), then go to Chrome extensions, turn on development mode, click 'Load unpacked' and select the dist folder within the extension directory. Click on the extension icon to open the sidepanel, or use the shortcut CMD + SHIFT + SPACE.
+Download the latest version of [Google Chrome](https://www.google.com/intl/en_uk/chrome/dr/download/), then go to Chrome extensions, turn on development mode, click 'Load unpacked' and select the dist folder within the extension directory. Click on the extension icon to open the sidepanel, or use the shortcut CMD + SHIFT + SPACE.
 
 To see any front end changes in the browser, you'll need to manually reload the extension by clicking the refresh button from the extensions page. Alternatively, download the [Extensions Reloader](https://chrome.google.com/webstore/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) to make this easier.
 

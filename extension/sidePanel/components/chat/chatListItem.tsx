@@ -208,6 +208,7 @@ const ChatListItem = ({ chat, setOpen }: ChatListItemProps) => {
                         sx={{
                             display: 'none',
                         }}
+                        className="delete-icon"
                         onClick={(event) => handleDeleteChat(event, chat)}
                     >
                         <DeleteIcon
