@@ -56,7 +56,7 @@ const sendMessage = hasValidSessionProcedure
             })
 
             const gptResponse = await openAI.createChatCompletion({
-                model: 'gpt-3.5-turbo',
+                model: 'gpt-3.5-turbo-16k',
                 messages: [
                     {
                         role: 'system',
@@ -115,7 +115,7 @@ const sendMessage = hasValidSessionProcedure
             })
 
         const gptResponse = await openAI.createChatCompletion({
-            model: 'gpt-3.5-turbo',
+            model: 'gpt-3.5-turbo-16k',
             messages: messagesToSend,
         })
 
