@@ -20,7 +20,6 @@ const UserDetails: FC = () => {
     const [lastNameValid, setLastNameValid] = useState<boolean>(true)
     const [localEmail, setLocalEmail] = useState<string>(email)
     const [emailValid, setEmailValid] = useState<boolean>(true)
-    const [formValid, setFormValid] = useState<boolean>(false)
     const [isLoading, setIsLoading] = useState<boolean>(false)
 
     const updateUserMutation = trpc.updateUserDetails.useMutation({
@@ -56,29 +55,27 @@ const UserDetails: FC = () => {
 
     useEffect(() => {
         const namePattern = /^[a-zA-Z0-9!@#$%^&*)(+=._-]{1,60}$/
-        const emailPattern = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/
         namePattern.test(localFirstName)
             ? setFirstNameValid(true)
             : setFirstNameValid(false)
+    }, [localFirstName])
+
+    useEffect(() => {
+        const namePattern = /^[a-zA-Z0-9!@#$%^&*)(+=._-]{1,60}$/
         namePattern.test(localLastName)
             ? setLastNameValid(true)
             : setLastNameValid(false)
+        localLastName.length === 0 && setLastNameValid(true)
+    }, [localLastName])
+
+    useEffect(() => {
+        const emailPattern =
+            /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
         emailPattern.test(localEmail)
             ? setEmailValid(true)
             : setEmailValid(false)
-        if (
-            localFirstName.length &&
-            firstNameValid &&
-            localLastName.length &&
-            lastNameValid &&
-            localEmail.length &&
-            emailValid
-        ) {
-            setFormValid(true)
-        } else {
-            setFormValid(false)
-        }
-    }, [localFirstName, localLastName, localEmail])
+        localEmail.length === 0 && setEmailValid(true)
+    }, [localEmail])
 
     const handleSubmit = async (event: SyntheticEvent) => {
         event.preventDefault()
@@ -97,13 +94,13 @@ const UserDetails: FC = () => {
         <div className="flex h-full w-full items-center justify-center bg-light-blue">
             <Box
                 component="form"
-                className="flex h-[95%] w-5/6 flex-col items-center rounded-xl border border-midnight-blue border-opacity-30 bg-white"
+                className="flex h-[calc(100%-30px)] w-[calc(100%-80px)] flex-col items-center justify-center rounded-xl border border-midnight-blue border-opacity-30 bg-white"
                 onSubmit={handleSubmit}
             >
-                <Typography variant="h6" className="my-16">
+                <Typography variant="h6" className="mb-12 text-lg">
                     Profile
                 </Typography>
-                <div className="flex grow flex-col items-center">
+                <div className="flex flex-col items-center">
                     <TextField
                         id="first-name-input"
                         label="First Name"
@@ -119,6 +116,9 @@ const UserDetails: FC = () => {
                         variant="outlined"
                         sx={{
                             width: 240,
+                            '@media (max-width: 360px)': {
+                                width: '200px',
+                            },
                             '& .MuiOutlinedInput-notchedOutline': {
                                 borderColor: 'primary.main',
                             },
@@ -135,6 +135,10 @@ const UserDetails: FC = () => {
                             },
                             '& .MuiInputLabel-formControl': {
                                 transform: 'translate(14px, 12px) scale(1)',
+                                opacity: 0.5,
+                            },
+                            '& .MuiInputLabel-shrink': {
+                                opacity: 1,
                             },
                             '& .MuiInputLabel-outlined.Mui-focused': {
                                 transform: 'translate(14px, -9px) scale(0.75)',
@@ -154,12 +158,14 @@ const UserDetails: FC = () => {
                             setLocalLastName(event.target.value)
                         }}
                         color="primary"
-                        required
                         autoComplete="off"
                         placeholder="Smith"
                         variant="outlined"
                         sx={{
                             width: 240,
+                            '@media (max-width: 360px)': {
+                                width: '200px',
+                            },
                             '& .MuiOutlinedInput-notchedOutline': {
                                 borderColor: 'primary.main',
                             },
@@ -176,6 +182,10 @@ const UserDetails: FC = () => {
                             },
                             '& .MuiInputLabel-formControl': {
                                 transform: 'translate(14px, 12px) scale(1)',
+                                opacity: 0.5,
+                            },
+                            '& .MuiInputLabel-shrink': {
+                                opacity: 1,
                             },
                             '& .MuiInputLabel-outlined.Mui-focused': {
                                 transform: 'translate(14px, -9px) scale(0.75)',
@@ -195,12 +205,14 @@ const UserDetails: FC = () => {
                             setLocalEmail(event.target.value)
                         }}
                         color="primary"
-                        required
                         autoComplete="off"
                         placeholder="john.smith@example.com"
                         variant="outlined"
                         sx={{
                             width: 240,
+                            '@media (max-width: 360px)': {
+                                width: '200px',
+                            },
                             '& .MuiOutlinedInput-notchedOutline': {
                                 borderColor: 'primary.main',
                             },
@@ -217,6 +229,10 @@ const UserDetails: FC = () => {
                             },
                             '& .MuiInputLabel-formControl': {
                                 transform: 'translate(14px, 12px) scale(1)',
+                                opacity: 0.5,
+                            },
+                            '& .MuiInputLabel-shrink': {
+                                opacity: 1,
                             },
                             '& .MuiInputLabel-outlined.Mui-focused': {
                                 transform: 'translate(14px, -9px) scale(0.75)',
@@ -246,7 +262,9 @@ const UserDetails: FC = () => {
                                 background: 'unset',
                             },
                         }}
-                        disabled={!formValid}
+                        disabled={
+                            !firstNameValid || !lastNameValid || !emailValid
+                        }
                         loading={isLoading}
                     >
                         Save

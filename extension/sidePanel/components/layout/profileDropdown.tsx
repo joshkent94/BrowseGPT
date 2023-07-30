@@ -1,4 +1,11 @@
-import { Avatar, IconButton, ListItemIcon, Menu, MenuItem } from '@mui/material'
+import {
+    Avatar,
+    IconButton,
+    ListItemIcon,
+    Menu,
+    MenuItem,
+    MenuList,
+} from '@mui/material'
 import { FC, MouseEvent, useEffect, useState } from 'react'
 import AccountCircleIcon from '@mui/icons-material/AccountCircle'
 import LogoutIcon from '@mui/icons-material/Logout'
@@ -18,6 +25,7 @@ const ProfileDropdown: FC = () => {
     const [userInitials, setUserInitials] = useState<string>('')
     const [anchor, setAnchor] = useState<null | HTMLElement>(null)
     const { user, setIsLoggingOut } = useGptStore()
+    const { firstName, lastName } = user
     const open = Boolean(anchor)
     const navigate = useNavigate()
 
@@ -42,8 +50,8 @@ const ProfileDropdown: FC = () => {
     }
 
     useEffect(() => {
-        setUserInitials(getInitials([user.firstName, user.lastName]))
-    }, [user])
+        setUserInitials(getInitials([firstName, lastName]))
+    }, [firstName, lastName])
 
     useEffect(() => {
         window.addEventListener('resize', hideMenu)
@@ -111,46 +119,54 @@ const ProfileDropdown: FC = () => {
                         elevation: 0,
                     },
                 }}
-                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+                transformOrigin={{
+                    horizontal: 'right',
+                    vertical: 'top',
+                }}
+                anchorOrigin={{
+                    horizontal: 'right',
+                    vertical: 'bottom',
+                }}
             >
-                <MenuItem
-                    onClick={() => {
-                        hideMenu()
-                        navigate('/details')
-                    }}
-                >
-                    <ListItemIcon>
-                        <AccountCircleIcon />
-                    </ListItemIcon>
-                    Profile
-                </MenuItem>
-                <MenuItem
-                    id="launch-resource-center"
-                    onClick={() => {
-                        hideMenu()
-                        window.pendo?.showGuideById(
-                            'VuRQStkruo86VokMj404FsKJxbA'
-                        )
-                    }}
-                >
-                    <ListItemIcon>
-                        <HelpIcon />
-                    </ListItemIcon>
-                    Resources
-                </MenuItem>
-                <MenuItem
-                    onClick={() => {
-                        hideMenu()
-                        setIsLoggingOut(true)
-                        sendLogoutMutation.mutate()
-                    }}
-                >
-                    <ListItemIcon>
-                        <LogoutIcon />
-                    </ListItemIcon>
-                    Logout
-                </MenuItem>
+                <MenuList dense>
+                    <MenuItem
+                        onClick={() => {
+                            hideMenu()
+                            navigate('/profile')
+                        }}
+                    >
+                        <ListItemIcon>
+                            <AccountCircleIcon />
+                        </ListItemIcon>
+                        Profile
+                    </MenuItem>
+                    <MenuItem
+                        id="launch-resource-center"
+                        onClick={() => {
+                            hideMenu()
+                            window.pendo?.showGuideById(
+                                'VuRQStkruo86VokMj404FsKJxbA'
+                            )
+                        }}
+                    >
+                        <ListItemIcon>
+                            <HelpIcon />
+                        </ListItemIcon>
+                        Resources
+                    </MenuItem>
+                    <MenuItem
+                        onClick={() => {
+                            hideMenu()
+                            setIsLoggingOut(true)
+                            sendLogoutMutation.mutate()
+                        }}
+                    >
+                        <ListItemIcon>
+                            <LogoutIcon />
+                        </ListItemIcon>
+                        Logout
+                    </MenuItem>
+                </MenuList>
             </Menu>
         </>
     )

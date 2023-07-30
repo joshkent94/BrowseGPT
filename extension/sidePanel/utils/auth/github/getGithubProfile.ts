@@ -12,7 +12,7 @@ export const getGithubProfile = async (token: string): Promise<User> => {
         return {
             id: profile.id.toString(),
             email: profile.email,
-            firstName: profile.name,
+            firstName: profile.name.split(' ')[0],
             lastName: null,
             latitude: null,
             longitude: null,

@@ -23,6 +23,7 @@ declare type Message = {
     content: string
     role: 'user' | 'assistant' | 'system'
     url?: string | null
+    isCommand?: boolean
 }
 
 declare type GoogleMessage = {

@@ -13,7 +13,7 @@
 
 -   [General info](#general-info)
 -   [Features](#features)
--   [Screenshots](#screenshots)
+-   [Usage](#usage)
 -   [Technologies](#technologies)
 -   [Development](#development)
 -   [Contact](#contact)
@@ -30,15 +30,27 @@ A Chrome extension using the sidepanel API that allows users to persistently int
 -   Use OAuth authentication to sign up and log in.
 -   Markdown is supported in chats.
 
-## Screenshots
+## Usage
 
-Users can sign up securely using OAuth.
+Sign up/log in securely using OAuth.
 
-![Screenshot of log in page](./public/log-in-page.png)
+![Screenshot of log in page](./public/login.png)
 
-Once logged in, users can chat with an assistant across their whole browser experience.
+Chat with an AI assistant across your whole browser experience. The AI knows your name and location (if available via your browser).
 
-![Screenshot of app in action](./public/chat-page.png)
+![Screenshot of app in action](./public/using-location.png)
+
+It also knows the site you're currently on.
+
+![Screenshot of app in action](./public/current-site.png)
+
+Type '/' to see a list of quick search prompts.
+
+![Screenshot of app in action](./public/command-ui.png)
+
+And instantly see the result in a new tab.
+
+![Screenshot of app in action](./public/command-result.png)
 
 ## Technologies
 

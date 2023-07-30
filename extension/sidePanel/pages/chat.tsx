@@ -22,6 +22,8 @@ import { useNavigate, useOutletContext } from 'react-router-dom'
 import { unauthorizedLogout } from '@utils/auth/unauthorizedLogout'
 import DOMPurify from 'dompurify'
 import { marked } from 'marked'
+import Commands from '@components/chat/commands'
+import { commands } from '@utils/misc/commandList'
 
 const Chat: FC = () => {
     const open = useOutletContext()
@@ -40,6 +42,8 @@ const Chat: FC = () => {
     const [userInitials, setUserInitials] = useState<string>('')
     const [message, setMessage] = useState<string>('')
     const [isError, setIsError] = useState<boolean>(false)
+    const [anchor, setAnchor] = useState<null | HTMLElement>(null)
+    const [selectedCommand, setSelectedCommand] = useState<string | null>(null)
     const messageInput = useRef<HTMLInputElement>(null)
 
     const focusMessageInput = () => {
@@ -71,7 +75,7 @@ const Chat: FC = () => {
     })
 
     const sendMessageMutation = trpc.sendMessage.useMutation({
-        onSuccess: (newMessage: Message) => {
+        onSuccess: (newMessage: Message, context) => {
             setOpenChat({
                 ...openChat,
                 messages: [...openChat.messages, newMessage],
@@ -88,6 +92,19 @@ const Chat: FC = () => {
             }
             setIsStartingChat(false)
             focusMessageInput()
+            if (context && context.message?.isCommand) {
+                const messageAsHtml = new DOMParser().parseFromString(
+                    marked.parse(newMessage.content, {
+                        mangle: false,
+                        headerIds: false,
+                    }),
+                    'text/html'
+                )
+                messageAsHtml.querySelectorAll('a').forEach((link) => {
+                    const url = link.getAttribute('href')
+                    chrome.tabs.create({ url })
+                })
+            }
         },
         onError: (error) => {
             if (error.data?.httpStatus === 401) {
@@ -100,6 +117,14 @@ const Chat: FC = () => {
                 setIsError(true)
             }
         },
+    })
+
+    useEffect(() => {
+        if (!firstName) {
+            navigate('/profile', {
+                replace: true,
+            })
+        }
     })
 
     useEffect(() => {
@@ -151,14 +176,58 @@ const Chat: FC = () => {
         }
     }, [openChat.messages])
 
+    useEffect(() => {
+        if (selectedCommand) {
+            const commandObj = commands.find(
+                (command) => command.value === selectedCommand
+            )
+            setMessage(
+                `<span id="command-tag" class="bg-dark-blue text-light-blue px-2 py-1 rounded text-xs mr-2 self-center min-w-fit caret-[transparent] cursor-default">${commandObj.name}</span><p class="grow min-h-[20px] leading-5"></p>`
+            )
+        } else {
+            setMessage('')
+        }
+    }, [selectedCommand])
+
+    const handleMessageChange = (value: string) => {
+        if (selectedCommand) {
+            const commandName = commands.find(
+                (command) => command.value === selectedCommand
+            )?.name
+            const commandTag = document.getElementById('command-tag')
+            if (commandTag?.innerText !== commandName) {
+                setSelectedCommand(null)
+                setMessage('')
+                return
+            }
+        }
+        if (value.startsWith('/')) {
+            setAnchor(document.getElementById('message-input'))
+        } else {
+            setAnchor(null)
+        }
+        setMessage(value)
+    }
+
     const handleMessageSubmit = async (message: string) => {
         setMessage('')
-        const strippedMessage = stripHTMLTags(message)
+        let strippedMessage = stripHTMLTags(message)
+        if (selectedCommand) {
+            const commandName = commands.find(
+                (command) => command.value === selectedCommand
+            )?.name
+            strippedMessage = `Search for ${strippedMessage.replace(
+                `${commandName}`,
+                ''
+            )} on ${commandName} and send me the link.`
+            setSelectedCommand(null)
+        }
         const currentUrl = await getCurrentTab()
         const newMessage: Message = {
             content: strippedMessage,
             role: 'user',
             url: currentUrl,
+            isCommand: !!selectedCommand,
         }
         setOpenChat({
             ...openChat,
@@ -186,7 +255,7 @@ const Chat: FC = () => {
             {isError ? (
                 <ChatError />
             ) : (
-                <MainContainer className="my-1 flex h-[95%] w-5/6 items-center justify-center rounded-xl border border-midnight-blue border-opacity-30">
+                <MainContainer className="my-1 flex h-[calc(100%-30px)] w-[calc(100%-80px)] items-center justify-center rounded-xl border border-midnight-blue border-opacity-30">
                     {!getAllChatsForUserQuery.isFetching && !isLoggingOut ? (
                         <ChatContainer className="z-0 bg-white text-base text-dark-blue">
                             <MessageList
@@ -224,6 +293,7 @@ const Chat: FC = () => {
                                                             />
                                                         </Avatar>
                                                         <Message.HtmlContent
+                                                            className="overflow-auto"
                                                             html={DOMPurify.sanitize(
                                                                 marked.parse(
                                                                     section.content,
@@ -254,6 +324,7 @@ const Chat: FC = () => {
                                                             {userInitials}
                                                         </Avatar>
                                                         <Message.HtmlContent
+                                                            className="overflow-auto"
                                                             html={DOMPurify.sanitize(
                                                                 marked.parse(
                                                                     section.content,
@@ -273,20 +344,29 @@ const Chat: FC = () => {
                             </MessageList>
                             <MessageInput
                                 ref={messageInput}
+                                id="message-input"
                                 placeholder="Type a message..."
                                 attachButton={false}
-                                onChange={(value) => setMessage(value)}
+                                onChange={(value) => handleMessageChange(value)}
                                 onSend={(message) =>
                                     handleMessageSubmit(message)
                                 }
                                 value={message}
                                 disabled={sendMessageMutation.isLoading}
+                                sendDisabled={message.length === 0}
                                 className="mx-4 items-center justify-center rounded border-0 bg-white py-4"
                             />
                         </ChatContainer>
                     ) : (
                         <CircularProgress />
                     )}
+                    <Commands
+                        anchor={anchor}
+                        setAnchor={setAnchor}
+                        searchTerm={message}
+                        selectedCommand={selectedCommand}
+                        setSelectedCommand={setSelectedCommand}
+                    />
                 </MainContainer>
             )}
         </div>

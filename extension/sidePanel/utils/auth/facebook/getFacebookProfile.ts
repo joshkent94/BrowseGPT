@@ -34,8 +34,8 @@ export const getFacebookProfile = async (token: string): Promise<User> => {
     return {
         id,
         email: email || '',
-        firstName: first_name || '',
-        lastName: last_name || '',
+        firstName: first_name.split(' ')[0] || '',
+        lastName: last_name.split(' ')[0] || '',
         latitude: null,
         longitude: null,
     }
