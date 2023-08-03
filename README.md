@@ -12,7 +12,6 @@
 ## Table of contents
 
 -   [General info](#general-info)
--   [Features](#features)
 -   [Usage](#usage)
 -   [Technologies](#technologies)
 -   [Development](#development)
@@ -21,14 +20,6 @@
 ## General info
 
 A Chrome extension using the sidepanel API that allows users to persistently interact with an AI assistant whilst browsing the web. Under the hood the extension is integrated to OpenAI's GPT3.5.
-
-## Features
-
--   Hold persistent chats with an AI across the whole browser experience.
--   The AI knows the date, and the user's name and location (if permission is granted).
--   Start multiple chats, search through chat content and delete old chats.
--   Use OAuth authentication to sign up and log in.
--   Markdown is supported in chats.
 
 ## Usage
 
