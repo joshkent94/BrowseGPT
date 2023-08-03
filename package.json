@@ -1,6 +1,6 @@
 {
 	"name": "browsegpt",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"author": "Joshua Kent",
 	"license": "MIT",
 	"packageManager": "npm@9.8.1",

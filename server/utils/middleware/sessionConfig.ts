@@ -11,7 +11,7 @@ const cookie: CookieOptions = {
         sameSite: 'none',
     }),
     httpOnly: false,
-    maxAge: 86400000,
+    maxAge: 1000 * 60 * 60 * 24 * 7 * 52,
 }
 
 const pgSession = connect(session)

@@ -99,8 +99,10 @@ const ChatList: FC<ChatListProps> = ({ open, setOpen }) => {
                     width: '100%',
                     boxSizing: 'border-box',
                     backgroundColor: 'rgb(230, 239, 255)',
-                    paddingBottom: '56px',
+                    paddingTop: '12px',
+                    paddingBottom: '72px',
                     boxShadow: 'none',
+                    alignItems: 'center',
                 },
                 '& *': {
                     zIndex: '10 !important',
@@ -122,10 +124,8 @@ const ChatList: FC<ChatListProps> = ({ open, setOpen }) => {
                     display: 'flex',
                     flexDirection: 'column',
                     position: 'relative',
-                    padding: '20px 40px',
-                    '@media (max-width: 600px)': {
-                        padding: '20px 20px',
-                    },
+                    height: 'calc(100vh - 30px)',
+                    width: 'calc(100vw - 80px)',
                 }}
             >
                 <TextField
@@ -187,7 +187,7 @@ const ChatList: FC<ChatListProps> = ({ open, setOpen }) => {
                             margin: '4px 0',
                         },
                     }}
-                    className="m-4 flex grow flex-col overflow-auto rounded-xl border border-midnight-blue border-opacity-30 bg-white"
+                    className="my-2 flex grow flex-col overflow-auto rounded-xl border border-midnight-blue border-opacity-30 bg-white"
                 >
                     <Typography variant="h6" className="mx-auto my-4">
                         Chats

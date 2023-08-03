@@ -29,7 +29,7 @@ export const router = createBrowserRouter(
                     </Route>
 
                     <Route element={<DetailsLayout />}>
-                        <Route path="/details" element={<UserDetails />} />
+                        <Route path="/profile" element={<UserDetails />} />
                     </Route>
 
                     <Route path="*" element={<NotFound />} />

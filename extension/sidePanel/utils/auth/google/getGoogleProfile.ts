@@ -27,8 +27,8 @@ export const getGoogleProfile = async (token: string): Promise<User> => {
         return {
             id: userInfo.id,
             email: userInfo.email,
-            firstName: profile.names[0].givenName,
-            lastName: profile.names[0].familyName,
+            firstName: profile.names[0].givenName.split(' ')[0],
+            lastName: profile.names[0].familyName.split(' ')[0],
             latitude: null,
             longitude: null,
         }

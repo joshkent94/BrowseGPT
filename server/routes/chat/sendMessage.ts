@@ -22,6 +22,7 @@ const sendMessage = hasValidSessionProcedure
                     ]),
                     content: z.string(),
                     url: z.string().optional(),
+                    isCommand: z.boolean().optional(),
                 })
                 .optional(),
             userLocation: z.array(z.number().nullable()),
@@ -88,6 +89,7 @@ const sendMessage = hasValidSessionProcedure
             data: {
                 role: message.role,
                 content: message.content,
+                isCommand: message.isCommand,
                 chatId,
                 url: message.url,
             },

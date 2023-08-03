@@ -6,3 +6,4 @@ pendo
 .env
 .turbo
 .DS_Store
+**/.DS_Store

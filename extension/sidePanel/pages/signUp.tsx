@@ -37,9 +37,9 @@ const SignUp: FC = () => {
                 cookieValue: cookies[0]?.value,
             })
             setLoading(false)
-            const { firstName, lastName, email } = signedUpUser
-            if (firstName && lastName && email) navigate('/')
-            else navigate('/details')
+            const { firstName } = signedUpUser
+            if (firstName) navigate('/')
+            else navigate('/profile')
         },
         onError: (error) => {
             if (error.message === 'User already exists')
