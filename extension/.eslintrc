@@ -21,8 +21,8 @@
         "dist/",
         "build/",
         "packages/",
+        "pendo/",
         "postcss.config.js",
-        "tailwind.config.js",
-        "pendo/"
+        "tailwind.config.js"
     ]
 }

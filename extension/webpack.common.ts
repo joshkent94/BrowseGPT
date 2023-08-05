@@ -30,7 +30,7 @@ const config: Configuration = {
                         },
                     },
                     {
-                        loader: 'postcss-loader', // postcss loader needed for tailwindcss
+                        loader: 'postcss-loader',
                         options: {
                             postcssOptions: {
                                 ident: 'postcss',
@@ -98,9 +98,9 @@ const config: Configuration = {
     stats: 'summary',
 }
 
-function getHtmlPlugins(chunks) {
+function getHtmlPlugins(chunks: string[]) {
     return chunks.map(
-        (chunk) =>
+        (chunk: string) =>
             new HtmlPlugin({
                 title: 'BrowseGPT',
                 filename: `${chunk}.html`,
