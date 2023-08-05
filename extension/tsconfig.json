@@ -11,19 +11,17 @@
         "noFallthroughCasesInSwitch": true,
         "noImplicitAny": false,
         "paths": {
-            "@background/*": ["background/*"],
             "@public/*": ["public/*"],
             "@styles/*": ["styles/*"],
             "@components/*": ["sidePanel/components/*"],
             "@pages/*": ["sidePanel/pages/*"],
             "@utils/*": ["sidePanel/utils/*"],
-            "@backgroundUtils/*": ["background/utils/*"],
             "@server/types": ["../server/dist/server.d.ts"]
         },
         "baseUrl": "./"
     },
     "include": ["./**/*.ts", "./**/*.tsx", "../index.d.ts"],
-    "exclude": ["node_modules", "pendo/pendo.js"],
+    "exclude": ["node_modules", "pendo/*"],
     "ts-node": {
         "compilerOptions": {
             "module": "CommonJS"
