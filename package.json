@@ -1,11 +1,12 @@
 {
 	"name": "browsegpt",
-	"version": "1.2.0",
+	"version": "1.0.0",
 	"author": "Joshua Kent",
 	"license": "MIT",
 	"packageManager": "npm@9.8.1",
 	"workspaces": [
-		"extension",
+		"chrome-extension",
+		"edge-extension",
 		"server"
 	],
 	"scripts": {
