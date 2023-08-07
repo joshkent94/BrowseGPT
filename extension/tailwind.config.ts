@@ -1,8 +1,6 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
-    content: [
-        './sidePanel/**/*.{js,jsx,ts,tsx}',
-    ],
+    content: ['./sidePanel/**/*.{js,jsx,ts,tsx}'],
     theme: {
         colors: {
             'dark-blue': 'rgb(var(--color-dark-blue) / <alpha-value>)',
