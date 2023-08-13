@@ -6,10 +6,9 @@
     "scripts": {
         "start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/server.js",
         "start:dev": "tsc && node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/server.js",
-        "build": "tsc",
-        "dev": "nodemon -q",
         "dev:chrome": "nodemon -q",
         "dev:edge": "nodemon -q",
+        "build": "tsc",
         "format": "prettier --write --loglevel silent .",
         "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
         "correct": "npm run format && npm run lint",
