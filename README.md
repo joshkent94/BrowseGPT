@@ -58,7 +58,7 @@ And instantly see the result in a new tab.
 
 You need to be running Node v18 for this project (as specified in the .nvmrc file). We suggest using [NVM](https://github.com/nvm-sh/nvm) to manage your Node versions.
 
-The project also uses Turborepo to manage the front and back end workspaces simultaneously. Run the below to install Turborepo globally (substitute in yarn if necessary).
+The project also uses Turborepo to manage all workspaces simultaneously. Run the below to install Turborepo globally (substitute in yarn if necessary).
 
 ```
 npm install turbo@latest --global
@@ -70,10 +70,16 @@ From the project root, run the below to install dependencies.
 npm install
 ```
 
-The project uses Postgres and Prisma for database management. Download [Postgres](https://www.postgresql.org/download/), create a database and add your database connection URL to the appropriate .env file (your .env files should match the format and location of the .env.example files). Then to create the tables in your database, run the below.
+The project uses Postgres and Prisma for database management. Download [Postgres](https://www.postgresql.org/download/), create a database and add your database connection URL to the appropriate .env file (your .env files should match the format and location of the .env.example files).
+
+***
+
+### Chrome
+
+To develop the Chrome extension, run the below. This will compile the back end code and Chrome extension, start a server at port 3000, and watch for changes across the two workspaces.
 
 ```
-turbo prisma:migrate:dev
+turbo dev:chrome
 ```
 
 You may get an error saying you need to use an interactive command line for this, if so, run the below instead.
@@ -82,22 +88,40 @@ You may get an error saying you need to use an interactive command line for this
 cd server && npm run prisma:migrate:dev
 ```
 
-Every time you change the database schema in schema.prisma, you should also run the above command with a name argument to generate a new migration script for your schema changes and apply the changes to your database.
+To create a production build of the extension, run the below.
+
+```
+turbo build:chrome
+```
+
+***
+
+### Edge
+
+To develop the Edge extension, run the below. This will compile the back end code and Edge extension, start a server at port 3000, and watch for changes across the two workspaces.
+
+```
+turbo dev:edge
+```
+
+You may get an error saying you need to use an interactive command line for this, if so, run the below instead.
+
+```
+cd server && npm run prisma:migrate:dev
+```
+
+To create a production build of the extension, run the below.
+
+```
+turbo build:edge
+```
+
+***
+
+Every time you change the database schema in schema.prisma, you should run the below command to generate a new migration script for your schema changes and apply the changes to your database.
 
 ```
 turbo prisma:migrate:dev -- --name={name-for-your-migration}
-```
-
-Then create initial development builds for both front and back end.
-
-```
-turbo build
-```
-
-To perform development, run the below. This will compile both front and back end, start a server at port 3000, and watch for changes across the entire codebase.
-
-```
-turbo dev
 ```
 
 To lint the project, run the below command from the project root.
@@ -106,7 +130,7 @@ To lint the project, run the below command from the project root.
 turbo correct
 ```
 
-Download the latest version of [Google Chrome](https://www.google.com/intl/en_uk/chrome/dr/download/), then go to Chrome extensions, turn on development mode, click 'Load unpacked' and select the dist folder within the extension directory. Click on the extension icon to open the sidepanel, or use the shortcut CMD + SHIFT + SPACE.
+To use the extension in the browser, download and open the latest version of [Google Chrome](https://www.google.com/intl/en_uk/chrome/dr/download/) or [Microsoft Edge](https://www.microsoft.com/en-us/edge/download?form=MA13FJ), then go to the extensions page, turn on development mode, click 'Load unpacked' and select the dist folder within the appropriate extension's directory. Click on the extension's icon to open the sidepanel, or use the shortcut CMD + SHIFT + SPACE.
 
 To see any front end changes in the browser, you'll need to manually reload the extension by clicking the refresh button from the extensions page. Alternatively, download the [Extensions Reloader](https://chrome.google.com/webstore/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) to make this easier.
 
