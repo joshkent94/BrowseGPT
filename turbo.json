@@ -1,41 +1,34 @@
 {
 	"$schema": "https://turbo.build/schema.json",
     "pipeline": {
-		"dev": {
-			"persistent": true,
-			"cache": false,
-			"outputMode": "none"
-		},
 		"dev:chrome": {
 			"persistent": true,
+			"dependsOn": ["server#build", "prisma:migrate:dev"],
 			"cache": false,
 			"outputMode": "none"
 		},
 		"dev:edge": {
 			"persistent": true,
+			"dependsOn": ["server#build", "prisma:migrate:dev"],
 			"cache": false,
 			"outputMode": "none"
 		},
-		"correct": {
-			"cache": false
-		},
-		"chrome-extension#build": {
+		"build:chrome": {
 			"dependsOn": ["server#build"],
 			"cache": false
 		},
-		"edge-extension#build": {
+		"build:edge": {
+			"dependsOn": ["server#build"],
+			"cache": false
+		},
+		"package": {
 			"dependsOn": ["server#build"],
 			"cache": false
 		},
 		"server#build": {
 			"cache": false
 		},
-		"build:prod": {
-			"dependsOn": ["server#build"],
-			"cache": false
-		},
-		"package": {
-			"dependsOn": ["server#build"],
+		"correct": {
 			"cache": false
 		},
 		"prisma:migrate:dev": {
