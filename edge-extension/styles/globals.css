@@ -1,0 +1,267 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+    :root {
+        --color-dark-blue: 14 28 54;
+        --color-light-blue: 230 239 255;
+        --color-midnight-blue: 61 71 101;
+        --color-white: 255 255 255;
+        --color-success: 75 181 110;
+        --color-error: 255 51 51;
+        --toastify-text-color-light: rgb(14, 28, 54);
+        --toastify-color-success: rgb(75, 181, 110);
+        --toastify-color-error: rgb(255, 51, 51);
+    }
+
+    html,
+    body,
+    body > div {
+        height: 100vh;
+        width: 100vw;
+    }
+
+    body * {
+        font-family: quicksand, sans-serif !important;
+        line-height: 1.4;
+    }
+}
+
+/* Global Styles */
+.hide-logo {
+    opacity: 0 !important;
+}
+
+.show-menu-icon {
+    opacity: 1 !important;
+}
+
+input[type='search']::-webkit-search-cancel-button {
+    margin-left: 10px;
+    -webkit-appearance: none;
+    height: 1em;
+    width: 1em;
+    border-radius: 50%;
+    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" height="1em" viewBox="0 0 384 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. --><style>svg{fill:%230e1c36}</style><path d="M342.6 150.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L192 210.7 86.6 105.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L146.7 256 41.4 361.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L192 301.3 297.4 406.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L237.3 256 342.6 150.6z"/></svg>')
+        no-repeat 50% 50%;
+    background-size: contain;
+}
+
+input[type='search']::-webkit-search-cancel-button:hover {
+    cursor: pointer;
+}
+
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(230, 239, 255, 0.9) rgb(255, 255, 255);
+}
+
+*::-webkit-scrollbar-track {
+    background-color: rgb(255, 255, 255);
+    border-top-right-radius: 1.5rem;
+    border-bottom-right-radius: 1.5rem;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: rgba(230, 239, 255, 0.9);
+    border-radius: 6px;
+    border: 2px solid rgb(255, 255, 255);
+}
+
+*::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(230, 239, 255);
+}
+
+/* Chat Styles */
+.cs-avatar:hover > img {
+    filter: none !important;
+}
+
+.cs-message__avatar {
+    width: 40px !important;
+    height: 40px !important;
+}
+
+.cs-message__content {
+    color: rgb(14, 28, 54) !important;
+    font-weight: 400 !important;
+    padding: 12px 14px !important;
+    font-size: 14px !important;
+    white-space: unset !important;
+}
+
+.cs-message--incoming .cs-message__content {
+    background-color: rgb(230, 239, 255) !important;
+}
+
+.cs-message--outgoing .cs-message__content {
+    border-radius: 0.7em 0 0.7em 0.7em !important;
+    background-color: rgb(14, 28, 54) !important;
+    color: rgb(255, 255, 255) !important;
+}
+
+.cs-message-input__content-editor {
+    color: rgb(14, 28, 54) !important;
+    font-weight: 400 !important;
+    background-color: rgb(230, 239, 255) !important;
+    display: flex !important;
+    align-items: center !important;
+    flex-grow: unset !important;
+}
+
+.cs-message-input__content-editor-wrapper {
+    margin: 0 !important;
+    border-radius: 0.7em !important;
+    font-size: 14px !important;
+    background-color: rgb(230, 239, 255) !important;
+    min-height: 44px !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+}
+
+.cs-message-input__content-editor-container {
+    padding: 8px 16px !important;
+    border-radius: 0.7em !important;
+    background-color: rgb(230, 239, 255) !important;
+    max-height: 120px !important;
+    height: unset !important;
+    line-height: unset !important;
+    flex-grow: 1;
+}
+
+.cs-message-input__content-editor-wrapper .ps__rail-y {
+    background-color: transparent !important;
+    opacity: 1 !important;
+    transition: none !important;
+}
+
+.cs-message-input__content-editor-wrapper .ps__thumb-y {
+    background-color: rgb(255, 255, 255) !important;
+    width: 6px !important;
+}
+
+.cs-message-input--disabled,
+.cs-message-input--disabled .cs-message-input__content-editor::before,
+.cs-button--send:disabled {
+    cursor: not-allowed !important;
+}
+
+.cs-button--send {
+    background-color: rgba(75, 181, 110, 0.8) !important;
+    color: rgb(255, 255, 255) !important;
+    border-radius: 50% !important;
+    height: 44px !important;
+    width: 44px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    font-size: 1.1rem !important;
+    margin-left: 8px !important;
+    position: relative !important;
+}
+
+.cs-button:hover:not(:disabled) {
+    background-color: rgb(75, 181, 110) !important;
+    opacity: unset !important;
+}
+
+.cs-button--send .svg-inline--fa {
+    position: absolute;
+    top: 13px;
+    left: 12px;
+}
+
+.cs-message-list__scroll-wrapper {
+    padding: 0 16px !important;
+}
+
+.cs-message__content-wrapper {
+    overflow: auto !important;
+}
+
+.ps__rail-y {
+    background-color: rgb(255, 255, 255) !important;
+    margin: 6px 0 !important;
+    opacity: 0.9 !important;
+    transition: none !important;
+}
+
+.ps__rail-y:hover {
+    opacity: 1 !important;
+}
+
+.ps__thumb-y {
+    background-color: rgb(230, 239, 255) !important;
+    width: 6px !important;
+}
+
+.cs-typing-indicator__dot {
+    height: 3px !important;
+    width: 3px !important;
+    background-color: rgb(14, 28, 54) !important;
+}
+
+.cs-typing-indicator__text {
+    color: rgb(14, 28, 54) !important;
+}
+
+/* Toast Styles */
+@media only screen and (max-width: 600px) {
+    .Toastify__toast-container {
+        padding: 4px !important;
+        top: 1em !important;
+        left: unset !important;
+    }
+}
+
+.Toastify__toast-icon {
+    margin-right: 16px !important;
+}
+
+/* User Details Styles */
+.MuiOutlinedInput-notchedOutline legend {
+    height: 9px !important;
+}
+
+.MuiOutlinedInput-notchedOutline span {
+    padding: 0 !important;
+    padding-left: 1px !important;
+}
+
+#email-input + .MuiOutlinedInput-notchedOutline span {
+    padding: 0 !important;
+    padding-left: 4px !important;
+}
+
+#chat-search + .MuiOutlinedInput-notchedOutline span {
+    padding: 0 !important;
+    padding-left: 4px !important;
+}
+
+/* Pendo Styles */
+#pendo-resource-center-container {
+    position: fixed !important;
+    top: unset !important;
+    left: unset !important;
+    bottom: 20px !important;
+    right: 20px !important;
+}
+
+#pendo-resource-center-container h2 {
+    padding: 18px 24px !important;
+    font-size: 18px !important;
+}
+
+._pendo-resource-center-left-caret {
+    top: 21px !important;
+}
+
+._pendo-close-guide {
+    top: 0px !important;
+    right: 10px !important;
+    font-size: 28px !important;
+}

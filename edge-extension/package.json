@@ -1,10 +1,11 @@
 {
-    "name": "extension",
-    "version": "1.2.0",
+    "name": "edge-extension",
+    "version": "1.0.0",
     "main": "index.ts",
     "license": "MIT",
     "scripts": {
         "dev": "webpack --watch --config webpack.dev.ts",
+        "dev:edge": "webpack --watch --config webpack.dev.ts",
         "build": "webpack --config webpack.dev.ts",
         "build:prod": "webpack --config webpack.prod.ts",
         "format": "prettier --write --loglevel silent .",

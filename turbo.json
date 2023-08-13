@@ -6,10 +6,24 @@
 			"cache": false,
 			"outputMode": "none"
 		},
+		"dev:chrome": {
+			"persistent": true,
+			"cache": false,
+			"outputMode": "none"
+		},
+		"dev:edge": {
+			"persistent": true,
+			"cache": false,
+			"outputMode": "none"
+		},
 		"correct": {
 			"cache": false
 		},
-		"extension#build": {
+		"chrome-extension#build": {
+			"dependsOn": ["server#build"],
+			"cache": false
+		},
+		"edge-extension#build": {
 			"dependsOn": ["server#build"],
 			"cache": false
 		},
