@@ -1,8 +1,12 @@
 <p align="center">
-    <img alt="Open source license" src="https://img.shields.io/github/license/joshkent94/browsegpt" align="center">
-    <img alt="Chrome extension manifest version" src="https://img.shields.io/github/manifest-json/v/joshkent94/browsegpt?filename=chrome-extension/public/manifest.json" align="center">
-    <img alt="Edge extension manifest version" src="https://img.shields.io/github/manifest-json/v/joshkent94/browsegpt?filename=edge-extension/public/manifest.json" align="center">
-    <img alt="GitHub issues" src="https://img.shields.io/github/issues/joshkent94/browsegpt" align="center">
+    <img alt="Open source license" src="https://img.shields.io/github/license/joshkent94/browsegpt?label=Open+Source+License" align="center">
+    <img alt="Chrome extension manifest version" src="https://img.shields.io/github/manifest-json/v/joshkent94/browsegpt?filename=chrome-extension/public/manifest.json&label=Chrome+Version" align="center">
+    <img alt="Chrome Rating" src="https://img.shields.io/chrome-web-store/rating/ijdehllahgkhhcoffcohgmbebcchdknb?label=Chrome+Rating" align="center">
+    <img alt="Edge extension manifest version" src="https://img.shields.io/github/manifest-json/v/joshkent94/browsegpt?filename=edge-extension/public/manifest.json&label=Edge+Version" align="center">
+    <img alt="Number of commits" src="https://img.shields.io/github/commit-activity/t/joshkent94/browsegpt/main?label=Commits" align="center">
+    <img alt="Last commit" src="https://img.shields.io/github/last-commit/joshkent94/browsegpt/main?label=Last Commit" align="center">
+
+
 </p>
 <h1 align="center">
     BrowseGPT
