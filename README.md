@@ -1,6 +1,7 @@
 <p align="center">
-    <img alt="GitHub" src="https://img.shields.io/github/license/joshkent94/browsegpt" align="center">
-    <img alt="GitHub manifest version (path)" src="https://img.shields.io/github/manifest-json/v/joshkent94/browsegpt?filename=extension/public/manifest.json" align="center">
+    <img alt="Open source license" src="https://img.shields.io/github/license/joshkent94/browsegpt" align="center">
+    <img alt="Chrome extension manifest version" src="https://img.shields.io/github/manifest-json/v/joshkent94/browsegpt?filename=chrome-extension/public/manifest.json" align="center">
+    <img alt="Edge extension manifest version" src="https://img.shields.io/github/manifest-json/v/joshkent94/browsegpt?filename=edge-extension/public/manifest.json" align="center">
     <img alt="GitHub issues" src="https://img.shields.io/github/issues/joshkent94/browsegpt" align="center">
 </p>
 <h1 align="center">
