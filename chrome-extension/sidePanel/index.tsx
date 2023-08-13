@@ -18,7 +18,7 @@ const trpcClient = trpc.createClient({
             url:
                 process.env.NODE_ENV === 'development'
                     ? 'http://localhost:3000/api'
-                    : 'https://browse-gpt-server-925113585525.herokuapp.com/api',
+                    : 'https://browse-gpt-server-b70ea6b22512.herokuapp.com/api',
             fetch(url, options) {
                 return fetch(url, {
                     ...options,
