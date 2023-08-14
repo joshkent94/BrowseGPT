@@ -2,7 +2,7 @@ import { FC } from 'react'
 import AppBar from '@mui/material/AppBar'
 import Container from '@mui/material/Container'
 import Toolbar from '@mui/material/Toolbar'
-import logo from '@public/icon-dark.png'
+import logo from '@public/icon.png'
 
 const PreLoginHeader: FC = () => {
     return (

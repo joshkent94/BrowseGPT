@@ -15,7 +15,7 @@ import { addEventListenersToLinks } from '@utils/chat/addEventListenersToLinks'
 import { getCurrentTab } from '@utils/chat/getCurrentTab'
 import { useGptStore } from '@utils/store'
 import { getInitials } from '@utils/user/getInitials'
-import gptIcon from '@public/icon-light.png'
+import gptIcon from '@public/icon.png'
 import { getUserLocation } from '@utils/user/getUserLocation'
 import CircularProgress from '@mui/material/CircularProgress'
 import { useNavigate, useOutletContext } from 'react-router-dom'
@@ -286,10 +286,10 @@ const Chat: FC = () => {
                                                         className="my-4"
                                                         avatarPosition="tl"
                                                     >
-                                                        <Avatar className="flex h-10 min-h-fit w-10 min-w-fit items-center justify-center bg-dark-blue">
+                                                        <Avatar className="flex h-10 min-h-fit w-10 min-w-fit items-center justify-center bg-light-blue">
                                                             <img
                                                                 src={gptIcon}
-                                                                className="h-6 w-6 rounded-none"
+                                                                className="h-7 w-7 rounded-none"
                                                             />
                                                         </Avatar>
                                                         <Message.HtmlContent

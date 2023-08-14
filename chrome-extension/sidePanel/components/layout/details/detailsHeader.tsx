@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import AppBar from '@mui/material/AppBar'
 import Container from '@mui/material/Container'
 import Toolbar from '@mui/material/Toolbar'
-import logo from '@public/icon-dark.png'
+import logo from '@public/icon.png'
 import ProfileDropdown from '@components/layout/profileDropdown'
 import { useGptStore } from '@utils/store'
 
