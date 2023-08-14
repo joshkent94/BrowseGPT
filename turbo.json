@@ -21,7 +21,11 @@
 			"dependsOn": ["server#build"],
 			"cache": false
 		},
-		"package": {
+		"package:chrome": {
+			"dependsOn": ["server#build"],
+			"cache": false
+		},
+		"package:edge": {
 			"dependsOn": ["server#build"],
 			"cache": false
 		},
