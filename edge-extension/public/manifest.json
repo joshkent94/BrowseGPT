@@ -7,9 +7,9 @@
         "default_title": "Click to open panel"
     },
     "icons": {
-        "16": "icon-dark.png",
-        "48": "icon-dark.png",
-        "128": "icon-dark.png"
+        "16": "icon-with-background.png",
+        "48": "icon-with-background.png",
+        "128": "icon-with-background.png"
     },
     "background": {
         "service_worker": "background.js"

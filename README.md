@@ -5,11 +5,10 @@
     <img alt="Edge extension manifest version" src="https://img.shields.io/github/manifest-json/v/joshkent94/browsegpt?filename=edge-extension/public/manifest.json&label=Edge+Version" align="center">
     <img alt="Number of commits" src="https://img.shields.io/github/commit-activity/t/joshkent94/browsegpt/main?label=Commits" align="center">
     <img alt="Last commit" src="https://img.shields.io/github/last-commit/joshkent94/browsegpt/main?label=Last Commit" align="center">
-
-
 </p>
-<h1 align="center">
-    BrowseGPT
+
+<h1 >
+    <img alt="Logo" src="./public/logo.png" align="center">
 </h1>
 
 > An AI assistant for your browser. Now available to [download](https://chrome.google.com/webstore/detail/browsegpt/ijdehllahgkhhcoffcohgmbebcchdknb) from the Chrome Store!

@@ -4,7 +4,7 @@ import Container from '@mui/material/Container'
 import Toolbar from '@mui/material/Toolbar'
 import MenuIcon from '@mui/icons-material/Menu'
 import Icon from '@mui/material/Icon'
-import logo from '@public/icon-dark.png'
+import logo from '@public/icon.png'
 import ProfileDropdown from '@components/layout/profileDropdown'
 
 type ChatHeaderProps = {
