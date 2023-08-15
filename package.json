@@ -6,7 +6,6 @@
 	"packageManager": "npm@9.8.1",
 	"workspaces": [
 		"chrome-extension",
-		"edge-extension",
 		"server"
 	],
 	"scripts": {

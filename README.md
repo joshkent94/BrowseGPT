@@ -1,8 +1,5 @@
 <p align="center">
     <img alt="Open source license" src="https://img.shields.io/github/license/joshkent94/browsegpt?label=Open+Source+License" align="center">
-    <img alt="Chrome extension manifest version" src="https://img.shields.io/github/manifest-json/v/joshkent94/browsegpt?filename=chrome-extension/public/manifest.json&label=Chrome+Version" align="center">
-    <img alt="Chrome Rating" src="https://img.shields.io/chrome-web-store/rating/ijdehllahgkhhcoffcohgmbebcchdknb?label=Chrome+Rating" align="center">
-    <img alt="Edge extension manifest version" src="https://img.shields.io/github/manifest-json/v/joshkent94/browsegpt?filename=edge-extension/public/manifest.json&label=Edge+Version" align="center">
     <img alt="Number of commits" src="https://img.shields.io/github/commit-activity/t/joshkent94/browsegpt/main?label=Commits" align="center">
     <img alt="Last commit" src="https://img.shields.io/github/last-commit/joshkent94/browsegpt/main?label=Last Commit" align="center">
 </p>
@@ -13,41 +10,18 @@
 
 <br>
 
-> An AI assistant for your browser. Now available to [download](https://chrome.google.com/webstore/detail/browsegpt/ijdehllahgkhhcoffcohgmbebcchdknb) from the Chrome Store!
+> An AI assistant for your browser. Now available to download from the [Chrome Store](https://chrome.google.com/webstore/detail/browsegpt/ijdehllahgkhhcoffcohgmbebcchdknb)!
 
 ## Table of contents
 
 -   [General info](#general-info)
--   [Usage](#usage)
 -   [Technologies](#technologies)
 -   [Development](#development)
 -   [Contact](#contact)
 
 ## General info
 
-A Chrome extension using the sidepanel API that allows users to persistently interact with an AI assistant whilst browsing the web. Under the hood the extension is integrated to OpenAI's GPT3.5.
-
-## Usage
-
-Sign up/log in securely using OAuth.
-
-![Screenshot of log in page](./public/login.png)
-
-Chat with an AI assistant across your whole browser experience. The AI knows your name and location (if available via your browser).
-
-![Screenshot of app in action](./public/using-location.png)
-
-It also knows the site you're currently on.
-
-![Screenshot of app in action](./public/current-site.png)
-
-Type '/' to see a list of quick search prompts.
-
-![Screenshot of app in action](./public/command-ui.png)
-
-And instantly see the result in a new tab.
-
-![Screenshot of app in action](./public/command-result.png)
+A browser extension using the sidepanel API that allows users to persistently interact with an AI assistant whilst browsing the web. Under the hood the extension is integrated to OpenAI's GPT3.5.
 
 ## Technologies
 
@@ -78,52 +52,6 @@ npm install
 
 The project uses Postgres and Prisma for database management. Download [Postgres](https://www.postgresql.org/download/), create a database and add your database connection URL to the appropriate .env file (your .env files should match the format and location of the .env.example files).
 
-***
-
-### Chrome
-
-To develop the Chrome extension, run the below. This will compile the back end code and Chrome extension, start a server at port 3000, and watch for changes across the two workspaces.
-
-```
-turbo dev:chrome
-```
-
-You may get an error saying you need to use an interactive command line for this, if so, run the below instead.
-
-```
-cd server && npm run prisma:migrate:dev
-```
-
-To create a production build of the extension, run the below.
-
-```
-turbo build:chrome
-```
-
-***
-
-### Edge
-
-To develop the Edge extension, run the below. This will compile the back end code and Edge extension, start a server at port 3000, and watch for changes across the two workspaces.
-
-```
-turbo dev:edge
-```
-
-You may get an error saying you need to use an interactive command line for this, if so, run the below instead.
-
-```
-cd server && npm run prisma:migrate:dev
-```
-
-To create a production build of the extension, run the below.
-
-```
-turbo build:edge
-```
-
-***
-
 Every time you change the database schema in schema.prisma, you should run the below command to generate a new migration script for your schema changes and apply the changes to your database.
 
 ```
@@ -136,9 +64,7 @@ To lint the project, run the below command from the project root.
 turbo correct
 ```
 
-To use the extension in the browser, download and open the latest version of [Google Chrome](https://www.google.com/intl/en_uk/chrome/dr/download/) or [Microsoft Edge](https://www.microsoft.com/en-us/edge/download?form=MA13FJ), then go to the extensions page, turn on development mode, click 'Load unpacked' and select the dist folder within the appropriate extension's directory. Click on the extension's icon to open the sidepanel, or use the shortcut CMD + SHIFT + SPACE.
-
-To see any front end changes in the browser, you'll need to manually reload the extension by clicking the refresh button from the extensions page. Alternatively, download the [Extensions Reloader](https://chrome.google.com/webstore/detail/extensions-reloader/fimgfedafeadlieiabdeeaodndnlbhid) to make this easier.
+For instructions on developing a particular extension, see the README in the corresponding extension's directory.
 
 ## Contact
 
