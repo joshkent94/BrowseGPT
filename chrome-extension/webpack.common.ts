@@ -95,7 +95,10 @@ const config: Configuration = {
             chunks: 'all',
         },
     },
-    stats: 'errors-only',
+    stats: {
+        preset: 'summary',
+        errors: true,
+    },
 }
 
 function getHtmlPlugins(chunks: string[]) {

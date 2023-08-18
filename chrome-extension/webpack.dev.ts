@@ -27,6 +27,9 @@ const config: Configuration = merge(common, {
     output: {
         path: path.join(__dirname, 'dist'),
     },
+    watchOptions: {
+        ignored: ['**/node_modules', '**/dist'],
+    },
 })
 
 export default config

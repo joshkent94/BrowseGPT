@@ -17,12 +17,9 @@
     },
     "ignorePatterns": [
         "node_modules/",
-        "webpack.*.ts",
         "dist/",
         "build/",
         "packages/",
-        "pendo/",
-        "postcss.config.ts",
-        "tailwind.config.ts"
+        "pendo/"
     ]
 }
