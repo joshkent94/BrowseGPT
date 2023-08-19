@@ -1,0 +1,39 @@
+{
+    "compilerOptions": {
+        "jsx": "react-jsx",
+        "module": "ES2022",
+        "target": "ES2022",
+        "moduleResolution": "node16",
+        "esModuleInterop": true,
+        "allowJs": true,
+        "forceConsistentCasingInFileNames": true,
+        "allowSyntheticDefaultImports": true,
+        "noFallthroughCasesInSwitch": true,
+        "noImplicitAny": false,
+        "paths": {
+            "@public/*": ["shared/public/*"],
+            "@styles/*": ["shared/styles/*"],
+            "@shared/components/*": ["shared/components/*"],
+            "@shared/pages/*": ["shared/pages/*"],
+            "@shared/utils/*": ["shared/utils/*"],
+            "@server/types": ["../server/dist/server.d.ts"]
+        },
+        "baseUrl": "./"
+    },
+    "include": ["./**/*.ts", "./**/*.tsx", "shared/global.d.ts"],
+    "exclude": [
+        "node_modules",
+        "shared/pendo/*",
+        "chrome/dist/*",
+        "firefox/dist/*",
+        "chrome/build",
+        "firefox/build",
+        "chrome/packages",
+        "firefox/packages"
+    ],
+    "ts-node": {
+        "compilerOptions": {
+            "module": "CommonJS"
+        }
+    }
+}

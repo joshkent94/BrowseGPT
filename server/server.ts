@@ -46,7 +46,7 @@ app.set('trust proxy', true)
 app.use(
     cors({
         credentials: true,
-        origin: 'chrome-extension://ijdehllahgkhhcoffcohgmbebcchdknb',
+        origin: true,
     })
 )
 app.use(express.json())
