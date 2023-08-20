@@ -1,12 +1,16 @@
-<p align="center">
+<div align="center">
     <img alt="Open source license" src="https://img.shields.io/github/license/joshkent94/browsegpt?label=Open+Source+License" align="center">
     <img alt="Number of commits" src="https://img.shields.io/github/commit-activity/t/joshkent94/browsegpt/main?label=Commits" align="center">
     <img alt="Last commit" src="https://img.shields.io/github/last-commit/joshkent94/browsegpt/main?label=Last Commit" align="center">
-</p>
+    <div align="center">
+        <img alt="Chrome extension manifest version" src="https://img.shields.io/github/manifest-json/v/joshkent94/browsegpt?filename=chrome-extension/public/manifest.json&label=Chrome+Version" align="center">
+        <img alt="Chrome Rating" src="https://img.shields.io/chrome-web-store/rating/ijdehllahgkhhcoffcohgmbebcchdknb?label=Chrome+Rating" align="center">
+    </div>
+</div>
 
 <br>
 
-<img alt="Logo" src="./public/logo.png" align="center">
+<img alt="Logo" src="./extension/shared/public/logo.png" align="center">
 
 <br>
 
@@ -38,12 +42,6 @@ A browser extension using the sidepanel API that allows users to persistently in
 
 You need to be running Node v18 for this project (as specified in the .nvmrc file). We suggest using [NVM](https://github.com/nvm-sh/nvm) to manage your Node versions.
 
-The project also uses Turborepo to manage all workspaces simultaneously. Run the below to install Turborepo globally (substitute in yarn if necessary).
-
-```
-npm install turbo@latest --global
-```
-
 From the project root, run the below to install dependencies.
 
 ```
@@ -55,16 +53,38 @@ The project uses Postgres and Prisma for database management. Download [Postgres
 Every time you change the database schema in schema.prisma, you should run the below command to generate a new migration script for your schema changes and apply the changes to your database.
 
 ```
-turbo prisma:migrate:dev -- --name={name-for-your-migration}
+npm run migrate:dev --migration={name-for-your-migration}
 ```
 
 To lint the project, run the below command from the project root.
 
 ```
-turbo correct
+npm run lint
 ```
 
-For instructions on developing a particular extension, see the README in the corresponding extension's directory.
+To perform development, make sure to add the required paths to your .env file, then run the below. This will compile both the back end and extension code for the chosen extension, start a server at port 3000, open the browser with the extension pre-installed and watch for changes across the two workspaces.
+
+```
+npm run dev --extension={chrome|firefox}
+```
+
+You may get an error saying you need to use an interactive command line for this, if so, run the below first.
+
+```
+cd server && npm run prisma:migrate:dev
+```
+
+To create a production build of an extension, run the below.
+
+```
+npm run build --extension={chrome|firefox}
+```
+
+To package an extension ready for uploading to the appropriate store, run the below.
+
+```
+npm run package --extension={chrome|firefox}
+```
 
 ## Contact
 

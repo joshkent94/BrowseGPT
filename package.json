@@ -1,19 +1,26 @@
 {
 	"name": "browsegpt",
-	"version": "1.0.0",
 	"author": "Joshua Kent",
 	"license": "MIT",
 	"packageManager": "npm@9.8.1",
 	"workspaces": [
-		"chrome-extension",
+		"extension",
 		"server"
 	],
 	"scripts": {
 		"start": "cd server && npm start",
-		"build": "cd server && npm run build && npm run prisma:migrate:deploy && npm run prisma:generate"
+		"build": "cd server && npm run build && npm run prisma:deploy",
+		"dev": "turbo build --filter=server && (turbo dev --filter=extension -- extension=$npm_config_extension & turbo dev --filter=server)",
+		"prod": "turbo build --filter=server && turbo build --filter=extension -- extension=$npm_config_extension",
+		"package": "turbo build --filter=server && turbo package --filter=extension -- extension=$npm_config_extension",
+		"lint": "turbo lint",
+		"migrate:dev": "turbo prisma:migrate:dev --filter=server -- --name=$npm_config_migration"
 	},
 	"engines": {
 		"node": "18.16.0",
 		"npm": "9.8.1"
+	},
+	"dependencies": {
+		"turbo": "^1.10.12"
 	}
 }

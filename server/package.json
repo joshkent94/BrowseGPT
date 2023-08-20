@@ -4,17 +4,12 @@
     "main": "server.js",
     "license": "MIT",
     "scripts": {
+        "dev": "nodemon -q",
         "start": "node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/server.js",
-        "start:dev": "tsc && node -r ts-node/register/transpile-only -r tsconfig-paths/register dist/server.js",
-        "dev:chrome": "nodemon -q",
-        "build": "tsc",
-        "format": "prettier --write --loglevel silent .",
-        "lint": "eslint . --ext .js,.jsx,.ts,.tsx",
-        "correct": "npm run format && npm run lint",
+        "build": "rm -rf dist && tsc",
+        "lint": "prettier !dist/** --write --loglevel silent . && eslint . --ext .js,.jsx,.ts,.tsx",
         "prisma:migrate:dev": "npx prisma migrate dev",
-        "prisma:migrate:deploy": "npx prisma migrate deploy",
-        "prisma:generate": "npx prisma generate",
-        "prisma:format": "npx prisma format"
+        "prisma:deploy": "npx prisma migrate deploy && npx prisma generate"
     },
     "dependencies": {
         "@prisma/client": "^5.0.0",
@@ -54,7 +49,32 @@
             "server.ts",
             "../index.d.ts"
         ],
-        "exec": "npm run start:dev",
+        "exec": "npm run start",
         "ext": "ts, js"
+    },
+    "eslintConfig": {
+        "parser": "@typescript-eslint/parser",
+        "plugins": [
+            "@typescript-eslint"
+        ],
+        "extends": [
+            "eslint:recommended",
+            "plugin:@typescript-eslint/eslint-recommended",
+            "plugin:@typescript-eslint/recommended"
+        ],
+        "rules": {
+            "@typescript-eslint/no-explicit-any": "off",
+            "@typescript-eslint/explicit-module-boundary-types": "off"
+        },
+        "ignorePatterns": [
+            "dist/*",
+            "node_modules/*"
+        ]
+    },
+    "prettier": {
+        "trailingComma": "es5",
+        "tabWidth": 4,
+        "semi": false,
+        "singleQuote": true
     }
 }
