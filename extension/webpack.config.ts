@@ -7,6 +7,7 @@ import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin'
 import { CleanWebpackPlugin } from 'clean-webpack-plugin'
 import CopyPlugin from 'copy-webpack-plugin'
 import { merge } from 'webpack-merge'
+import { GhostProgressPlugin } from 'ghost-progress-webpack-plugin'
 import 'dotenv/config'
 
 type Mode = 'development' | 'production' | 'none'
@@ -108,6 +109,7 @@ const commonConfig = (extension: string, mode: Mode): Configuration => ({
                 process.env.REACT_APP_STATE_SECRET
             ),
         }),
+        new GhostProgressPlugin(),
     ],
     resolve: {
         extensions: ['.js', '.ts', '.tsx'],
@@ -121,10 +123,7 @@ const commonConfig = (extension: string, mode: Mode): Configuration => ({
             chunks: 'all',
         },
     },
-    stats: {
-        preset: 'summary',
-        errors: true,
-    },
+    stats: 'errors-only',
 })
 
 const devConfig = (extension: string): Configuration => ({
@@ -154,7 +153,12 @@ const devConfig = (extension: string): Configuration => ({
         path: path.join(__dirname, `${extension}/dist`),
     },
     watchOptions: {
-        ignored: ['**/node_modules', '**/dist', '**/build', 'scripts/**'],
+        ignored: [
+            '**/node_modules',
+            '**/chrome/dist',
+            '**/firefox/dist',
+            '**/build',
+        ],
     },
 })
 

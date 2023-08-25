@@ -39,7 +39,7 @@ const Chat: FC = () => {
         isStartingChat,
         setIsStartingChat,
     } = useGptStore()
-    const { id, firstName, lastName, latitude, longitude } = user
+    const { id, firstName, lastName } = user
     const [userInitials, setUserInitials] = useState<string>('')
     const [message, setMessage] = useState<string>('')
     const [isError, setIsError] = useState<boolean>(false)
@@ -247,7 +247,6 @@ const Chat: FC = () => {
         sendMessageMutation.mutate({
             chatId: openChat.id,
             message: newMessage,
-            userLocation: [latitude, longitude],
         })
     }
 

@@ -23,7 +23,7 @@ waitOn({
 })
     .then(() => {
         console.log(
-            'Extension built, running in the browser and watching for changes...'
+            'Extension built! Opening the browser and watching for changes...'
         )
         exec(command, (stdout, stderr) => {
             if (stdout) console.log(stdout)

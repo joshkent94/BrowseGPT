@@ -3,7 +3,7 @@
     <img alt="Number of commits" src="https://img.shields.io/github/commit-activity/t/joshkent94/browsegpt/main?label=Commits" align="center">
     <img alt="Last commit" src="https://img.shields.io/github/last-commit/joshkent94/browsegpt/main?label=Last Commit" align="center">
     <div align="center">
-        <img alt="Chrome extension manifest version" src="https://img.shields.io/github/manifest-json/v/joshkent94/browsegpt?filename=chrome-extension/public/manifest.json&label=Chrome+Version" align="center">
+        <img alt="Chrome extension manifest version" src="https://img.shields.io/github/manifest-json/v/joshkent94/browsegpt?filename=extension/chrome/manifest.json&label=Chrome+Version" align="center">
         <img alt="Chrome Rating" src="https://img.shields.io/chrome-web-store/rating/ijdehllahgkhhcoffcohgmbebcchdknb?label=Chrome+Rating" align="center">
     </div>
 </div>
@@ -68,16 +68,10 @@ To perform development, make sure to add the required paths to your .env file, t
 npm run dev --extension={chrome|firefox}
 ```
 
-You may get an error saying you need to use an interactive command line for this, if so, run the below first.
-
-```
-cd server && npm run prisma:migrate:dev
-```
-
 To create a production build of an extension, run the below.
 
 ```
-npm run build --extension={chrome|firefox}
+npm run prod --extension={chrome|firefox}
 ```
 
 To package an extension ready for uploading to the appropriate store, run the below.

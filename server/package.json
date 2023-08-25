@@ -41,15 +41,16 @@
     },
     "nodemonConfig": {
         "ignore": [
-            "node_modules"
+            "node_modules",
+            "dist"
         ],
         "watch": [
             "routes",
             "utils",
             "server.ts",
-            "../index.d.ts"
+            "../extension/shared/global.d.ts"
         ],
-        "exec": "npm run start",
+        "exec": "tsc && npm run start",
         "ext": "ts, js"
     },
     "eslintConfig": {

@@ -10,17 +10,19 @@
 	"scripts": {
 		"start": "cd server && npm start",
 		"build": "cd server && npm run build && npm run prisma:deploy",
-		"dev": "turbo build --filter=server && (turbo dev --filter=extension -- extension=$npm_config_extension & turbo dev --filter=server)",
-		"prod": "turbo build --filter=server && turbo build --filter=extension -- extension=$npm_config_extension",
-		"package": "turbo build --filter=server && turbo package --filter=extension -- extension=$npm_config_extension",
-		"lint": "turbo lint",
-		"migrate:dev": "turbo prisma:migrate:dev --filter=server -- --name=$npm_config_migration"
+		"dev": "rm -rf server/dist && npm run prisma:init && npm --prefix ./server/ run dev & extension=$npm_config_extension node ./scripts/devServer.ts",
+		"prod": "npm run prisma:init && npm --prefix ./server/ run build && npm --prefix ./extension/ run build --extension=$npm_config_extension",
+		"package": "npm run prisma:init && npm --prefix ./server/ run build && npm --prefix ./extension/ run package --extension=$npm_config_extension",
+		"lint": "npm --prefix ./server/ run lint & npm --prefix ./extension/ run lint",
+		"prisma:init": "npm --prefix ./server/ run prisma:migrate:dev",
+		"migrate:dev": "npm --prefix ./server/ run prisma:migrate:dev --name=$npm_config_migration"
 	},
 	"engines": {
 		"node": "18.16.0",
 		"npm": "9.8.1"
 	},
 	"dependencies": {
-		"turbo": "^1.10.12"
+		"wait-on": "^7.0.1",
+		"web-ext": "^7.6.2"
 	}
 }

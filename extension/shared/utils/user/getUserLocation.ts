@@ -13,6 +13,7 @@ export const getUserLocation = async (): Promise<Position> => {
             })
         })
     } catch (error) {
+        console.error(error)
         position = null
     }
     return {

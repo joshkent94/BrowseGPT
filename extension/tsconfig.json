@@ -20,7 +20,12 @@
         },
         "baseUrl": "./"
     },
-    "include": ["./**/*.ts", "./**/*.tsx", "shared/global.d.ts"],
+    "include": [
+        "./**/*.ts",
+        "./**/*.tsx",
+        "shared/global.d.ts",
+        "../server/dist/server.d.ts"
+    ],
     "exclude": [
         "node_modules",
         "shared/pendo/*",
@@ -29,7 +34,8 @@
         "chrome/build",
         "firefox/build",
         "chrome/packages",
-        "firefox/packages"
+        "firefox/packages",
+        "../scripts/*"
     ],
     "ts-node": {
         "compilerOptions": {
