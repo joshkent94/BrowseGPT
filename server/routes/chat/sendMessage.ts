@@ -25,14 +25,14 @@ const sendMessage = hasValidSessionProcedure
                     isCommand: z.boolean().optional(),
                 })
                 .optional(),
-            userLocation: z.array(z.number().nullable()),
+            userLocation: z.array(z.number().nullable()).optional(),
         })
     )
     .mutation(async ({ input, ctx }): Promise<Message> => {
         const { message, userLocation, chatId } = input
         const { prisma } = ctx
         const { firstName } = ctx.user
-        const [latitude, longitude] = userLocation
+        const [latitude, longitude] = userLocation ?? [null, null]
         const apiKey = process.env.OPENAI_API_KEY
 
         const configuration = new Configuration({

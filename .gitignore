@@ -4,6 +4,5 @@ build
 packages
 pendo
 .env
-.turbo
 .DS_Store
 **/.DS_Store
