@@ -183,12 +183,31 @@ const Chat: FC = () => {
                 (command) => command.value === selectedCommand
             )
             setMessage(
-                `<span id="command-tag" class="bg-dark-blue text-light-blue px-2 py-1 rounded text-xs mr-2 self-center min-w-fit caret-[transparent] cursor-default">${commandObj.name}</span><p class="grow min-h-[20px] leading-5"></p>`
+                `<span id="command-tag" class="bg-dark-blue text-light-blue px-2 py-1 rounded text-xs mr-2 self-center min-w-fit caret-[transparent] cursor-default">${commandObj.name}</span><p id="command-input" class="grow min-h-[20px] leading-5"></p>`
             )
         } else {
             setMessage('')
         }
     }, [selectedCommand])
+
+    // hack for Firefox to focus on the command input
+    useEffect(() => {
+        const commandInput = document.getElementById('command-input')
+        const messageInput = document.getElementsByClassName(
+            'cs-message-input__content-editor'
+        )[0] as HTMLElement
+        if (commandInput && messageInput && messageInput.childNodes[2]) {
+            const textNode = messageInput.childNodes[2]
+            commandInput.appendChild(textNode)
+            const range = document.createRange()
+            const selection = window.getSelection()
+            range.setStart(textNode, textNode.textContent?.length)
+            range.collapse(true)
+            selection?.removeAllRanges()
+            selection?.addRange(range)
+            commandInput.focus()
+        }
+    }, [message])
 
     const handleMessageChange = (value: string) => {
         if (selectedCommand) {
@@ -196,7 +215,8 @@ const Chat: FC = () => {
                 (command) => command.value === selectedCommand
             )?.name
             const commandTag = document.getElementById('command-tag')
-            if (commandTag?.innerText !== commandName) {
+            const commandInput = document.getElementById('command-input')
+            if (commandTag?.innerText !== commandName || !commandInput) {
                 setSelectedCommand(null)
                 setMessage('')
                 return
@@ -207,7 +227,7 @@ const Chat: FC = () => {
         } else {
             setAnchor(null)
         }
-        setMessage(value)
+        setMessage(value.replaceAll('<br>', ''))
     }
 
     const handleMessageSubmit = async (message: string) => {
