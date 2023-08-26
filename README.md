@@ -64,19 +64,19 @@ npm run lint
 To perform development, make sure to add the required paths to your .env file, then run the below. This will compile both the back end and extension code for the chosen extension, start a server at port 3000, open the browser with the extension pre-installed and watch for changes across the two workspaces.
 
 ```
-npm run dev --extension={chrome|firefox}
+npm run dev --extension={chrome|firefox|edge}
 ```
 
 To create a production build of an extension, run the below.
 
 ```
-npm run prod --extension={chrome|firefox}
+npm run prod --extension={chrome|firefox|edge}
 ```
 
 To package an extension ready for uploading to the appropriate store, run the below.
 
 ```
-npm run package --extension={chrome|firefox}
+npm run package --extension={chrome|firefox|edge}
 ```
 
 ## Contact
