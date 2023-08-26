@@ -36,7 +36,6 @@ A browser extension using the sidepanel API that allows users to persistently in
 -   tRPC
 -   Tailwind
 -   Typescript
--   Turborepo
 
 ## Development
 

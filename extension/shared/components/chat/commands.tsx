@@ -28,6 +28,11 @@ const Commands: FC<CommandsProps> = ({
     const hideCommands = () => {
         setHighlightedCommand(null)
         setAnchor(null)
+        setTimeout(() => {
+            setFilteredCommands(
+                commands.sort((a, b) => a.value.localeCompare(b.value))
+            )
+        }, 100)
     }
 
     const selectCommand = (command: string) => {
@@ -51,10 +56,24 @@ const Commands: FC<CommandsProps> = ({
                 a.value.localeCompare(b.value)
             )
             setFilteredCommands(sorted)
+            if (
+                !highlightedCommand ||
+                sorted.findIndex(
+                    (command) => command.value === highlightedCommand
+                ) === -1
+            ) {
+                setHighlightedCommand(sorted[0]?.value)
+            }
         } else {
             hideCommands()
         }
     }, [searchTerm])
+
+    useEffect(() => {
+        if (anchor) {
+            setHighlightedCommand(filteredCommands[0]?.value)
+        }
+    }, [anchor])
 
     useEffect(() => {
         const handleKeyDown = (event: KeyboardEvent) => {

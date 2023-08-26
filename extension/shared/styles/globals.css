@@ -111,6 +111,7 @@ input[type='search']::-webkit-search-cancel-button:hover {
     display: flex !important;
     align-items: center !important;
     flex-grow: unset !important;
+    white-space: break-spaces !important;
 }
 
 .cs-message-input__content-editor-wrapper {

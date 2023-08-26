@@ -33,7 +33,7 @@ export const loadPendoScript = () => {
                     }
                 }
 
-                if (urlRedirects[arguments[0].src]) {
+                if (urlRedirects[arguments[0]?.src]) {
                     arguments[0].src = urlRedirects[arguments[0].src]
                 }
 
