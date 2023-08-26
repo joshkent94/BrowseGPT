@@ -123,7 +123,7 @@ const commonConfig = (extension: string, mode: Mode): Configuration => ({
             chunks: 'all',
         },
     },
-    stats: 'errors-only',
+    stats: 'summary',
 })
 
 const devConfig = (extension: string): Configuration => ({
@@ -157,6 +157,7 @@ const devConfig = (extension: string): Configuration => ({
             '**/node_modules',
             '**/chrome/dist',
             '**/firefox/dist',
+            '**/edge/dist',
             '**/build',
         ],
     },
@@ -194,9 +195,13 @@ const config = (env: any, args: any): Configuration => {
         const { extension } = env
         const { mode } = args
 
-        if (extension !== 'chrome' && extension !== 'firefox') {
+        if (
+            extension !== 'chrome' &&
+            extension !== 'firefox' &&
+            extension !== 'edge'
+        ) {
             throw new Error(
-                'Please specify a valid extension to build using the argument --extension=chrome|firefox'
+                'Please specify a valid extension to build using the argument --extension=chrome|firefox|edge'
             )
         }
 

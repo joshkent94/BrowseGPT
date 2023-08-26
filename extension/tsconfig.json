@@ -31,10 +31,13 @@
         "shared/pendo/*",
         "chrome/dist/*",
         "firefox/dist/*",
+        "edge/dist/*",
         "chrome/build",
         "firefox/build",
+        "edge/build",
         "chrome/packages",
         "firefox/packages",
+        "edge/packages",
         "../scripts/*"
     ],
     "ts-node": {
