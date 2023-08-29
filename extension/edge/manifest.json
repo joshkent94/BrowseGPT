@@ -16,13 +16,7 @@
         "service_worker": "background.js"
     },
     "host_permissions": ["<all_urls>"],
-    "permissions": [
-        "sidePanel",
-        "tabs",
-        "geolocation",
-        "identity",
-        "cookies"
-    ],
+    "permissions": ["sidePanel", "tabs", "geolocation", "identity", "cookies"],
     "side_panel": {
         "default_path": "sidepanel.html"
     },

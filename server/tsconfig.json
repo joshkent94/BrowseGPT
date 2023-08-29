@@ -4,7 +4,7 @@
     },
     "files": ["./server.ts", "../extension/shared/global.d.ts"],
     "compilerOptions": {
-        "module": "commonjs",
+        "module": "Node16",
         "target": "es2016",
         "moduleResolution": "node16",
         "isolatedModules": true,

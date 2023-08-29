@@ -1,13 +1,15 @@
 import z from 'zod'
-import {
-    Configuration,
-    OpenAIApi,
-    ChatCompletionRequestMessageRoleEnum,
-} from 'openai'
+import OpenAI from 'openai'
 import { hasValidSessionProcedure } from '@utils/middleware/hasValidSession'
 import { TRPCError } from '@trpc/server'
 import 'dotenv/config'
 import { generateInitialPrompt } from '@utils/misc/initialPrompt'
+
+const ChatCompletionRequestMessageRoleEnum = z.enum([
+    'assistant',
+    'user',
+    'system',
+])
 
 const sendMessage = hasValidSessionProcedure
     .input(
@@ -15,11 +17,7 @@ const sendMessage = hasValidSessionProcedure
             chatId: z.string(),
             message: z
                 .object({
-                    role: z.enum([
-                        ChatCompletionRequestMessageRoleEnum.Assistant,
-                        ChatCompletionRequestMessageRoleEnum.User,
-                        ChatCompletionRequestMessageRoleEnum.System,
-                    ]),
+                    role: ChatCompletionRequestMessageRoleEnum,
                     content: z.string(),
                     url: z.string().optional(),
                     isCommand: z.boolean().optional(),
@@ -34,11 +32,9 @@ const sendMessage = hasValidSessionProcedure
         const { firstName } = ctx.user
         const [latitude, longitude] = userLocation ?? [null, null]
         const apiKey = process.env.OPENAI_API_KEY
-
-        const configuration = new Configuration({
+        const openai = new OpenAI({
             apiKey,
         })
-        const openAI = new OpenAIApi(configuration)
 
         // if no message, the chat has just started so send the system prompt
         if (!message) {
@@ -56,7 +52,7 @@ const sendMessage = hasValidSessionProcedure
                 },
             })
 
-            const gptResponse = await openAI.createChatCompletion({
+            const gptResponse = await openai.chat.completions.create({
                 model: 'gpt-3.5-turbo-16k',
                 messages: [
                     {
@@ -66,7 +62,7 @@ const sendMessage = hasValidSessionProcedure
                 ],
             })
 
-            if (!gptResponse?.data?.choices[0]?.message?.content) {
+            if (!gptResponse?.choices[0]?.message?.content) {
                 throw new TRPCError({
                     code: 'INTERNAL_SERVER_ERROR',
                     message: 'Error connecting to GPT',
@@ -76,12 +72,12 @@ const sendMessage = hasValidSessionProcedure
             await prisma.message.create({
                 data: {
                     role: 'assistant',
-                    content: gptResponse.data.choices[0].message.content,
+                    content: gptResponse.choices[0].message.content,
                     chatId,
                 },
             })
 
-            return gptResponse.data.choices[0].message as Message
+            return gptResponse.choices[0].message as Message
         }
 
         // else, store new message, then get all messages and send them to GPT
@@ -116,12 +112,12 @@ const sendMessage = hasValidSessionProcedure
                 }
             })
 
-        const gptResponse = await openAI.createChatCompletion({
+        const gptResponse = await openai.chat.completions.create({
             model: 'gpt-3.5-turbo-16k',
             messages: messagesToSend,
         })
 
-        if (!gptResponse?.data?.choices[0]?.message?.content) {
+        if (!gptResponse?.choices[0]?.message?.content) {
             throw new TRPCError({
                 code: 'INTERNAL_SERVER_ERROR',
                 message: 'Error connecting to GPT',
@@ -131,12 +127,12 @@ const sendMessage = hasValidSessionProcedure
         await prisma.message.create({
             data: {
                 role: 'assistant',
-                content: gptResponse.data.choices[0].message.content,
+                content: gptResponse.choices[0].message.content,
                 chatId,
             },
         })
 
-        return gptResponse.data.choices[0].message as Message
+        return gptResponse.choices[0].message as Message
     })
 
 export { sendMessage }
