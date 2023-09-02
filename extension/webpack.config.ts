@@ -16,7 +16,7 @@ const commonConfig = (extension: string, mode: Mode): Configuration => ({
     mode,
     entry: {
         sidePanel: path.resolve('shared/index.tsx'),
-        background: path.resolve(`${extension}/background/background.ts`),
+        background: path.resolve(`${extension}/background.ts`),
     },
     module: {
         rules: [
@@ -142,10 +142,6 @@ const devConfig = (extension: string): Configuration => ({
                     from: path.resolve('shared/pendo'),
                     to: path.resolve(`${extension}/dist`),
                 },
-                {
-                    from: path.resolve(`${extension}/manifest.json`),
-                    to: path.resolve(`${extension}/dist`),
-                },
             ],
         }),
     ],
@@ -153,13 +149,7 @@ const devConfig = (extension: string): Configuration => ({
         path: path.join(__dirname, `${extension}/dist`),
     },
     watchOptions: {
-        ignored: [
-            '**/node_modules',
-            '**/chrome/dist',
-            '**/firefox/dist',
-            '**/edge/dist',
-            '**/build',
-        ],
+        ignored: ['**/node_modules', '**/dist', '**/build'],
     },
 })
 
@@ -176,10 +166,6 @@ const prodConfig = (extension: string): Configuration => ({
                 },
                 {
                     from: path.resolve('shared/pendo'),
-                    to: path.resolve(`${extension}/build`),
-                },
-                {
-                    from: path.resolve(`${extension}/manifest.json`),
                     to: path.resolve(`${extension}/build`),
                 },
             ],
