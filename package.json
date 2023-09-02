@@ -11,7 +11,7 @@
 	"scripts": {
 		"start": "npm --prefix ./server/ run start",
 		"build": "npm --prefix ./website/ run build && npm --prefix ./server/ run build && npm --prefix ./server/ run prisma:deploy",
-		"dev": "rm -rf server/dist && npm run prisma:init && npm --prefix ./server/ run dev & extension=$npm_config_extension node ./scripts/dev-extension.ts",
+		"dev": "rm -rf server/dist && npm run prisma:init && npm --prefix ./server/ run dev & extension=$npm_config_extension node ./scripts/build-extension.ts",
 		"dev:site": "npm --prefix ./website/ run dev",
 		"prod": "npm run prisma:init && npm --prefix ./server/ run build && npm --prefix ./extension/ run build --extension=$npm_config_extension",
 		"package": "npm run prisma:init && npm --prefix ./server/ run build && npm --prefix ./extension/ run package --extension=$npm_config_extension",

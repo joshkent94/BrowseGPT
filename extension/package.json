@@ -2,9 +2,9 @@
     "name": "extension",
     "license": "MIT",
     "scripts": {
-        "dev": "rm -rf $npm_config_extension/dist && webpack --mode=development --watch --config webpack.config.ts --env extension=$npm_config_extension & extension=$npm_config_extension node ../scripts/run-extension.ts",
-        "build": "rm -rf $npm_config_extension/build && webpack --mode=production --config webpack.config.ts --env extension=$npm_config_extension",
-        "package": "npm run build --extension=$npm_config_extension && mkdir -p $npm_config_extension/packages && zip -r $npm_config_extension/packages/$(date -u +\"%Y-%m-%dT%H:%M:%SZ\").zip $npm_config_extension/build",
+        "dev": "rm -rf $npm_config_extension/dist && webpack --mode=development --watch --config webpack.config.ts --env extension=$npm_config_extension & extension=$npm_config_extension mode=development node ../scripts/emit-extension.ts",
+        "build": "rm -rf $npm_config_extension/build && webpack --mode=production --config webpack.config.ts --env extension=$npm_config_extension && extension=$npm_config_extension mode=production node ../scripts/emit-extension.ts",
+        "package": "npm run build --extension=$npm_config_extension && mkdir -p $npm_config_extension/packages && zip -r -j $npm_config_extension/packages/$(date -u +\"%Y-%m-%dT%H:%M:%SZ\").zip $npm_config_extension/build",
         "lint": "prettier --write --log-level silent . && eslint . --ext .js,.jsx,.ts,.tsx"
     },
     "dependencies": {

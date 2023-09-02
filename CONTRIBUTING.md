@@ -1,4 +1,6 @@
-I am open to any and all contributions that you feel would improve the project, however there is a list of things to do in the issues section on GitHub.
+# Contributing
+
+We are open to any and all contributions that you feel would improve the project, however if you're stuck, there is a list of things to work on in the issues section on GitHub.
 
 Any feature requests or bugs should be added to the issues section.
 

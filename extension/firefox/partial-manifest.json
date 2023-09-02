@@ -1,9 +1,5 @@
 {
-    "manifest_version": 3,
-    "name": "BrowseGPT",
     "short_name": "BrowseGPT - Firefox",
-    "description": "An AI assistant for your browser",
-    "version": "1.0.0",
     "action": {
         "default_title": "BrowseGPT",
         "default_icon": {
@@ -12,15 +8,9 @@
             "128": "icon-with-background.png"
         }
     },
-    "icons": {
-        "16": "icon-with-background.png",
-        "48": "icon-with-background.png",
-        "128": "icon-with-background.png"
-    },
     "background": {
         "scripts": ["background.js"]
     },
-    "host_permissions": ["<all_urls>"],
     "permissions": ["tabs", "geolocation", "identity", "cookies"],
     "sidebar_action": {
         "default_icon": {
