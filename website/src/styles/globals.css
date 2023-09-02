@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap');
+
+@layer base {
+    :root {
+        --color-dark-blue: 14 28 54;
+        --color-light-blue: 230 239 255;
+        --color-midnight-blue: 61 71 101;
+        --color-white: 255 255 255;
+        --color-success: 89 187 122;
+        --color-success-dark: 69 169 102;
+        --color-error: 255 51 51;
+    }
+
+    html,
+    body,
+    body > div {
+        height: 100vh;
+        width: 100vw;
+        scroll-behavior: smooth;
+    }
+
+    body * {
+        font-family: quicksand, sans-serif !important;
+        line-height: 1.4;
+        color: rgb(14, 28, 54);
+    }
+}

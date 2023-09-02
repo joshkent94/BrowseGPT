@@ -194,6 +194,7 @@ const config = (env: any, args: any): Configuration => {
     try {
         const { extension } = env
         const { mode } = args
+        const common = commonConfig(extension, mode)
 
         if (
             extension !== 'chrome' &&
@@ -205,10 +206,10 @@ const config = (env: any, args: any): Configuration => {
             )
         }
 
-        const common = commonConfig(extension, mode)
         if (mode === 'development') {
             return merge(common, devConfig(extension))
         }
+
         return merge(common, prodConfig(extension))
     } catch (error) {
         console.error(error.message)

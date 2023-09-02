@@ -1,4 +1,5 @@
 import express from 'express'
+import path from 'path'
 import session from 'express-session'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
@@ -60,6 +61,7 @@ app.use(
         createContext,
     })
 )
+app.use(express.static(path.join(__dirname, '../build')))
 
 app.listen(port, () => {
     console.log(`Backend listening on port ${port}`)

@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "jsx": "react-jsx",
-        "module": "ES2022",
+        "module": "Node16",
         "target": "ES2022",
         "moduleResolution": "node16",
         "esModuleInterop": true,
