@@ -11,7 +11,7 @@
 
 <br>
 
-> An AI assistant for your browser. Now available to download from the [Chrome Store](https://chrome.google.com/webstore/detail/browsegpt/ijdehllahgkhhcoffcohgmbebcchdknb)!
+> An AI assistant for your browser. Now available to download for [Chrome](https://chrome.google.com/webstore/detail/browsegpt/ijdehllahgkhhcoffcohgmbebcchdknb) and [Firefox](https://addons.mozilla.org/en-US/firefox/addon/browsegpt/)!
 
 ## Table of contents
 

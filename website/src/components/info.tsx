@@ -58,7 +58,7 @@ const Info: FC = () => {
                     sx={{ textTransform: 'none' }}
                 >
                     <a
-                        href="https://chrome.google.com/webstore/detail/browsegpt/ijdehllahgkhhcoffcohgmbebcchdknb"
+                        href="https://addons.mozilla.org/en-US/firefox/addon/browsegpt/"
                         target="_blank"
                         title="Firefox Download"
                         className="h-full w-full text-white p-2 flex justify-center items-center text-sm sm:text-base md:text-lg"
