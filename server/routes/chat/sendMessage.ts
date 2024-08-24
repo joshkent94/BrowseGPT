@@ -4,6 +4,7 @@ import { hasValidSessionProcedure } from '@utils/middleware/hasValidSession'
 import { TRPCError } from '@trpc/server'
 import 'dotenv/config'
 import { generateInitialPrompt } from '@utils/misc/initialPrompt'
+import { GPT_MODEL } from '@utils/constants'
 
 const ChatCompletionRequestMessageRoleEnum = z.enum([
     'assistant',
@@ -53,7 +54,7 @@ const sendMessage = hasValidSessionProcedure
             })
 
             const gptResponse = await openai.chat.completions.create({
-                model: 'gpt-3.5-turbo-16k',
+                model: GPT_MODEL,
                 messages: [
                     {
                         role: 'system',
@@ -113,7 +114,7 @@ const sendMessage = hasValidSessionProcedure
             })
 
         const gptResponse = await openai.chat.completions.create({
-            model: 'gpt-3.5-turbo-16k',
+            model: GPT_MODEL,
             messages: messagesToSend,
         })
 

@@ -2,7 +2,7 @@
     "manifest_version": 3,
     "name": "BrowseGPT",
     "description": "An AI assistant for your browser",
-    "version": "1.2.1",
+    "version": "1.3.0",
     "icons": {
         "16": "icon-with-background.png",
         "48": "icon-with-background.png",
