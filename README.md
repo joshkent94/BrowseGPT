@@ -64,7 +64,7 @@ To perform development run the below command. This will compile both the back en
 npm run dev --extension={chrome|firefox|edge}
 ```
 
-Whenever changes are made to the codebase, make sure to update the CHANGELOG.md file with descriptions are your changes. 
+Whenever changes are made to the codebase, make sure to update the CHANGELOG.md file with descriptions are your changes.
 
 To create a production build of an extension, run the below. This will output to a build directory for the chosen extension.
 
@@ -80,4 +80,4 @@ npm run package --extension={chrome|firefox|edge}
 
 ## Contact
 
-Created by [@BrowseGPT](mailto:general@browsegpt.app) - if you'd like to chat about feature requests, contributing or anything else please get in touch!
+Created by BrowseGPT - if you'd like to chat about feature requests, contributing or anything else please get in touch!
