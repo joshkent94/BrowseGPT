@@ -11,7 +11,7 @@
 
 <br>
 
-> An AI assistant for your browser. Now available to download for [Chrome](https://chrome.google.com/webstore/detail/browsegpt/ijdehllahgkhhcoffcohgmbebcchdknb) and [Firefox](https://addons.mozilla.org/en-US/firefox/addon/browsegpt/)!
+> An AI assistant for your browser.
 
 ## Table of contents
 
@@ -22,7 +22,7 @@
 
 ## General info
 
-A browser extension using the sidepanel API that allows users to persistently interact with an AI assistant whilst browsing the web. Under the hood the extension is integrated to OpenAI's GPT3.5.
+A browser extension using the sidepanel API that allows users to persistently interact with an AI assistant whilst browsing the web.
 
 ## Technologies
 
@@ -64,7 +64,7 @@ To perform development run the below command. This will compile both the back en
 npm run dev --extension={chrome|firefox|edge}
 ```
 
-Whenever changes are made to the codebase, make sure to update the CHANGELOG.md file with descriptions are your changes. 
+Whenever changes are made to the codebase, make sure to update the CHANGELOG.md file with descriptions are your changes.
 
 To create a production build of an extension, run the below. This will output to a build directory for the chosen extension.
 
