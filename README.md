@@ -80,4 +80,4 @@ npm run package --extension={chrome|firefox|edge}
 
 ## Contact
 
-Created by [@BrowseGPT](mailto:general@browsegpt.app) - if you'd like to chat about feature requests, contributing or anything else please get in touch!
+Created by BrowseGPT - if you'd like to chat about feature requests, contributing or anything else please get in touch!
