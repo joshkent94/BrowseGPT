@@ -26,6 +26,17 @@ export const getGithubAccessToken = async (code: string) => {
                 },
             }
         )
+    } else if (browserName === 'edge') {
+        const redirectUrl = browser.identity.getRedirectURL()
+        response = await fetch(
+            `https://github.com/login/oauth/access_token?client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID_EDGE}&client_secret=${process.env.REACT_APP_GITHUB_CLIENT_SECRET_EDGE}&code=${code}&redirect_uri=${redirectUrl}`,
+            {
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                },
+            }
+        )
     }
 
     if (response.ok) {

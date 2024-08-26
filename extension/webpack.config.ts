@@ -79,10 +79,16 @@ const commonConfig = (extension: string, mode: Mode): Configuration => ({
             'process.env.REACT_APP_GOOGLE_CLIENT_ID_FIREFOX': JSON.stringify(
                 process.env.REACT_APP_GOOGLE_CLIENT_ID_FIREFOX
             ),
+            'process.env.REACT_APP_GOOGLE_CLIENT_ID_EDGE': JSON.stringify(
+                process.env.REACT_APP_GOOGLE_CLIENT_ID_EDGE
+            ),
             'process.env.REACT_APP_GOOGLE_CLIENT_SECRET_FIREFOX':
                 JSON.stringify(
                     process.env.REACT_APP_GOOGLE_CLIENT_SECRET_FIREFOX
                 ),
+            'process.env.REACT_APP_GOOGLE_CLIENT_SECRET_EDGE': JSON.stringify(
+                process.env.REACT_APP_GOOGLE_CLIENT_SECRET_FEDGE
+            ),
             'process.env.REACT_APP_GOOGLE_PEOPLE_API_KEY': JSON.stringify(
                 process.env.REACT_APP_GOOGLE_PEOPLE_API_KEY
             ),
@@ -99,6 +105,12 @@ const commonConfig = (extension: string, mode: Mode): Configuration => ({
                 JSON.stringify(
                     process.env.REACT_APP_GITHUB_CLIENT_SECRET_FIREFOX
                 ),
+            'process.env.REACT_APP_GITHUB_CLIENT_ID_EDGE': JSON.stringify(
+                process.env.REACT_APP_GITHUB_CLIENT_ID_EDGE
+            ),
+            'process.env.REACT_APP_GITHUB_CLIENT_SECRET_EDGE': JSON.stringify(
+                process.env.REACT_APP_GITHUB_CLIENT_SECRET_EDGE
+            ),
             'process.env.REACT_APP_FACEBOOK_CLIENT_ID': JSON.stringify(
                 process.env.REACT_APP_FACEBOOK_CLIENT_ID
             ),
@@ -149,7 +161,7 @@ const devConfig = (extension: string): Configuration => ({
         path: path.join(__dirname, `${extension}/dist`),
     },
     watchOptions: {
-        ignored: ['**/node_modules', '**/dist', '**/build'],
+        ignored: ['**/node_modules', '**/dist', '**/build', '**/packages'],
     },
 })
 

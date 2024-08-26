@@ -43,6 +43,17 @@ export const getGithubAuthParams = async (): Promise<GithubAuthURLParams> => {
                 code: params.get('code'),
                 state: params.get('state'),
             }
+        } else if (browserName === 'edge') {
+            const redirectUrl = browser.identity.getRedirectURL()
+            const returnedUrl = await browser.identity.launchWebAuthFlow({
+                interactive: true,
+                url: `https://github.com/login/oauth/authorize?scope=user&client_id=${process.env.REACT_APP_GITHUB_CLIENT_ID_EDGE}&state=${process.env.REACT_APP_STATE_SECRET}&redirect_uri=${redirectUrl}`,
+            })
+            const params = new URLSearchParams(returnedUrl.split('?')[1])
+            return {
+                code: params.get('code'),
+                state: params.get('state'),
+            }
         }
     } catch (error) {
         console.error(error)
