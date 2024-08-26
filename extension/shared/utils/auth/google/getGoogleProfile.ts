@@ -40,7 +40,7 @@ export const getGoogleProfile = async (token: string): Promise<User> => {
         }
 
         return null
-    } else if (browserName === 'firefox') {
+    } else if (browserName === 'firefox' || browserName === 'edge') {
         const response = await fetch(
             `https://people.googleapis.com/v1/people/me?personFields=names,emailAddresses&key=${process.env.REACT_APP_GOOGLE_PEOPLE_API_KEY}`,
             {

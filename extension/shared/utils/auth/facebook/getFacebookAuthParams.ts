@@ -33,7 +33,7 @@ export const getFacebookAuthParams =
                         }
                     )
                 })
-            } else if (browserName === 'firefox') {
+            } else if (browserName === 'firefox' || browserName === 'edge') {
                 const redirectUrl = browser.identity.getRedirectURL()
                 const returnedUrl = await browser.identity.launchWebAuthFlow({
                     interactive: true,
