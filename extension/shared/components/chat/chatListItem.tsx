@@ -88,6 +88,10 @@ const ChatListItem = ({ chat, setOpen }: ChatListItemProps) => {
             const newChatsArray = userChats.filter(
                 (existingChat) => existingChat.id !== deletedChatId
             )
+            window.pendo?.track('chat_deleted', {
+                chat_id: deletedChatId,
+                remaining_chat_count: newChatsArray.length,
+            })
             setUserChats(newChatsArray)
             if (openChat.id === deletedChatId) {
                 if (newChatsArray?.length > 0) {

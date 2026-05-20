@@ -93,6 +93,13 @@ const Chat: FC = () => {
             }
             setIsStartingChat(false)
             focusMessageInput()
+            window.pendo?.track('message_sent', {
+                chat_id: openChat.id,
+                has_url_context: !!context?.message?.url,
+                is_command: !!context?.message?.isCommand,
+                message_length: context?.message?.content?.length || 0,
+                response_length: newMessage.content?.length || 0,
+            })
             if (context && context.message?.isCommand) {
                 const messageAsHtml = new DOMParser().parseFromString(
                     marked.parse(newMessage.content, {
@@ -101,7 +108,13 @@ const Chat: FC = () => {
                     }),
                     'text/html'
                 )
-                messageAsHtml.querySelectorAll('a').forEach((link) => {
+                const links = messageAsHtml.querySelectorAll('a')
+                window.pendo?.track('command_executed', {
+                    chat_id: openChat.id,
+                    search_query: context.message?.content,
+                    links_opened_count: links.length,
+                })
+                links.forEach((link) => {
                     const url = link.getAttribute('href')
                     browser.tabs.create({ url })
                 })
