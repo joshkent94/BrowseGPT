@@ -22,6 +22,7 @@ import UrlPermissions from '@shared/components/auth/urlPermissions'
 
 const SignUp: FC = () => {
     const [loading, setLoading] = useState<boolean>(false)
+    const [oauthProvider, setOauthProvider] = useState<string>('')
     const navigate = useNavigate()
     const { setUser, hasGrantedPermissions } = useGptStore()
 
@@ -38,6 +39,11 @@ const SignUp: FC = () => {
                 cookieValue: cookies[0]?.value,
             })
             setLoading(false)
+            window.pendo?.track('user_signed_up', {
+                oauthProvider,
+                hasFirstName: !!signedUpUser.firstName,
+                hasEmail: !!signedUpUser.email,
+            })
             const { firstName } = signedUpUser
             if (firstName) navigate('/')
             else navigate('/profile')
@@ -52,6 +58,7 @@ const SignUp: FC = () => {
     const oauthSignUpGoogle = async (event: MouseEvent) => {
         event.preventDefault()
         setLoading(true)
+        setOauthProvider('google')
 
         const token = await getGoogleAuthToken()
         if (!token) {
@@ -76,6 +83,7 @@ const SignUp: FC = () => {
     const oauthSignUpGithub = async (event: MouseEvent) => {
         event.preventDefault()
         setLoading(true)
+        setOauthProvider('github')
 
         const { code, state } = await getGithubAuthParams()
         if (!code || !state || state !== process.env.REACT_APP_STATE_SECRET) {
@@ -106,6 +114,7 @@ const SignUp: FC = () => {
     const oauthSignUpFacebook = async (event: MouseEvent) => {
         event.preventDefault()
         setLoading(true)
+        setOauthProvider('facebook')
 
         const { code, state } = await getFacebookAuthParams()
         if (!code || !state || state !== process.env.REACT_APP_STATE_SECRET) {

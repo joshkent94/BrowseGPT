@@ -93,6 +93,13 @@ const Chat: FC = () => {
             }
             setIsStartingChat(false)
             focusMessageInput()
+            window.pendo?.track('chat_message_sent', {
+                chatId: openChat.id,
+                isCommand: !!context?.message?.isCommand,
+                hasUrl: !!context?.message?.url,
+                messageLength: context?.message?.content?.length || 0,
+                currentPageUrl: context?.message?.url || '',
+            })
             if (context && context.message?.isCommand) {
                 const messageAsHtml = new DOMParser().parseFromString(
                     marked.parse(newMessage.content, {
@@ -237,10 +244,16 @@ const Chat: FC = () => {
             const commandName = commands.find(
                 (command) => command.value === selectedCommand
             )?.name
-            strippedMessage = `Search for ${strippedMessage.replace(
+            const searchQuery = strippedMessage.replace(
                 `${commandName}`,
                 ''
-            )} on ${commandName} and send me the link.`
+            ).trim()
+            window.pendo?.track('smart_command_used', {
+                commandName: commandName || '',
+                commandValue: selectedCommand,
+                searchQuery,
+            })
+            strippedMessage = `Search for ${searchQuery} on ${commandName} and send me the link.`
             setSelectedCommand(null)
         }
         const currentUrl = await getCurrentTab()
