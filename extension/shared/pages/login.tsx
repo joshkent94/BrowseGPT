@@ -39,9 +39,7 @@ const Login: FC = () => {
                 cookieValue: cookies[0]?.value,
             })
             window.pendo?.track('user_logged_in', {
-                oauth_provider: oauthProviderRef.current,
-                latitude: loggedInUser.latitude,
-                longitude: loggedInUser.longitude,
+                oauthProvider: oauthProviderRef.current,
             })
             setLoading(false)
             navigate('/')
@@ -50,9 +48,7 @@ const Login: FC = () => {
             window.pendo?.track('auth_failed', {
                 oauth_provider: oauthProviderRef.current,
                 auth_type: 'login',
-                error_message: error.message === 'User does not exist'
-                    ? error.message
-                    : 'Failed to log in',
+                error_message: error.message === 'User does not exist' ? error.message : 'Failed to log in',
             })
             if (error.message === 'User does not exist')
                 showErrorToast(error.message)

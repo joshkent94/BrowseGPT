@@ -39,11 +39,9 @@ const SignUp: FC = () => {
                 cookieValue: cookies[0]?.value,
             })
             window.pendo?.track('user_signed_up', {
-                oauth_provider: oauthProviderRef.current,
-                has_first_name: !!signedUpUser.firstName,
-                has_email: !!signedUpUser.email,
-                latitude: signedUpUser.latitude,
-                longitude: signedUpUser.longitude,
+                oauthProvider: oauthProviderRef.current,
+                hasFirstName: !!signedUpUser.firstName,
+                hasEmail: !!signedUpUser.email,
             })
             setLoading(false)
             const { firstName } = signedUpUser
@@ -54,9 +52,7 @@ const SignUp: FC = () => {
             window.pendo?.track('auth_failed', {
                 oauth_provider: oauthProviderRef.current,
                 auth_type: 'sign_up',
-                error_message: error.message === 'User already exists'
-                    ? error.message
-                    : 'Failed to sign up',
+                error_message: error.message === 'User already exists' ? error.message : 'Failed to sign up',
             })
             if (error.message === 'User already exists')
                 showErrorToast(error.message)

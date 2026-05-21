@@ -41,9 +41,8 @@ const ChatList: FC<ChatListProps> = ({ open, setOpen }) => {
             setOpen(false)
             setOpenChat(newChat)
             window.pendo?.track('chat_created', {
-                chat_id: newChat.id,
-                total_chat_count: userChats.length + 1,
-                trigger_source: 'new_chat_button',
+                totalChatCount: userChats.length + 1,
+                chatId: newChat.id,
             })
             // wait for drawer to close
             // set all existing chats to not open
@@ -91,10 +90,10 @@ const ChatList: FC<ChatListProps> = ({ open, setOpen }) => {
         if (searchTerm === '') return
         if (searchDebounceRef.current) clearTimeout(searchDebounceRef.current)
         searchDebounceRef.current = setTimeout(() => {
-            window.pendo?.track('chat_history_searched', {
-                search_term: searchTerm,
-                results_count: filteredChats.length,
-                total_chats_count: userChats.length,
+            window.pendo?.track('chat_search_executed', {
+                searchTerm,
+                resultsCount: filteredChats.length,
+                totalChats: userChats.length,
             })
         }, 500)
         return () => {

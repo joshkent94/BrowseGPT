@@ -89,8 +89,9 @@ const ChatListItem = ({ chat, setOpen }: ChatListItemProps) => {
                 (existingChat) => existingChat.id !== deletedChatId
             )
             window.pendo?.track('chat_deleted', {
-                chat_id: deletedChatId,
-                remaining_chat_count: newChatsArray.length,
+                remainingChatCount: newChatsArray.length,
+                deletedChatId,
+                wasActiveChat: openChat.id === deletedChatId,
             })
             setUserChats(newChatsArray)
             if (openChat.id === deletedChatId) {
