@@ -30,6 +30,7 @@ const ProfileDropdown: FC = () => {
     const navigate = useNavigate()
 
     const clearStorageAndLogout = () => {
+        window.pendo?.track('user_logged_out', {})
         resetStore()
         useGptStore.persist.clearStorage()
         setIsLoggingOut(false)

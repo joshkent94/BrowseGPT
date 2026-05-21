@@ -9,7 +9,7 @@ import {
 } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import SearchIcon from '@mui/icons-material/Search'
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import { useGptStore } from '@shared/utils/store'
 import { trpc } from '@shared/utils/trpc'
 import { toast } from 'react-toastify'
@@ -34,11 +34,16 @@ const ChatList: FC<ChatListProps> = ({ open, setOpen }) => {
     const [searchTerm, setSearchTerm] = useState<string>('')
     const [filteredChats, setFilteredChats] = useState<Chats>(userChats)
     const navigate = useNavigate()
+    const searchDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
 
     const createNewChatMutation = trpc.addChat.useMutation({
         onSuccess: (newChat: Chat) => {
             setOpen(false)
             setOpenChat(newChat)
+            window.pendo?.track('chat_created', {
+                totalChatCount: userChats.length + 1,
+                chatId: newChat.id,
+            })
             // wait for drawer to close
             // set all existing chats to not open
             setTimeout(() => {
@@ -69,7 +74,7 @@ const ChatList: FC<ChatListProps> = ({ open, setOpen }) => {
         if (searchTerm === '') {
             setFilteredChats(userChats)
         } else {
-            const filteredChats = userChats.filter((chat) => {
+            const filtered = userChats.filter((chat) => {
                 const chatText = chat.messages.map((message) =>
                     message.content.toLowerCase()
                 )
@@ -77,9 +82,24 @@ const ChatList: FC<ChatListProps> = ({ open, setOpen }) => {
                     text.includes(searchTerm.toLowerCase())
                 )
             })
-            setFilteredChats(filteredChats)
+            setFilteredChats(filtered)
         }
     }, [searchTerm, userChats])
+
+    useEffect(() => {
+        if (searchTerm === '') return
+        if (searchDebounceRef.current) clearTimeout(searchDebounceRef.current)
+        searchDebounceRef.current = setTimeout(() => {
+            window.pendo?.track('chat_search_executed', {
+                searchTerm,
+                resultsCount: filteredChats.length,
+                totalChats: userChats.length,
+            })
+        }, 500)
+        return () => {
+            if (searchDebounceRef.current) clearTimeout(searchDebounceRef.current)
+        }
+    }, [searchTerm])
 
     const handleNewChat = () => {
         setIsStartingChat(true)

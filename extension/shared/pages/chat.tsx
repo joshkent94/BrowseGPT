@@ -93,6 +93,13 @@ const Chat: FC = () => {
             }
             setIsStartingChat(false)
             focusMessageInput()
+            window.pendo?.track('chat_message_sent', {
+                chatId: openChat.id,
+                isCommand: !!context?.message?.isCommand,
+                hasUrl: !!context?.message?.url,
+                messageLength: context?.message?.content?.length || 0,
+                currentPageUrl: context?.message?.url || '',
+            })
             if (context && context.message?.isCommand) {
                 const messageAsHtml = new DOMParser().parseFromString(
                     marked.parse(newMessage.content, {
@@ -101,7 +108,8 @@ const Chat: FC = () => {
                     }),
                     'text/html'
                 )
-                messageAsHtml.querySelectorAll('a').forEach((link) => {
+                const links = messageAsHtml.querySelectorAll('a')
+                links.forEach((link) => {
                     const url = link.getAttribute('href')
                     browser.tabs.create({ url })
                 })
@@ -237,10 +245,16 @@ const Chat: FC = () => {
             const commandName = commands.find(
                 (command) => command.value === selectedCommand
             )?.name
+            const searchQuery = strippedMessage.replace(`${commandName}`, '').trim()
             strippedMessage = `Search for ${strippedMessage.replace(
                 `${commandName}`,
                 ''
             )} on ${commandName} and send me the link.`
+            window.pendo?.track('smart_command_used', {
+                commandName: commandName || '',
+                commandValue: selectedCommand,
+                searchQuery,
+            })
             setSelectedCommand(null)
         }
         const currentUrl = await getCurrentTab()

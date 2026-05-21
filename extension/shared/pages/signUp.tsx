@@ -1,7 +1,7 @@
 import { getUserLocation } from '@shared/utils/user/getUserLocation'
 import { useGptStore } from '@shared/utils/store'
 import { trpc } from '@shared/utils/trpc'
-import { FC, MouseEvent, useState } from 'react'
+import { FC, MouseEvent, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { getGoogleAuthToken } from '@shared/utils/auth/google/getGoogleAuthToken'
@@ -24,6 +24,7 @@ const SignUp: FC = () => {
     const [loading, setLoading] = useState<boolean>(false)
     const navigate = useNavigate()
     const { setUser, hasGrantedPermissions } = useGptStore()
+    const oauthProviderRef = useRef<string>('')
 
     const showErrorToast = (message: string): void => {
         toast.error(message)
@@ -37,12 +38,22 @@ const SignUp: FC = () => {
                 ...signedUpUser,
                 cookieValue: cookies[0]?.value,
             })
+            window.pendo?.track('user_signed_up', {
+                oauthProvider: oauthProviderRef.current,
+                hasFirstName: !!signedUpUser.firstName,
+                hasEmail: !!signedUpUser.email,
+            })
             setLoading(false)
             const { firstName } = signedUpUser
             if (firstName) navigate('/')
             else navigate('/profile')
         },
         onError: (error) => {
+            window.pendo?.track('auth_failed', {
+                oauth_provider: oauthProviderRef.current,
+                auth_type: 'sign_up',
+                error_message: error.message === 'User already exists' ? error.message : 'Failed to sign up',
+            })
             if (error.message === 'User already exists')
                 showErrorToast(error.message)
             else showErrorToast('Failed to sign up')
@@ -52,6 +63,7 @@ const SignUp: FC = () => {
     const oauthSignUpGoogle = async (event: MouseEvent) => {
         event.preventDefault()
         setLoading(true)
+        oauthProviderRef.current = 'google'
 
         const token = await getGoogleAuthToken()
         if (!token) {
@@ -76,6 +88,7 @@ const SignUp: FC = () => {
     const oauthSignUpGithub = async (event: MouseEvent) => {
         event.preventDefault()
         setLoading(true)
+        oauthProviderRef.current = 'github'
 
         const { code, state } = await getGithubAuthParams()
         if (!code || !state || state !== process.env.REACT_APP_STATE_SECRET) {
@@ -106,6 +119,7 @@ const SignUp: FC = () => {
     const oauthSignUpFacebook = async (event: MouseEvent) => {
         event.preventDefault()
         setLoading(true)
+        oauthProviderRef.current = 'facebook'
 
         const { code, state } = await getFacebookAuthParams()
         if (!code || !state || state !== process.env.REACT_APP_STATE_SECRET) {
