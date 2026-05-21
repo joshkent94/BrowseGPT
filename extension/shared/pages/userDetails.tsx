@@ -26,6 +26,12 @@ const UserDetails: FC = () => {
         onSuccess: (updatedUser: User) => {
             setUser({ ...user, ...updatedUser })
             setIsLoading(false)
+            window.pendo?.track('user_profile_updated', {
+                updatedFirstName: !!updatedUser.firstName,
+                updatedLastName: !!updatedUser.lastName,
+                updatedEmail: !!updatedUser.email,
+                isInitialProfileSetup: !firstName,
+            })
             window.pendo?.updateOptions({
                 visitor: {
                     id: updatedUser.id,

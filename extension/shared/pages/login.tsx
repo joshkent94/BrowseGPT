@@ -22,6 +22,7 @@ import UrlPermissions from '@shared/components/auth/urlPermissions'
 
 const Login: FC = () => {
     const [loading, setLoading] = useState<boolean>(false)
+    const [oauthProvider, setOauthProvider] = useState<string>('')
     const navigate = useNavigate()
     const { setUser, hasGrantedPermissions } = useGptStore()
 
@@ -38,6 +39,9 @@ const Login: FC = () => {
                 cookieValue: cookies[0]?.value,
             })
             setLoading(false)
+            window.pendo?.track('user_logged_in', {
+                oauthProvider,
+            })
             navigate('/')
         },
         onError: (error) => {
@@ -50,6 +54,7 @@ const Login: FC = () => {
     const oauthLoginGoogle = async (event: MouseEvent) => {
         event.preventDefault()
         setLoading(true)
+        setOauthProvider('google')
 
         const token = await getGoogleAuthToken()
         if (!token) {
@@ -74,6 +79,7 @@ const Login: FC = () => {
     const oauthLoginGithub = async (event: MouseEvent) => {
         event.preventDefault()
         setLoading(true)
+        setOauthProvider('github')
 
         const { code, state } = await getGithubAuthParams()
         if (!code || !state || state !== process.env.REACT_APP_STATE_SECRET) {
@@ -104,6 +110,7 @@ const Login: FC = () => {
     const oauthLoginFacebook = async (event: MouseEvent) => {
         event.preventDefault()
         setLoading(true)
+        setOauthProvider('facebook')
 
         const { code, state } = await getFacebookAuthParams()
         if (!code || !state || state !== process.env.REACT_APP_STATE_SECRET) {

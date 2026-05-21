@@ -39,6 +39,10 @@ const ChatList: FC<ChatListProps> = ({ open, setOpen }) => {
         onSuccess: (newChat: Chat) => {
             setOpen(false)
             setOpenChat(newChat)
+            window.pendo?.track('chat_created', {
+                totalChatCount: userChats.length + 1,
+                chatId: newChat.id,
+            })
             // wait for drawer to close
             // set all existing chats to not open
             setTimeout(() => {
@@ -78,6 +82,11 @@ const ChatList: FC<ChatListProps> = ({ open, setOpen }) => {
                 )
             })
             setFilteredChats(filteredChats)
+            window.pendo?.track('chat_search_executed', {
+                searchTerm,
+                resultsCount: filteredChats.length,
+                totalChats: userChats.length,
+            })
         }
     }, [searchTerm, userChats])
 
