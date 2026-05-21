@@ -77,6 +77,18 @@ const Chat: FC = () => {
 
     const sendMessageMutation = trpc.sendMessage.useMutation({
         onSuccess: (newMessage: Message, context) => {
+            pendo.trackAgent("agent_response", {
+                agentId: "ENqdE-F1Bgedm5TdtfzXYCNw2lo",
+                conversationId: openChat.id,
+                messageId: crypto.randomUUID(),
+                content: newMessage.content,
+            })
+            pendo.trackAgent("agent_response", {
+                agentId: "u3R80wC-6_NNhqkVORFL6MfvyVA",
+                conversationId: openChat.id,
+                messageId: crypto.randomUUID(),
+                content: newMessage.content,
+            })
             setOpenChat({
                 ...openChat,
                 messages: [...openChat.messages, newMessage],
@@ -264,6 +276,20 @@ const Chat: FC = () => {
                 },
             ])
         }
+        pendo.trackAgent("prompt", {
+            agentId: "ENqdE-F1Bgedm5TdtfzXYCNw2lo",
+            conversationId: openChat.id,
+            messageId: crypto.randomUUID(),
+            content: strippedMessage,
+            suggestedPrompt: !!selectedCommand,
+        })
+        pendo.trackAgent("prompt", {
+            agentId: "u3R80wC-6_NNhqkVORFL6MfvyVA",
+            conversationId: openChat.id,
+            messageId: crypto.randomUUID(),
+            content: strippedMessage,
+            suggestedPrompt: !!selectedCommand,
+        })
         sendMessageMutation.mutate({
             chatId: openChat.id,
             message: newMessage,
