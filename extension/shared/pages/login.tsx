@@ -1,7 +1,7 @@
 import { getUserLocation } from '@shared/utils/user/getUserLocation'
 import { useGptStore } from '@shared/utils/store'
 import { trpc } from '@shared/utils/trpc'
-import { FC, MouseEvent, useState } from 'react'
+import { FC, MouseEvent, useRef, useState } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { getGoogleAuthToken } from '@shared/utils/auth/google/getGoogleAuthToken'
@@ -24,6 +24,7 @@ const Login: FC = () => {
     const [loading, setLoading] = useState<boolean>(false)
     const navigate = useNavigate()
     const { setUser, hasGrantedPermissions } = useGptStore()
+    const oauthProviderRef = useRef<string>('')
 
     const showErrorToast = (message: string): void => {
         toast.error(message)
@@ -38,6 +39,12 @@ const Login: FC = () => {
                 cookieValue: cookies[0]?.value,
             })
             setLoading(false)
+
+            window.pendo?.track('user_logged_in', {
+                oauth_provider: oauthProviderRef.current,
+                has_location_data: !!(loggedInUser.latitude || loggedInUser.longitude),
+            })
+
             navigate('/')
         },
         onError: (error) => {
@@ -50,6 +57,7 @@ const Login: FC = () => {
     const oauthLoginGoogle = async (event: MouseEvent) => {
         event.preventDefault()
         setLoading(true)
+        oauthProviderRef.current = 'google'
 
         const token = await getGoogleAuthToken()
         if (!token) {
@@ -74,6 +82,7 @@ const Login: FC = () => {
     const oauthLoginGithub = async (event: MouseEvent) => {
         event.preventDefault()
         setLoading(true)
+        oauthProviderRef.current = 'github'
 
         const { code, state } = await getGithubAuthParams()
         if (!code || !state || state !== process.env.REACT_APP_STATE_SECRET) {
@@ -104,6 +113,7 @@ const Login: FC = () => {
     const oauthLoginFacebook = async (event: MouseEvent) => {
         event.preventDefault()
         setLoading(true)
+        oauthProviderRef.current = 'facebook'
 
         const { code, state } = await getFacebookAuthParams()
         if (!code || !state || state !== process.env.REACT_APP_STATE_SECRET) {

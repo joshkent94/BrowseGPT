@@ -38,7 +38,10 @@ const ProfileDropdown: FC = () => {
     }
 
     const sendLogoutMutation = trpc.logout.useMutation({
-        onSettled: () => clearStorageAndLogout(),
+        onSettled: () => {
+            window.pendo?.track('user_logged_out')
+            clearStorageAndLogout()
+        },
     })
 
     const showMenu = (event: MouseEvent<HTMLElement>) => {
