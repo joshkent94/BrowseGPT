@@ -1,6 +1,10 @@
 declare module '*.png'
 declare module '*.jpg'
 
+declare var pendo: {
+    trackAgent: (eventType: string, metadata: object) => void
+}
+
 declare type User = {
     id: string
     email: string
