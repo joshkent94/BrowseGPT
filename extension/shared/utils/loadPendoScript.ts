@@ -14,7 +14,7 @@ export const loadPendoScript = () => {
                 browser.runtime.getURL('./global-guide.js'),
             'https://cdn.pendo.io/agent/releases/2.193.0/pendo.debugger.min.js':
                 browser.runtime.getURL('./pendo.debugger.min.js'),
-            'https://pendo-io-static.storage.googleapis.com/agent/static/30efa22f-a150-4de1-7714-8536b9b061f8/pendo-unminified.js':
+            'https://pendo-io-static.storage.googleapis.com/agent/static/9f719b5e-0c1f-4c2b-ad54-ca835824cc08/pendo-unminified.js':
                 browser.runtime.getURL('./pendo-unminified.js'),
         }
 
