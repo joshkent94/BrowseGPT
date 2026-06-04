@@ -9,7 +9,7 @@ import {
 } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import SearchIcon from '@mui/icons-material/Search'
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import { useGptStore } from '@shared/utils/store'
 import { trpc } from '@shared/utils/trpc'
 import { toast } from 'react-toastify'
@@ -37,6 +37,11 @@ const ChatList: FC<ChatListProps> = ({ open, setOpen }) => {
 
     const createNewChatMutation = trpc.addChat.useMutation({
         onSuccess: (newChat: Chat) => {
+            window.pendo?.track('chat_created', {
+                creation_trigger: 'user_initiated',
+                existing_chat_count: userChats.length,
+            })
+
             setOpen(false)
             setOpenChat(newChat)
             // wait for drawer to close
@@ -65,6 +70,8 @@ const ChatList: FC<ChatListProps> = ({ open, setOpen }) => {
         },
     })
 
+    const searchDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
+
     useEffect(() => {
         if (searchTerm === '') {
             setFilteredChats(userChats)
@@ -78,6 +85,33 @@ const ChatList: FC<ChatListProps> = ({ open, setOpen }) => {
                 )
             })
             setFilteredChats(filteredChats)
+        }
+
+        if (searchTerm !== '') {
+            if (searchDebounceRef.current) {
+                clearTimeout(searchDebounceRef.current)
+            }
+            searchDebounceRef.current = setTimeout(() => {
+                const resultsCount = userChats.filter((chat) => {
+                    const chatText = chat.messages.map((message) =>
+                        message.content.toLowerCase()
+                    )
+                    return chatText.some((text) =>
+                        text.includes(searchTerm.toLowerCase())
+                    )
+                }).length
+                window.pendo?.track('chat_search_executed', {
+                    search_term_length: searchTerm.length,
+                    results_count: resultsCount,
+                    total_chat_count: userChats.length,
+                })
+            }, 500)
+        }
+
+        return () => {
+            if (searchDebounceRef.current) {
+                clearTimeout(searchDebounceRef.current)
+            }
         }
     }, [searchTerm, userChats])
 

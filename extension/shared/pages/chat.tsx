@@ -93,6 +93,15 @@ const Chat: FC = () => {
             }
             setIsStartingChat(false)
             focusMessageInput()
+
+            const isCommandResponse = !!(context && context.message?.isCommand)
+            window.pendo?.track('ai_response_received', {
+                response_length: newMessage.content?.length || 0,
+                is_command_response: isCommandResponse,
+                chat_id: openChat.id,
+                had_links_opened: isCommandResponse,
+            })
+
             if (context && context.message?.isCommand) {
                 const messageAsHtml = new DOMParser().parseFromString(
                     marked.parse(newMessage.content, {
@@ -233,10 +242,15 @@ const Chat: FC = () => {
     const handleMessageSubmit = async (message: string) => {
         setMessage('')
         let strippedMessage = stripHTMLTags(message)
+        const wasCommand = !!selectedCommand
+        let commandName: string | undefined
+        let commandValue: string | undefined
         if (selectedCommand) {
-            const commandName = commands.find(
+            const commandObj = commands.find(
                 (command) => command.value === selectedCommand
-            )?.name
+            )
+            commandName = commandObj?.name
+            commandValue = selectedCommand
             strippedMessage = `Search for ${strippedMessage.replace(
                 `${commandName}`,
                 ''
@@ -244,6 +258,24 @@ const Chat: FC = () => {
             setSelectedCommand(null)
         }
         const currentUrl = await getCurrentTab()
+
+        if (wasCommand) {
+            window.pendo?.track('command_used', {
+                command_name: commandName || '',
+                command_value: commandValue || '',
+                search_query: strippedMessage.substring(0, 200),
+                current_url: currentUrl || '',
+            })
+        }
+
+        window.pendo?.track('message_sent', {
+            is_command: wasCommand,
+            command_name: commandName || '',
+            message_length: strippedMessage.length,
+            current_url: currentUrl || '',
+            chat_id: openChat.id,
+            message_count_in_chat: openChat.messages?.length || 0,
+        })
         const newMessage: Message = {
             content: strippedMessage,
             role: 'user',

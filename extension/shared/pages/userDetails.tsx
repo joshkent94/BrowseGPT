@@ -24,6 +24,19 @@ const UserDetails: FC = () => {
 
     const updateUserMutation = trpc.updateUserDetails.useMutation({
         onSuccess: (updatedUser: User) => {
+            const fieldsUpdated = [
+                updatedUser.firstName !== firstName && 'firstName',
+                updatedUser.lastName !== lastName && 'lastName',
+                updatedUser.email !== email && 'email',
+            ].filter(Boolean)
+
+            window.pendo?.track('user_profile_updated', {
+                fields_updated: fieldsUpdated.join(','),
+                has_email: !!updatedUser.email,
+                has_last_name: !!updatedUser.lastName,
+                is_initial_profile_setup: !firstName,
+            })
+
             setUser({ ...user, ...updatedUser })
             setIsLoading(false)
             window.pendo?.updateOptions({
