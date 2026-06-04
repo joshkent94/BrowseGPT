@@ -91,6 +91,13 @@ const Chat: FC = () => {
                     },
                 ])
             }
+            window.pendo?.track('message_sent', {
+                chat_id: openChat.id,
+                is_command: !!(context && context.message?.isCommand),
+                has_url_context: !!context?.message?.url,
+                message_length: context?.message?.content?.length || 0,
+                response_length: newMessage.content?.length || 0,
+            })
             setIsStartingChat(false)
             focusMessageInput()
             if (context && context.message?.isCommand) {
@@ -234,9 +241,16 @@ const Chat: FC = () => {
         setMessage('')
         let strippedMessage = stripHTMLTags(message)
         if (selectedCommand) {
-            const commandName = commands.find(
+            const commandObj = commands.find(
                 (command) => command.value === selectedCommand
-            )?.name
+            )
+            const commandName = commandObj?.name
+            const searchQuery = stripHTMLTags(message).replace(`${commandName}`, '').trim()
+            window.pendo?.track('command_executed', {
+                command_name: commandName || '',
+                command_value: selectedCommand,
+                search_query: searchQuery.substring(0, 200),
+            })
             strippedMessage = `Search for ${strippedMessage.replace(
                 `${commandName}`,
                 ''

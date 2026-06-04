@@ -22,6 +22,7 @@ import UrlPermissions from '@shared/components/auth/urlPermissions'
 
 const SignUp: FC = () => {
     const [loading, setLoading] = useState<boolean>(false)
+    const [authProvider, setAuthProvider] = useState<string>('')
     const navigate = useNavigate()
     const { setUser, hasGrantedPermissions } = useGptStore()
 
@@ -39,6 +40,12 @@ const SignUp: FC = () => {
             })
             setLoading(false)
             const { firstName } = signedUpUser
+            window.pendo?.track('user_signed_up', {
+                auth_provider: authProvider,
+                has_first_name: !!firstName,
+                latitude: signedUpUser.latitude,
+                longitude: signedUpUser.longitude,
+            })
             if (firstName) navigate('/')
             else navigate('/profile')
         },
@@ -66,6 +73,7 @@ const SignUp: FC = () => {
         }
 
         const { latitude, longitude } = await getUserLocation()
+        setAuthProvider('google')
         signUpMutation.mutate({
             ...user,
             latitude,
@@ -96,6 +104,7 @@ const SignUp: FC = () => {
         }
 
         const { latitude, longitude } = await getUserLocation()
+        setAuthProvider('github')
         signUpMutation.mutate({
             ...user,
             latitude,
@@ -126,6 +135,7 @@ const SignUp: FC = () => {
         }
 
         const { latitude, longitude } = await getUserLocation()
+        setAuthProvider('facebook')
         signUpMutation.mutate({
             ...user,
             latitude,

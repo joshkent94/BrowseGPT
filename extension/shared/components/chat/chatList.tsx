@@ -9,7 +9,7 @@ import {
 } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import SearchIcon from '@mui/icons-material/Search'
-import { FC, useEffect, useState } from 'react'
+import { FC, useEffect, useRef, useState } from 'react'
 import { useGptStore } from '@shared/utils/store'
 import { trpc } from '@shared/utils/trpc'
 import { toast } from 'react-toastify'
@@ -33,12 +33,16 @@ const ChatList: FC<ChatListProps> = ({ open, setOpen }) => {
     } = useGptStore()
     const [searchTerm, setSearchTerm] = useState<string>('')
     const [filteredChats, setFilteredChats] = useState<Chats>(userChats)
+    const searchDebounceRef = useRef<ReturnType<typeof setTimeout> | null>(null)
     const navigate = useNavigate()
 
     const createNewChatMutation = trpc.addChat.useMutation({
         onSuccess: (newChat: Chat) => {
             setOpen(false)
             setOpenChat(newChat)
+            window.pendo?.track('chat_created', {
+                total_chat_count: userChats.length + 1,
+            })
             // wait for drawer to close
             // set all existing chats to not open
             setTimeout(() => {
@@ -80,6 +84,29 @@ const ChatList: FC<ChatListProps> = ({ open, setOpen }) => {
             setFilteredChats(filteredChats)
         }
     }, [searchTerm, userChats])
+
+    useEffect(() => {
+        if (searchTerm === '') return
+        if (searchDebounceRef.current) clearTimeout(searchDebounceRef.current)
+        searchDebounceRef.current = setTimeout(() => {
+            const results = userChats.filter((chat) => {
+                const chatText = chat.messages.map((message) =>
+                    message.content.toLowerCase()
+                )
+                return chatText.some((text) =>
+                    text.includes(searchTerm.toLowerCase())
+                )
+            })
+            window.pendo?.track('chat_search_executed', {
+                search_term_length: searchTerm.length,
+                results_count: results.length,
+                total_chat_count: userChats.length,
+            })
+        }, 500)
+        return () => {
+            if (searchDebounceRef.current) clearTimeout(searchDebounceRef.current)
+        }
+    }, [searchTerm])
 
     const handleNewChat = () => {
         setIsStartingChat(true)

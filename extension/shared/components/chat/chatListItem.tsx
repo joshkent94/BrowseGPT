@@ -85,9 +85,15 @@ const ChatListItem = ({ chat, setOpen }: ChatListItemProps) => {
     const deleteChatMutation = trpc.deleteChat.useMutation({
         onSuccess: (deletedChatId) => {
             toast.success('Chat successfully deleted')
+            const deletedChat = userChats.find((c) => c.id === deletedChatId)
             const newChatsArray = userChats.filter(
                 (existingChat) => existingChat.id !== deletedChatId
             )
+            window.pendo?.track('chat_deleted', {
+                was_active_chat: openChat.id === deletedChatId,
+                remaining_chat_count: newChatsArray.length,
+                message_count_in_deleted: deletedChat?.messages?.length || 0,
+            })
             setUserChats(newChatsArray)
             if (openChat.id === deletedChatId) {
                 if (newChatsArray?.length > 0) {
