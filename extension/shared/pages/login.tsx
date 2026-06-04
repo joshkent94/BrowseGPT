@@ -22,6 +22,7 @@ import UrlPermissions from '@shared/components/auth/urlPermissions'
 
 const Login: FC = () => {
     const [loading, setLoading] = useState<boolean>(false)
+    const [authProvider, setAuthProvider] = useState<string>('')
     const navigate = useNavigate()
     const { setUser, hasGrantedPermissions } = useGptStore()
 
@@ -38,6 +39,11 @@ const Login: FC = () => {
                 cookieValue: cookies[0]?.value,
             })
             setLoading(false)
+            window.pendo?.track('user_logged_in', {
+                auth_provider: authProvider,
+                latitude: loggedInUser.latitude,
+                longitude: loggedInUser.longitude,
+            })
             navigate('/')
         },
         onError: (error) => {
@@ -64,6 +70,7 @@ const Login: FC = () => {
         }
 
         const { latitude, longitude } = await getUserLocation()
+        setAuthProvider('google')
         loginMutation.mutate({
             id: user.id,
             latitude,
@@ -94,6 +101,7 @@ const Login: FC = () => {
         }
 
         const { latitude, longitude } = await getUserLocation()
+        setAuthProvider('github')
         loginMutation.mutate({
             id: user.id.toString(),
             latitude,
@@ -124,6 +132,7 @@ const Login: FC = () => {
         }
 
         const { latitude, longitude } = await getUserLocation()
+        setAuthProvider('facebook')
         loginMutation.mutate({
             id: user.id.toString(),
             latitude,
