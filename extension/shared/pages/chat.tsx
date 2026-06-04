@@ -77,7 +77,7 @@ const Chat: FC = () => {
 
     const sendMessageMutation = trpc.sendMessage.useMutation({
         onSuccess: (newMessage: Message, context) => {
-            if (newMessage.role === 'assistant') {
+            if (newMessage.role === 'assistant' && typeof pendo !== 'undefined') {
                 pendo.trackAgent("agent_response", {
                     agentId: "ibmmo83klwxyOUBJmYwb5uBu9GE",
                     conversationId: openChat.id,
@@ -260,13 +260,15 @@ const Chat: FC = () => {
             isCommand: !!selectedCommand,
         }
 
-        pendo.trackAgent("prompt", {
-            agentId: "ibmmo83klwxyOUBJmYwb5uBu9GE",
-            conversationId: openChat.id,
-            messageId: crypto.randomUUID(),
-            content: strippedMessage,
-            suggestedPrompt: false,
-        })
+        if (typeof pendo !== 'undefined') {
+            pendo.trackAgent("prompt", {
+                agentId: "ibmmo83klwxyOUBJmYwb5uBu9GE",
+                conversationId: openChat.id,
+                messageId: crypto.randomUUID(),
+                content: strippedMessage,
+                suggestedPrompt: false,
+            })
+        }
 
         setOpenChat({
             ...openChat,
